@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WrksNet — Instant Digital Services on Telegram</title>
+<meta name="description" content="Phone verification, private proxies, and gift cards — delivered instantly through Telegram. Quick signup, no paperwork.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void:#07080f;
+    --bg-top:#0b0d1c;
+    --bg-bottom:#040509;
+    --panel:#10121d;
+    --panel-2:#0d1420;
+    --line:#232a3a;
+    --line-soft:#1a2030;
+    --cyan:#40d9ff;
+    --cyan-bright:#aaf6ff;
+    --violet:#9660ff;
+    --ink:#eef2f9;
+    --mist:#98a5bd;
+    --mist-dim:#69748c;
+    --mint:#6ef0bd;
+    --mint-bg:#0f2019;
+    --mint-line:#2c6a4f;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%;}
+  body{
+    margin:0;
+    width:100%;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom) 70%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  /* ambient dot grid + glow, purely decorative */
+  .bg-layer{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100vw; }
+  .field{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(120,150,190,0.16) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 90%);
+  }
+  .glow{ position:absolute; filter:blur(90px); border-radius:50%; }
+  .glow-a{ width:640px; height:640px; top:-220px; left:50%; transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(150,96,255,0.35), transparent 70%); }
+  .glow-b{ width:520px; height:520px; top:30%; left:-160px;
+    background:radial-gradient(circle, rgba(64,217,255,0.22), transparent 70%); }
+  .glow-c{ width:560px; height:560px; bottom:-140px; right:-160px;
+    background:radial-gradient(circle, rgba(150,96,255,0.20), transparent 70%); }
+
+  .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- header ---------- */
+  header{ padding:28px 0 10px; }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{
+    width:42px; height:42px; border-radius:50%; flex:none;
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9), rgba(64,217,255,0.5) 35%, rgba(10,12,20,0.9) 70%);
+    border:1.5px solid rgba(170,246,255,0.7);
+    box-shadow:0 0 22px rgba(64,217,255,0.55);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:#dffcff;
+  }
+  .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
+  .brand-name .accent{ color:var(--cyan); }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
+    border:1px solid var(--mint-line); background:rgba(20,40,32,0.55);
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* ---------- terminal card (signature element) ---------- */
+  .terminal{
+    margin:34px 0 0;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(64,217,255,0.04) inset;
+    overflow:hidden;
+  }
+  .titlebar{
+    display:flex; align-items:center; justify-content:center; position:relative;
+    padding:15px 18px; border-bottom:1px solid var(--line-soft);
+    background:rgba(255,255,255,0.015);
+  }
+  .tl-dots{ position:absolute; left:18px; display:flex; gap:7px; }
+  .tl-dots span{ width:11px; height:11px; border-radius:50%; display:block; }
+  .tl-dots span:nth-child(1){ background:#ff5f57; }
+  .tl-dots span:nth-child(2){ background:#febc2e; }
+  .tl-dots span:nth-child(3){ background:#28c840; }
+  .titlebar-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); }
+
+  .terminal-body{ padding:44px 40px 46px; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mint);
+    display:flex; align-items:center; gap:4px; margin:0 0 18px;
+  }
+  .caret{
+    width:9px; height:18px; background:var(--mint); display:inline-block;
+    animation:blink 1s step-end infinite; margin-left:2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1{
+    font-size:52px; line-height:1.06; font-weight:800; letter-spacing:-0.5px;
+    margin:0 0 22px; color:var(--ink);
+  }
+  h1 .grad{
+    background:linear-gradient(96deg, var(--cyan-bright), var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .lede{ font-size:17.5px; line-height:1.6; color:var(--mist); max-width:520px; margin:0 0 30px; }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:12px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:16px;
+    padding:16px 26px; border-radius:999px; text-decoration:none;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset, 0 18px 40px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,255,255,0.12) inset, 0 22px 46px -12px rgba(64,217,255,0.7); }
+  .cta svg{ width:19px; height:19px; flex:none; }
+  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-bottom:34px; }
+  .cta-note{ font-size:13.5px; color:var(--mist-dim); }
+
+  .safe-box{
+    display:flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--mint);
+    border:1px solid var(--mint-line); background:var(--mint-bg);
+    padding:14px 18px; border-radius:var(--radius-sm); margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .safe-box b{ color:#eafff5; font-weight:600; }
+  .safe-box .sep{ color:var(--mint-line); }
+
+  .services-prompt{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mist-dim);
+    margin:0 0 16px; display:flex; align-items:center; gap:2px;
+  }
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
+  }
+  .svc-card{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:20px 18px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .svc-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .svc-icon{
+    width:42px; height:42px; border-radius:12px; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+  }
+  .svc-icon svg{ width:22px; height:22px; stroke:var(--cyan-bright); }
+  .svc-name{ font-weight:600; font-size:15.5px; margin:0 0 6px; }
+  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0 0 14px; line-height:1.5; }
+  .svc-price{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:12.5px;
+    color:var(--mint); background:var(--mint-bg); border:1px solid var(--mint-line);
+    padding:5px 11px; border-radius:999px;
+  }
+
+  /* ---------- how it works ---------- */
+  .section{ padding:74px 0; }
+  .section-head{ margin-bottom:38px; }
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px;
+  }
+  .section h2{ font-size:32px; font-weight:700; margin:0; letter-spacing:-0.3px; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .step{ position:relative; padding-left:0; }
+  .step-num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--void);
+    background:linear-gradient(100deg, var(--cyan-bright), var(--violet));
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    margin-bottom:16px;
+  }
+  .step h3{ font-size:17px; margin:0 0 8px; font-weight:600; }
+  .step p{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
+  .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-brand .brand-mark{ width:30px; height:30px; font-size:10px; }
+  .footer-tagline{ font-size:13px; color:var(--mist-dim); margin-top:2px; }
+  .footer-cta{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
+  }
+  .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
+
+  @media (max-width:820px){
+    h1{ font-size:38px; }
+    .terminal-body{ padding:32px 22px 34px; }
+    .services-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .section{ padding:56px 0; }
+  }
+  @media (max-width:420px){
+    .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .caret, .status-dot{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="field"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="glow glow-c"></div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-row">
+      <a class="brand" href="#top">
+        <span class="brand-mark">WS</span>
+        <span class="brand-name">WRKS<span class="accent">NET</span></span>
+      </a>
+      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — access</span>
+      </div>
+
+      <div class="terminal-body">
+        <p class="eyebrow">access wrksnet<span class="caret"></span></p>
+
+        <h1>Instant digital services.<br><span class="grad">Zero paperwork.</span></h1>
+
+        <p class="lede">Phone verification, private proxies, and gift cards — delivered
+          straight through Telegram, funded by your own balance.</p>
+
+        <div class="cta-row">
+          <a class="cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M2 11.5L21 3l-4 18-6-5-3.5 3-.5-5L2 11.5z" stroke="#0a0d14" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" fill="#0a0d14"/></svg>
+            Message @worksnet_bot on Telegram
+          </a>
+          <span class="cta-note">Opens a chat in the Telegram app</span>
+        </div>
+
+        <div class="safe-box">
+          <b>Quick signup</b><span class="sep">·</span><b>No paperwork</b><span class="sep">·</span><b>Privacy first</b>
+        </div>
+
+        <p class="services-prompt">$ ls ./services<span class="caret"></span></p>
+
+        <div class="services-grid">
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+            <p class="svc-name">Phone Verification</p>
+            <p class="svc-desc">Real numbers for SMS codes and app sign-ups, delivered in seconds.</p>
+            <span class="svc-price">$1 – $2 per number</span>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/></svg></div>
+            <p class="svc-name">Private Proxies</p>
+            <p class="svc-desc">Clean proxies by state — pick a location, get instant access.</p>
+            <span class="svc-price">$1 – $2 per proxy</span>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9v-1a3 3 0 0 1 3-3c2 0 3.5 2 6 4 2.5-2 4-4 6-4a3 3 0 0 1 3 3v1"/><line x1="12" y1="9" x2="12" y2="21"/></svg></div>
+            <p class="svc-name">Gift Cards</p>
+            <p class="svc-desc">Top brand gift cards, bought straight from your WrksNet balance.</p>
+            <span class="svc-price">Multiple amounts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="how">
+      <div class="section-head">
+        <p class="section-eyebrow">// how it works</p>
+        <h2>Three steps, no forms.</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Open the bot</h3>
+          <p>Message @worksnet_bot on Telegram — no app download, no account creation.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Top up your balance</h3>
+          <p>Add funds to your WrksNet balance directly inside the chat.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Get instant service</h3>
+          <p>Pick a service from the menu and it's delivered in the same conversation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark">WS</span>
+          <span class="brand-name">WRKS<span class="accent">NET</span></span>
+        </div>
+        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
+      </div>
+      <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">message @worksnet_bot on telegram →</a>
+    </div>
+    <p class="fine-print">WrksNet provides paid digital services (phone verification numbers, proxies, and
+      gift cards) delivered via Telegram. Services are for personal use and subject to the terms of the
+      platforms you use them with. © <span id="year"></span> WrksNet.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
