@@ -163,7 +163,7 @@
   }
 
   .services-grid{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
   }
   .svc-card{
     border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
@@ -178,12 +178,7 @@
   }
   .svc-icon svg{ width:22px; height:22px; stroke:var(--cyan-bright); }
   .svc-name{ font-weight:600; font-size:15.5px; margin:0 0 6px; }
-  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0 0 14px; line-height:1.5; }
-  .svc-price{
-    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:12.5px;
-    color:var(--mint); background:var(--mint-bg); border:1px solid var(--mint-line);
-    padding:5px 11px; border-radius:999px;
-  }
+  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0; line-height:1.5; }
 
   /* ---------- how it works ---------- */
   .section{ padding:74px 0; }
@@ -288,19 +283,21 @@
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
             <p class="svc-name">Phone Verification</p>
             <p class="svc-desc">Real numbers for SMS codes and app sign-ups, delivered in seconds.</p>
-            <span class="svc-price">$1 – $2 per number</span>
           </div>
           <div class="svc-card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/></svg></div>
             <p class="svc-name">Private Proxies</p>
             <p class="svc-desc">Clean proxies by state — pick a location, get instant access.</p>
-            <span class="svc-price">$1 – $2 per proxy</span>
           </div>
           <div class="svc-card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9v-1a3 3 0 0 1 3-3c2 0 3.5 2 6 4 2.5-2 4-4 6-4a3 3 0 0 1 3 3v1"/><line x1="12" y1="9" x2="12" y2="21"/></svg></div>
             <p class="svc-name">Gift Cards</p>
             <p class="svc-desc">Top brand gift cards, bought straight from your WrksNet balance.</p>
-            <span class="svc-price">Multiple amounts</span>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M3 6l9 7 9-7"/></svg></div>
+            <p class="svc-name">Print &amp; Mail</p>
+            <p class="svc-desc">Send real documents to any US or Canada address, straight from the bot.</p>
           </div>
         </div>
       </div>
