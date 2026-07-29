@@ -39,6 +39,7 @@
   body{
     margin:0;
     width:100%;
+    position:relative;
     background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom) 70%);
     color:var(--ink);
     font-family:'Poppins',system-ui,sans-serif;
@@ -49,7 +50,7 @@
   .mono{ font-family:'JetBrains Mono',monospace; }
 
   /* ambient dot grid + glow, purely decorative */
-  .bg-layer{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100vw; }
+  .bg-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100%; height:100%; }
   .field{
     position:absolute; inset:0;
     background-image:radial-gradient(rgba(120,150,190,0.16) 1px, transparent 1px);
