@@ -94,6 +94,13 @@
     box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
 
+  .eyebrow-dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--mint); box-shadow:0 0 8px var(--mint);
+    animation:pulse 2.2s ease-in-out infinite;
+    margin-right:9px; vertical-align:middle;
+  }
+
   /* ---------- terminal card (signature element) ---------- */
   .terminal{
     margin:34px 0 0;
@@ -226,7 +233,7 @@
     .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
   }
   @media (prefers-reduced-motion: reduce){
-    .caret, .status-dot{ animation:none; }
+    .caret, .status-dot, .eyebrow-dot{ animation:none; }
   }
 
   /* ---------- new homepage specific ---------- */
@@ -357,7 +364,7 @@
 
   <main>
     <section class="hero">
-      <p class="hero-eyebrow">// wrksnet</p>
+      <p class="hero-eyebrow"><span class="eyebrow-dot"></span>// wrksnet</p>
       <h1>Digital infrastructure,<br><span class="grad">delivered instantly.</span></h1>
       <p class="hero-lede">WrksNet builds fast, privacy-conscious digital infrastructure for people and
         businesses who need things to just work — without an account, without paperwork, and without
@@ -368,12 +375,11 @@
           Explore Our Services
           <svg viewBox="0 0 24 24" fill="none" stroke="#0a0d14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a class="link-secondary" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">Already a user? Message @worksnet_bot &rarr;</a>
       </div>
     </section>
 
     <section class="section">
-      <p class="section-eyebrow">// our approach</p>
+      <p class="section-eyebrow"><span class="eyebrow-dot"></span>// our approach</p>
       <h2>Most services ask for more than they need.</h2>
       <div class="approach">
         <div>
@@ -411,7 +417,7 @@
     </section>
 
     <section class="section">
-      <p class="section-eyebrow">// why wrksnet</p>
+      <p class="section-eyebrow"><span class="eyebrow-dot"></span>// why wrksnet</p>
       <h2>Built for speed. Optimized for privacy.</h2>
       <div class="pillar-grid">
         <div class="pillar">
