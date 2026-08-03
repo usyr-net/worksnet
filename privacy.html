@@ -73,12 +73,9 @@
   .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
   .brand-mark{
     width:42px; height:42px; border-radius:50%; flex:none;
-    background:
-      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9), rgba(64,217,255,0.5) 35%, rgba(10,12,20,0.9) 70%);
+    object-fit:cover; display:block;
     border:1.5px solid rgba(170,246,255,0.7);
     box-shadow:0 0 22px rgba(64,217,255,0.55);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; color:#dffcff;
   }
   .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
   .brand-name .accent{ color:var(--cyan); }
@@ -205,7 +202,7 @@
   footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
   .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
   .footer-brand{ display:flex; align-items:center; gap:10px; }
-  .footer-brand .brand-mark{ width:30px; height:30px; font-size:10px; }
+  .footer-brand .brand-mark{ width:30px; height:30px; }
   .footer-tagline{ font-size:13px; color:var(--mist-dim); margin-top:2px; }
   .footer-cta{
     font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
@@ -270,7 +267,7 @@
   <header>
     <div class="header-row">
       <a class="brand" href="index.html">
-        <span class="brand-mark">WS</span>
+        <img class="brand-mark" src="logo.png" alt="WrksNet logo">
         <span class="brand-name">WRKS<span class="accent">NET</span></span>
       </a>
       <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
@@ -318,7 +315,7 @@
     <div class="footer-row">
       <div>
         <div class="footer-brand">
-          <span class="brand-mark">WS</span>
+          <img class="brand-mark" src="logo.png" alt="WrksNet logo">
           <span class="brand-name">WRKS<span class="accent">NET</span></span>
         </div>
         <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
