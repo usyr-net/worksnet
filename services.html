@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — WrksNet</title>
 <meta name="description" content="Phone verification, private proxies, gift cards, and print & mail — delivered instantly through Telegram. Quick signup, no paperwork.">
+<link rel="canonical" href="https://www.wrksnet.com/services.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -208,6 +209,10 @@
     font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
     text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
   }
+  .footer-links{ display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
+  @media (max-width:560px){ .footer-links{ align-items:flex-start; } }
+  .footer-cta{ display:inline-flex; align-items:center; gap:7px; }
+  .footer-cta svg{ width:15px; height:15px; flex:none; }
   .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
 
   @media (max-width:820px){
@@ -342,7 +347,10 @@
         </div>
         <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
       </div>
-      <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">message @worksnet_bot on telegram →</a>
+      <div class="footer-links">
+        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>message @worksnet_bot on telegram →</a>
+        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>follow @wrksnet on instagram →</a>
+      </div>
     </div>
     <p class="fine-print">WrksNet provides paid digital services (phone verification numbers, proxies,
       gift cards, and print &amp; mail) delivered via Telegram. Services are for personal use and subject to the terms of the
