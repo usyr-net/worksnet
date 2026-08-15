@@ -199,6 +199,29 @@
   .step h3{ font-size:17px; margin:0 0 8px; font-weight:600; }
   .step p{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0; }
 
+  .resource-link{
+    display:flex; align-items:center; gap:18px;
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:20px 22px;
+    text-decoration:none; color:inherit;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .resource-link:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-2px); }
+  .resource-icon{
+    flex:none; width:44px; height:44px; border-radius:12px;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-bright);
+  }
+  .resource-icon svg{ width:20px; height:20px; }
+  .resource-text{ flex:1; display:flex; flex-direction:column; gap:4px; }
+  .resource-title{ font-size:15.5px; font-weight:600; color:var(--ink); }
+  .resource-desc{ font-size:13.5px; color:var(--mist); line-height:1.5; }
+  .resource-arrow{ flex:none; width:17px; height:17px; color:var(--mist-dim); }
+  @media (max-width:560px){
+    .resource-link{ align-items:flex-start; }
+    .resource-arrow{ display:none; }
+  }
+
   /* ---------- footer ---------- */
   footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
   .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
@@ -335,6 +358,23 @@
           <p>Pick a service from the menu and it's delivered in the same conversation.</p>
         </div>
       </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="section-head">
+        <p class="section-eyebrow">// useful tools</p>
+        <h2>Guides &amp; resources.</h2>
+      </div>
+      <a class="resource-link" href="proxy-setup-guide.pdf" target="_blank" rel="noopener">
+        <span class="resource-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </span>
+        <span class="resource-text">
+          <span class="resource-title">Proxy Setup Guide</span>
+          <span class="resource-desc">Step-by-step SOCKS5 configuration for Firefox, Chrome, iOS &amp; Android — PDF</span>
+        </span>
+        <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </a>
     </section>
   </main>
 
