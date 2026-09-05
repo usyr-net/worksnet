@@ -209,10 +209,15 @@
     font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
     text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
   }
-  .footer-links{ display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
-  @media (max-width:560px){ .footer-links{ align-items:flex-start; } }
-  .footer-cta{ display:inline-flex; align-items:center; gap:7px; }
-  .footer-cta svg{ width:15px; height:15px; flex:none; }
+  .footer-links{ display:flex; gap:12px; align-items:center; }
+  .footer-cta{
+    width:40px; height:40px; border-radius:50%; flex:none;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-bright);
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .footer-cta:hover{ border-color:rgba(64,217,255,0.6); transform:translateY(-2px); }
+  .footer-cta svg{ width:19px; height:19px; }
   .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
 
   @media (max-width:820px){
@@ -345,8 +350,8 @@
         <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
       </div>
       <div class="footer-links">
-        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg>message @worksnet_bot on telegram →</a>
-        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>follow @wrksnet on instagram →</a>
+        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
+        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on Instagram" title="Follow @wrksnet on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
       </div>
     </div>
     <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, proxies,
