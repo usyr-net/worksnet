@@ -531,7 +531,7 @@
               <textarea class="f-textarea" id="reviewer-message" name="message" placeholder="Tell us about your experience with WrksNet" required></textarea>
             </div>
             <input type="hidden" name="_subject" value="New WrksNet review submitted" />
-            <button type="submit" class="f-submit">Submit for Review</button>
+            <button type="submit" class="f-submit">Submit</button>
             <p id="review-status" class="f-status"></p>
           </form>
         </section>
@@ -599,7 +599,7 @@
       });
 
       reviewButton.disabled = false;
-      reviewButton.textContent = 'Submit for Review';
+      reviewButton.textContent = 'Submit';
 
       if (response.ok) {
         reviewStatus.textContent = 'Thanks! Your review has been received and will be reviewed shortly.';
@@ -611,7 +611,7 @@
       }
     } catch (err) {
       reviewButton.disabled = false;
-      reviewButton.textContent = 'Submit for Review';
+      reviewButton.textContent = 'Submit';
       reviewStatus.textContent = 'Something went wrong. Please try again.';
       reviewStatus.className = 'f-status status-error';
     }
