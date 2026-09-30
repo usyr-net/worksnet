@@ -318,6 +318,58 @@
     letter-spacing:0.3px; margin:0 0 10px;
   }
 
+  .testimonial-cta{
+    margin-top:26px; font-size:14px; color:var(--mist);
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .testimonial-cta a{
+    color:var(--cyan-bright); text-decoration:none;
+    border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:1px;
+  }
+
+  /* ---------- review form (reuses fund.html's form input styling for consistency) ---------- */
+  .review-form{ max-width:480px; margin-top:6px; }
+  .f-group{ margin-bottom:16px; }
+  .f-label{ display:block; font-size:13.5px; color:var(--mist); margin-bottom:7px; }
+  .f-input, .f-textarea{
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:rgba(255,255,255,0.02); border:1px solid var(--line);
+    color:var(--ink); font-family:'Poppins',sans-serif; font-size:14.5px;
+    box-sizing:border-box;
+  }
+  .f-textarea{ resize:vertical; min-height:110px; }
+  .f-input:focus, .f-textarea:focus{ outline:none; border-color:rgba(64,217,255,0.5); }
+  .f-hint{ font-size:12px; color:var(--mist-dim); margin-top:6px; }
+
+  .f-submit{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:15px; border:none; cursor:pointer;
+    padding:14px 26px; border-radius:999px;
+    box-shadow:0 14px 34px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease;
+  }
+  .f-submit:hover{ transform:translateY(-2px); }
+  .f-submit:disabled{ opacity:0.6; cursor:default; transform:none; }
+
+  .f-status{ font-family:'JetBrains Mono',monospace; font-size:13.5px; margin-top:14px; min-height:18px; }
+  .f-status.status-loading{ color:var(--mist); }
+  .f-status.status-success{ color:var(--mint); }
+  .f-status.status-error{ color:#ff8a8a; }
+
+  /* ---------- star rating input (pure CSS, no JS required) ---------- */
+  .star-rating{
+    display:flex; flex-direction:row-reverse; justify-content:flex-end;
+    gap:4px; font-size:30px; width:fit-content;
+  }
+  .star-rating input{ position:absolute; opacity:0; width:0; height:0; }
+  .star-rating label{
+    color:var(--line); cursor:pointer; transition:color .15s ease; line-height:1;
+  }
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label{ color:#ffc94d; }
+
   .final-cta{
     text-align:center; padding:64px 40px; border-radius:var(--radius-lg);
     background:linear-gradient(180deg, var(--panel), var(--panel-2));
@@ -395,8 +447,8 @@
           <h2>Most services ask for more than they need.</h2>
           <div class="approach">
             <div>
-              <p class="approach-lead">A phone number to sign up. An email to verify. Sometimes an ID just to top
-                up a balance.</p>
+              <p class="approach-lead">A phone number to sign up. Your mother's name to prove you're real. Sometimes
+                an ID just to top up a balance.</p>
               <p class="body">We think that's backwards. WrksNet was built around a simpler idea: you should be
                 able to get access to what you need without handing over who you are. No accounts to create, no
                 forms to fill out, no waiting on approval emails.</p>
@@ -443,6 +495,45 @@
             <!-- END REVIEW CARD -->
 
           </div>
+
+          <p class="testimonial-cta">Used WrksNet? <a href="#leave-review">Leave a review &rarr;</a></p>
+        </section>
+      </div>
+    </div>
+
+    <div class="terminal" id="leave-review">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — leave a review</span>
+      </div>
+      <div class="terminal-body">
+        <section class="section" style="border-top:none; padding:0;">
+          <p class="section-eyebrow"><span class="eyebrow-dot"></span>// leave a review</p>
+          <h2>Tell us how it went.</h2>
+
+          <form id="review-form" class="review-form">
+            <div class="f-group">
+              <label class="f-label" for="rating">Your Rating</label>
+              <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+              </div>
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="reviewer-name">Name or Handle <span style="opacity:0.6;">(optional)</span></label>
+              <input class="f-input" type="text" id="reviewer-name" name="name" placeholder="e.g. Alex, or leave blank to stay anonymous" />
+            </div>
+            <div class="f-group">
+              <label class="f-label" for="reviewer-message">Your Review</label>
+              <textarea class="f-textarea" id="reviewer-message" name="message" placeholder="Tell us about your experience with WrksNet" required></textarea>
+            </div>
+            <input type="hidden" name="_subject" value="New WrksNet review submitted" />
+            <button type="submit" class="f-submit">Submit for Review</button>
+            <p id="review-status" class="f-status"></p>
+          </form>
         </section>
       </div>
     </div>
@@ -485,6 +576,46 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script>
+  const reviewForm = document.getElementById('review-form');
+  const reviewStatus = document.getElementById('review-status');
+  const reviewButton = reviewForm.querySelector('button[type="submit"]');
+
+  reviewForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    reviewStatus.textContent = 'Submitting...';
+    reviewStatus.className = 'f-status status-loading';
+    reviewButton.disabled = true;
+    reviewButton.textContent = 'Submitting...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xzezoyqz', {
+        method: 'POST',
+        body: new FormData(reviewForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit for Review';
+
+      if (response.ok) {
+        reviewStatus.textContent = 'Thanks! Your review has been received and will be reviewed shortly.';
+        reviewStatus.className = 'f-status status-success';
+        reviewForm.reset();
+      } else {
+        reviewStatus.textContent = 'Something went wrong. Please try again.';
+        reviewStatus.className = 'f-status status-error';
+      }
+    } catch (err) {
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit for Review';
+      reviewStatus.textContent = 'Something went wrong. Please try again.';
+      reviewStatus.className = 'f-status status-error';
+    }
+  });
 </script>
 
 </body>
