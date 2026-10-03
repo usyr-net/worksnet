@@ -221,6 +221,62 @@
     .resource-arrow{ display:none; }
   }
 
+  .testimonial-grid{ display:flex; flex-wrap:wrap; gap:20px; }
+  .testimonial-card{
+    flex:0 1 320px;
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:24px 22px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .testimonial-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .testimonial-stars{ font-size:15px; letter-spacing:3px; margin-bottom:14px; color:#ffc94d; }
+  .testimonial-text{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0 0 16px; }
+  .testimonial-id{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mist-dim);
+    letter-spacing:0.3px; margin:0 0 10px;
+  }
+
+  .review-form{ max-width:480px; margin-top:6px; }
+  .f-group{ margin-bottom:16px; }
+  .f-label{ display:block; font-size:13.5px; color:var(--mist); margin-bottom:7px; }
+  .f-input, .f-textarea{
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:rgba(255,255,255,0.02); border:1px solid var(--line);
+    color:var(--ink); font-family:'Poppins',sans-serif; font-size:14.5px;
+    box-sizing:border-box;
+  }
+  .f-textarea{ resize:vertical; min-height:110px; }
+  .f-input:focus, .f-textarea:focus{ outline:none; border-color:rgba(64,217,255,0.5); }
+  .f-hint{ font-size:12px; color:var(--mist-dim); margin-top:6px; }
+
+  .f-submit{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:15px; border:none; cursor:pointer;
+    padding:14px 26px; border-radius:999px;
+    box-shadow:0 14px 34px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease;
+  }
+  .f-submit:hover{ transform:translateY(-2px); }
+  .f-submit:disabled{ opacity:0.6; cursor:default; transform:none; }
+
+  .f-status{ font-family:'JetBrains Mono',monospace; font-size:13.5px; margin-top:14px; min-height:18px; }
+  .f-status.status-loading{ color:var(--mist); }
+  .f-status.status-success{ color:var(--mint); }
+  .f-status.status-error{ color:#ff8a8a; }
+
+  .star-rating{
+    display:flex; flex-direction:row-reverse; justify-content:flex-end;
+    gap:3px; font-size:22px; width:fit-content;
+  }
+  .star-rating input{ position:absolute; opacity:0; width:0; height:0; }
+  .star-rating label{
+    color:var(--line); cursor:pointer; transition:color .15s ease; line-height:1;
+  }
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label{ color:#ffc94d; }
+
   /* ---------- footer ---------- */
   footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
   .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
@@ -396,6 +452,68 @@
         <svg class="resource-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       </a>
     </section>
+
+    <section class="section" id="testimonials">
+      <div class="section-head">
+        <p class="section-eyebrow">// testimonials</p>
+        <h2>What people are saying.</h2>
+      </div>
+
+      <div class="testimonial-grid">
+
+        <!-- REVIEW CARD — copy this whole block to add another review below it -->
+        <div class="testimonial-card">
+          <p class="testimonial-id">User 17369*****</p>
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Good services so far&rdquo;</p>
+        </div>
+        <!-- END REVIEW CARD -->
+
+        <!-- REVIEW CARD — copy this whole block to add another review below it -->
+        <div class="testimonial-card">
+          <p class="testimonial-id">User 82207*****</p>
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Yess! I purchased an Apple gift Card and it delivered instantly.. you guys keep it up please &#128077;&rdquo;</p>
+        </div>
+        <!-- END REVIEW CARD -->
+
+        <!-- REVIEW CARD — copy this whole block to add another review below it -->
+        <div class="testimonial-card">
+          <p class="testimonial-id">User 17353*****</p>
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;My experience has been great so far, I enjoy the swift service and accuracy.&rdquo;</p>
+        </div>
+        <!-- END REVIEW CARD -->
+
+      </div>
+
+      <h3 style="font-size:19px; margin:40px 0 6px;">Leave a Review</h3>
+      <p style="font-size:14.5px; color:var(--mist); margin:0 0 20px;">Used WrksNet? Tell us how it went.</p>
+
+      <form id="review-form" class="review-form">
+        <div class="f-group">
+          <label class="f-label" for="star5">Your Rating</label>
+          <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
+            <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+            <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+            <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+            <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="reviewer-name">Name or Handle <span style="opacity:0.6;">(optional)</span></label>
+          <input class="f-input" type="text" id="reviewer-name" name="name" placeholder="e.g. Alex, or leave blank to stay anonymous" />
+        </div>
+        <div class="f-group">
+          <label class="f-label" for="reviewer-message">Your Review</label>
+          <textarea class="f-textarea" id="reviewer-message" name="message" placeholder="Tell us about your experience with WrksNet" required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New WrksNet review submitted" />
+        <button type="submit" class="f-submit">Submit</button>
+        <p id="review-status" class="f-status"></p>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -417,13 +535,53 @@
     <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, proxies,
       license keys, bill pay, and print &amp; mail) delivered via Telegram. Services are for personal use and subject to the terms of the
       platforms you use them with. © <span id="year"></span> WrksNet. &nbsp;·&nbsp;
-      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact Us</a></p>
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
   </footer>
 
 </div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script>
+  const reviewForm = document.getElementById('review-form');
+  const reviewStatus = document.getElementById('review-status');
+  const reviewButton = reviewForm.querySelector('button[type="submit"]');
+
+  reviewForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    reviewStatus.textContent = 'Submitting...';
+    reviewStatus.className = 'f-status status-loading';
+    reviewButton.disabled = true;
+    reviewButton.textContent = 'Submitting...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xzezoyqz', {
+        method: 'POST',
+        body: new FormData(reviewForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit';
+
+      if (response.ok) {
+        reviewStatus.textContent = 'Thanks! Your review has been received and will be reviewed shortly.';
+        reviewStatus.className = 'f-status status-success';
+        reviewForm.reset();
+      } else {
+        reviewStatus.textContent = 'Something went wrong. Please try again.';
+        reviewStatus.className = 'f-status status-error';
+      }
+    } catch (err) {
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit';
+      reviewStatus.textContent = 'Something went wrong. Please try again.';
+      reviewStatus.className = 'f-status status-error';
+    }
+  });
 </script>
 
 </body>
