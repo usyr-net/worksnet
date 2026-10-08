@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Services — WrksNet</title>
-<meta name="description" content="Gift cards, phone numbers, private proxies, license keys, bill pay, and print & mail — delivered instantly through Telegram. Quick signup, no paperwork.">
+<meta name="description" content="Gift cards, phone numbers, eSIMs, private proxies, license keys, bill pay, and print & mail — delivered instantly through Telegram. Quick signup, no paperwork.">
 <link rel="canonical" href="https://www.wrksnet.com/services.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,6 +167,7 @@
     border-radius:var(--radius-md); padding:20px 18px;
     transition:border-color .18s ease, transform .18s ease;
   }
+  .svc-card:last-child:nth-child(odd){ grid-column:1 / -1; }
   .svc-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
   .svc-icon{
     width:42px; height:42px; border-radius:12px; margin-bottom:14px;
@@ -354,7 +355,7 @@
 
         <h1>Instant digital services.<br><span class="grad">Zero paperwork.</span></h1>
 
-        <p class="lede">Gift cards, phone numbers, private proxies, license keys, bill pay, and print &amp; mail — delivered
+        <p class="lede">Gift cards, phone numbers, eSIMs, private proxies, license keys, bill pay, and print &amp; mail — delivered
           straight through our bot on Telegram, funded by your own balance.</p>
 
         <div class="cta-row">
@@ -387,6 +388,11 @@
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
             <p class="svc-name">Phone Number</p>
             <p class="svc-desc">A second number for calls, texts, and verification — ready in seconds.</p>
+          </div>
+          <div class="svc-card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2.5h6.5L19 6v14a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 7 20V4A1.5 1.5 0 0 1 8.5 2.5z"/><rect x="9.5" y="11" width="6" height="6" rx="1"/></svg></div>
+            <p class="svc-name">eSIMs</p>
+            <p class="svc-desc">Instant data eSIMs — activate by QR code and get online anywhere, straight from the bot.</p>
           </div>
           <div class="svc-card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/></svg></div>
@@ -532,7 +538,7 @@
         <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
       </div>
     </div>
-    <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, proxies,
+    <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, eSIMs, proxies,
       license keys, bill pay, and print &amp; mail) delivered via Telegram. Services are for personal use and subject to the terms of the
       platforms you use them with. © <span id="year"></span> WrksNet. &nbsp;·&nbsp;
       <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
