@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /proxy-setup-guide-v2.pdf
+
+Sitemap: https://www.wrksnet.com/sitemap.xml
