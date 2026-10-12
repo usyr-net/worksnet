@@ -379,6 +379,34 @@
   .terminal:hover{ border-color:#5a6290; box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(102,255,255,0.10) inset, 0 0 60px -28px rgba(102,255,255,0.35); }
   @media (prefers-reduced-motion: reduce){ .js .reveal{ opacity:1; transform:none; transition:none; } }
 
+
+  /* ---------- social proof ---------- */
+  .trust{
+    display:inline-flex; align-items:center; gap:14px; margin-top:0;
+    padding:10px 20px 10px 12px; border-radius:999px;
+    border:1px solid rgba(102,255,255,0.22);
+    background:linear-gradient(100deg, rgba(102,255,255,0.07), rgba(137,59,204,0.10));
+    box-shadow:0 14px 34px -20px rgba(102,255,255,0.5);
+  }
+  .trust-wrap{ display:flex; justify-content:center; margin:40px 0 0; }
+  .trust-avatars{ display:flex; }
+  .trust-avatars span{
+    width:32px; height:32px; border-radius:50%; margin-left:-10px;
+    border:2px solid #070c30; display:flex; align-items:center; justify-content:center;
+  }
+  .trust-avatars span:first-child{ margin-left:0; }
+  .trust-avatars span:nth-child(1){ background:linear-gradient(135deg,#66ffff,#3aa6d8); }
+  .trust-avatars span:nth-child(2){ background:linear-gradient(135deg,#9bffff,#893bcc); }
+  .trust-avatars span:nth-child(3){ background:linear-gradient(135deg,#893bcc,#4c1f80); }
+  .trust-avatars span:nth-child(4){ background:linear-gradient(135deg,#6ef0bd,#2c8a68); }
+  .trust-avatars svg{ width:16px; height:16px; stroke:#09103d; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .trust-avatars span:nth-child(3) svg{ stroke:#e6eaed; }
+  .trust-text{ display:flex; flex-direction:column; line-height:1.25; }
+  .trust-text b{ font-size:15px; font-weight:700; color:var(--ink); letter-spacing:-0.1px; }
+  .trust-text b em{ font-style:normal; background:linear-gradient(96deg, var(--cyan-bright), var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .trust-text small{ font-size:11.5px; color:var(--mist); font-family:'JetBrains Mono',monospace; }
+  .trust-text b, .trust-text small{ white-space:nowrap; }
+  @media (max-width:520px){ .trust{ padding-right:14px; gap:10px; max-width:100%; } .trust-text b{ font-size:13.5px; } .trust-text small{ font-size:10.5px; } .trust-avatars span{ width:28px; height:28px; } }
 </style>
 </head>
 <body>
@@ -473,26 +501,18 @@
       </div>
     </div>
 
-    <div class="terminal">
-      <div class="titlebar">
-        <div class="tl-dots"><span></span><span></span><span></span></div>
-        <span class="titlebar-label">wrksnet — approach</span>
-      </div>
-      <div class="terminal-body">
-        <section class="section" style="border-top:none; padding:0;">
-          <p class="section-eyebrow"><span class="eyebrow-dot"></span>// our approach</p>
-          <h2>Most services ask for more than they need.</h2>
-          <div class="approach">
-            <div>
-              <p class="approach-lead">A phone number to sign up. Your mother's name to prove you're real. Sometimes
-                an ID just to top up a balance.</p>
-              <p class="body">We think that's backwards. WrksNet was built around a simpler idea: you should be
-                able to get access to what you need without handing over who you are. No accounts to create, no
-                forms to fill out, no waiting on approval emails.</p>
-              <p class="body">Just a balance, and a bot that delivers — in the same conversation, in seconds.</p>
-            </div>
-          </div>
-        </section>
+    <div class="trust-wrap">
+      <div class="trust">
+        <div class="trust-avatars" aria-hidden="true">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+        </div>
+        <div class="trust-text">
+          <b>Trusted by <em>1,000+</em> users</b>
+          <small>Instant delivery on Telegram</small>
+        </div>
       </div>
     </div>
 
@@ -527,7 +547,7 @@
     <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, eSIMs, proxies,
       license keys, bill pay, and print &amp; mail) delivered via Telegram. Services are for personal use and subject to the terms of the
       platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
-      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="services.html#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="approach.html" style="color:var(--mist-dim); text-decoration:underline;">Our Approach</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="services.html#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
   </footer>
 
 </div>
@@ -542,7 +562,7 @@
   try{
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if(!('IntersectionObserver' in window)) return;
-    var SEL='.terminal,.safe-box,.section,.final-cta,.pay-strip,.refer-card,.faq details';
+    var SEL='.terminal,.safe-box,.section,.final-cta,.pay-strip,.refer-card,.trust-wrap,.faq details';
     var all=Array.prototype.slice.call(document.querySelectorAll(SEL));
     var els=all.filter(function(e){ return !(e.parentElement && e.parentElement.closest(SEL)); });
     document.documentElement.classList.add('js');
