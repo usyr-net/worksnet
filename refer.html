@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refer &amp; Earn — WrksNet</title>
+<meta name="description" content="Invite friends to WrksNet and earn $0.50 in balance credit when they make their first purchase — up to $250.">
+<link rel="canonical" href="https://www.wrksnet.com/refer.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void:#04071b;
+    --bg-top:#080e36;
+    --bg-bottom:#030618;
+    --panel:#070c30;
+    --panel-2:#050a27;
+    --line:#464d6e;
+    --line-soft:#272e55;
+    --cyan:#66ffff;
+    --cyan-bright:#9bffff;
+    --violet:#893bcc;
+    --ink:#e6eaed;
+    --mist:#82879d;
+    --mist-dim:#565c7a;
+    --mint:#6ef0bd;
+    --mint-bg:#0f2019;
+    --mint-line:#2c6a4f;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%; background:var(--bg-bottom);}
+  body{
+    margin:0;
+    width:100%;
+    position:relative;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom) 70%);
+    color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  /* ambient dot grid + glow, purely decorative */
+  .bg-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100%; height:100%; }
+  .field{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(120,150,190,0.16) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 90%);
+  }
+  .glow{ position:absolute; filter:blur(90px); border-radius:50%; }
+  .glow-a{ width:640px; height:640px; top:-220px; left:50%; transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(150,96,255,0.35), transparent 70%); }
+  .glow-b{ width:520px; height:520px; top:30%; left:-160px;
+    background:radial-gradient(circle, rgba(64,217,255,0.22), transparent 70%); }
+  .glow-c{ width:560px; height:560px; bottom:-140px; right:-160px;
+    background:radial-gradient(circle, rgba(150,96,255,0.20), transparent 70%); }
+
+  .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- header ---------- */
+  header{ padding:28px 0 10px; }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{
+    width:42px; height:42px; border-radius:50%; flex:none;
+    object-fit:cover; display:block;
+    border:1.5px solid rgba(170,246,255,0.7);
+    box-shadow:0 0 22px rgba(64,217,255,0.55);
+  }
+  .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
+  .brand-name .accent{ color:var(--cyan); }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
+    border:1px solid var(--mint-line); background:rgba(20,40,32,0.55);
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* ---------- terminal card (signature element) ---------- */
+  .terminal{
+    margin:34px 0 0;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(64,217,255,0.04) inset;
+    overflow:hidden;
+  }
+  .titlebar{
+    display:flex; align-items:center; justify-content:center; position:relative;
+    padding:15px 18px; border-bottom:1px solid var(--line-soft);
+    background:rgba(255,255,255,0.015);
+  }
+  .tl-dots{ position:absolute; left:18px; display:flex; gap:7px; }
+  .tl-dots span{ width:11px; height:11px; border-radius:50%; display:block; }
+  .tl-dots span:nth-child(1){ background:#ff5f57; }
+  .tl-dots span:nth-child(2){ background:#febc2e; }
+  .tl-dots span:nth-child(3){ background:#28c840; }
+  .titlebar-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); }
+
+  .terminal-body{ padding:44px 40px 46px; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mint);
+    display:flex; align-items:center; gap:4px; margin:0 0 18px;
+  }
+  .caret{
+    width:9px; height:18px; background:var(--mint); display:inline-block;
+    animation:blink 1s step-end infinite; margin-left:2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1{
+    font-size:52px; line-height:1.06; font-weight:800; letter-spacing:-0.5px;
+    margin:0 0 22px; color:var(--ink);
+  }
+  h1 .grad{
+    background:linear-gradient(96deg, var(--cyan-bright), var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .lede{ font-size:17.5px; line-height:1.6; color:var(--mist); max-width:520px; margin:0 0 30px; }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:12px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:16px;
+    padding:16px 26px; border-radius:999px; text-decoration:none;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset, 0 18px 40px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,255,255,0.12) inset, 0 22px 46px -12px rgba(64,217,255,0.7); }
+  .cta svg{ width:19px; height:19px; flex:none; }
+  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-bottom:34px; }
+  .cta-note{ font-size:13.5px; color:var(--mist-dim); }
+
+  .safe-box{
+    display:flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--mint);
+    border:1px solid var(--mint-line); background:var(--mint-bg);
+    padding:14px 18px; border-radius:var(--radius-sm); margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .safe-box b{ color:#eafff5; font-weight:600; }
+  .safe-box .sep{ color:var(--mint-line); }
+
+  .services-prompt{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mist-dim);
+    margin:0 0 16px; display:flex; align-items:center; gap:2px;
+  }
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
+  }
+  .svc-card{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:20px 18px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .svc-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .svc-icon{
+    width:42px; height:42px; border-radius:12px; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+  }
+  .svc-icon svg{ width:22px; height:22px; stroke:var(--cyan-bright); }
+  .svc-name{ font-weight:600; font-size:15.5px; margin:0 0 6px; }
+  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0; line-height:1.5; }
+
+  /* ---------- how it works ---------- */
+  .section{ padding:74px 0; }
+  .section-head{ margin-bottom:38px; }
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px;
+  }
+  .section h2{ font-size:32px; font-weight:700; margin:0; letter-spacing:-0.3px; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .step{ position:relative; padding-left:0; }
+  .step-num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--void);
+    background:linear-gradient(100deg, var(--cyan-bright), var(--violet));
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    margin-bottom:16px;
+  }
+  .step h3{ font-size:17px; margin:0 0 8px; font-weight:600; }
+  .step p{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
+  .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-brand .brand-mark{ width:30px; height:30px; }
+  .footer-tagline{ font-size:13px; color:var(--mist-dim); margin-top:2px; }
+  .footer-cta{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
+  }
+  .footer-links{ display:flex; gap:12px; align-items:center; }
+  .footer-cta{
+    width:40px; height:40px; border-radius:50%; flex:none;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-bright);
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .footer-cta:hover{ border-color:rgba(64,217,255,0.6); transform:translateY(-2px); }
+  .footer-cta svg{ width:19px; height:19px; }
+  .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
+
+  @media (max-width:820px){
+    h1{ font-size:38px; }
+    .terminal-body{ padding:32px 22px 34px; }
+    .services-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .section{ padding:56px 0; }
+  }
+  @media (max-width:420px){
+    .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .caret, .status-dot{ animation:none; }
+  }
+
+  /* ---------- policy page specific ---------- */
+  .policy-body{ padding:44px 40px 50px; }
+  .policy-meta{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--mist-dim);
+    margin:0 0 30px;
+  }
+  .policy-h2{
+    font-size:20px; font-weight:700; margin:34px 0 12px; color:var(--ink);
+  }
+  .policy-h2:first-of-type{ margin-top:0; }
+  .policy-p{
+    font-size:15.5px; line-height:1.7; color:var(--mist); margin:0 0 6px;
+  }
+  .policy-p code{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--cyan-bright);
+    background:rgba(64,217,255,0.08); padding:2px 7px; border-radius:5px;
+  }
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; margin-bottom:28px; opacity:0.9;
+  }
+  .back-link:hover{ opacity:1; }
+  @media (max-width:820px){
+    .policy-body{ padding:32px 22px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="field"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="glow glow-c"></div>
+</div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+        <span class="brand-name">WRKS<span class="accent">NET</span></span>
+      </a>
+      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </header>
+
+  <main>
+    <a class="back-link" href="index.html">&larr; back to home</a>
+
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — refer &amp; earn</span>
+      </div>
+
+      <div class="policy-body">
+        <p class="eyebrow">refer &amp; earn<span class="caret"></span></p>
+
+        <h1 style="font-size:34px; margin:0 0 8px;">Refer &amp; Earn</h1>
+        <p class="policy-meta">Invite friends to WrksNet and earn balance credit when they make their first purchase.</p>
+
+        <h2 class="policy-h2">How It Works</h2>
+        <p class="policy-p"><b style="color:var(--cyan-bright);">1.</b>&nbsp; Open the bot, tap My Account, then tap Refer to get your personal invite link.</p>
+        <p class="policy-p"><b style="color:var(--cyan-bright);">2.</b>&nbsp; Share your link with friends.</p>
+        <p class="policy-p"><b style="color:var(--cyan-bright);">3.</b>&nbsp; When someone joins through your link and makes their first purchase,
+          $0.50 is added to your balance.</p>
+
+        <h2 class="policy-h2">Rewards</h2>
+        <p class="policy-p">You earn $0.50 in balance credit for every person you invite who completes a first
+          purchase. Any purchase counts, and there is no minimum amount. You can refer up to 500 people, which
+          means you can earn up to $250.</p>
+        <p class="policy-p">Rewards are added to your balance automatically shortly after your friend's first purchase.</p>
+
+        <h2 class="policy-h2">Using Your Rewards</h2>
+        <p class="policy-p">Referral rewards are added to your WrksNet balance and can be used on any service in
+          the bot. Like all account balance, referral credit cannot be withdrawn as cash.</p>
+
+        <h2 class="policy-h2">Rules &amp; Warnings</h2>
+        <p class="policy-p">Please share your invite link responsibly. Do not spam, and do not post your link
+          anywhere it is not allowed. Abuse of the referral program can result in rewards being withheld or
+          your account being restricted.</p>
+
+        <div style="margin-top:30px;">
+          <a class="cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M2 11.5L21 3l-4 18-6-5-3.5 3-.5-5L2 11.5z" stroke="#0a0d14" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" fill="#0a0d14"/></svg>
+            Open the Bot
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand">
+          <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+          <span class="brand-name">WRKS<span class="accent">NET</span></span>
+        </div>
+        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
+        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on Instagram" title="Follow @wrksnet on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="footer-cta" href="https://x.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on X" title="Follow @wrksnet on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></a>
+        <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
+      </div>
+    </div>
+    <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram bot. Services are for personal use and subject to the terms of the
+      platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="approach.html" style="color:var(--mist-dim); text-decoration:underline;">Our Approach</a> &nbsp;&middot;&nbsp; <a href="refer.html" style="color:var(--mist-dim); text-decoration:underline;">Refer &amp; Earn</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="services.html#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -322,13 +322,15 @@
   .pay-chip svg{ width:17px; height:17px; stroke:var(--cyan-bright); flex:none; }
 
   .refer-card{
-    margin:0 0 4px; padding:30px 30px; border-radius:var(--radius-lg);
-    border:1px solid rgba(137,59,204,0.55);
-    background:linear-gradient(120deg, rgba(137,59,204,0.20), rgba(102,255,255,0.07));
-    box-shadow:0 30px 70px -40px rgba(137,59,204,0.8);
     display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    margin:0 0 4px; padding:30px 30px; border-radius:var(--radius-md);
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    text-decoration:none; color:inherit;
+    transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
   }
-  .refer-card .section-eyebrow{ margin:0 0 8px; }
+  .refer-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); box-shadow:0 0 0 1px rgba(102,255,255,0.18), 0 22px 44px -22px rgba(102,255,255,0.4); }
+  .refer-more{ display:inline-block; margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--cyan-bright); }
+  .refer-card .section-eyebrow{ margin:0 0 8px; color:var(--cyan); }
   .refer-card h3{ font-size:24px; font-weight:700; margin:0 0 8px; letter-spacing:-0.2px; }
   .refer-card p{ margin:0; color:var(--mist); font-size:14.5px; line-height:1.6; max-width:540px; }
   .refer-badge{
@@ -525,14 +527,15 @@
     </div>
 
     <section class="section" style="border-top:none; padding:20px 0 40px;">
-      <div class="refer-card">
+      <a class="refer-card" href="refer.html">
         <div>
           <p class="section-eyebrow">// refer &amp; earn</p>
           <h3>Invite friends. Earn balance.</h3>
           <p>Share your personal invite link from the bot. When someone you invite makes their first purchase, you get $0.50 in balance credit.</p>
+          <span class="refer-more">See how it works &rarr;</span>
         </div>
         <span class="refer-badge">Earn up to $250</span>
-      </div>
+      </a>
     </section>
 
     <section class="section" id="faq">
@@ -646,7 +649,7 @@
     </div>
     <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram bot. Services are for personal use and subject to the terms of the
       platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
-      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="approach.html" style="color:var(--mist-dim); text-decoration:underline;">Our Approach</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="approach.html" style="color:var(--mist-dim); text-decoration:underline;">Our Approach</a> &nbsp;&middot;&nbsp; <a href="refer.html" style="color:var(--mist-dim); text-decoration:underline;">Refer &amp; Earn</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
   </footer>
 
 </div>
