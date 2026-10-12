@@ -146,18 +146,31 @@
   }
   .cta:hover{ transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,255,255,0.12) inset, 0 22px 46px -12px rgba(64,217,255,0.7); }
   .cta svg{ width:19px; height:19px; flex:none; }
-  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-bottom:34px; }
+  .cta-row{ display:flex; flex-direction:column; align-items:center; gap:14px; margin-bottom:12px; }
   .cta-note{ font-size:13.5px; color:var(--mist-dim); }
 
   .safe-box{
-    display:flex; align-items:center; gap:10px;
-    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--mint);
-    border:1px solid var(--mint-line); background:var(--mint-bg);
-    padding:14px 18px; border-radius:var(--radius-sm);
-    flex-wrap:wrap; width:fit-content; margin:36px auto;
+    display:flex; align-items:center; justify-content:center; gap:20px;
+    font-family:'Poppins',system-ui,sans-serif; font-weight:500; font-size:12.5px;
+    letter-spacing:.34em; text-transform:uppercase; color:var(--ink);
+    width:fit-content; max-width:100%; margin:44px auto; padding:0;
+    border:none; background:none; flex-wrap:nowrap; white-space:nowrap;
   }
-  .safe-box b{ color:#eafff5; font-weight:600; }
-  .safe-box .sep{ color:var(--mint-line); }
+  .safe-box::before, .safe-box::after{
+    content:''; flex:none; width:84px; height:1px;
+  }
+  .safe-box::before{ background:linear-gradient(90deg, transparent, var(--violet)); }
+  .safe-box::after{ background:linear-gradient(270deg, transparent, var(--cyan)); }
+  .safe-box b{ font-weight:500; color:var(--ink); margin-right:-.34em; }
+  .safe-box .sep{
+    font-size:0; width:5px; height:5px; flex:none; transform:rotate(45deg);
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+  }
+  @media (max-width:520px){
+    .safe-box{ gap:12px; font-size:10.5px; letter-spacing:.26em; margin:34px auto; }
+    .safe-box b{ margin-right:-.26em; }
+    .safe-box::before, .safe-box::after{ width:28px; }
+  }
 
   .services-grid{
     display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
@@ -296,7 +309,84 @@
     text-decoration:none; margin:6px 0 18px; opacity:0.9;
   }
   .back-link:hover{ opacity:1; }
+
+  .svc-card:hover{ box-shadow:0 0 0 1px rgba(102,255,255,0.18), 0 22px 44px -22px rgba(102,255,255,0.4); }
+
+  .pay-strip{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; margin:28px 0 0; }
+  .pay-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist); }
+  .pay-chip{
+    display:inline-flex; align-items:center; gap:9px; font-size:13.5px; font-weight:500;
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.02);
+    padding:9px 16px; border-radius:999px;
+  }
+  .pay-chip svg{ width:17px; height:17px; stroke:var(--cyan-bright); flex:none; }
+
+  .refer-card{
+    margin:0 0 4px; padding:30px 30px; border-radius:var(--radius-lg);
+    border:1px solid rgba(137,59,204,0.55);
+    background:linear-gradient(120deg, rgba(137,59,204,0.20), rgba(102,255,255,0.07));
+    box-shadow:0 30px 70px -40px rgba(137,59,204,0.8);
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .refer-card .section-eyebrow{ margin:0 0 8px; }
+  .refer-card h3{ font-size:24px; font-weight:700; margin:0 0 8px; letter-spacing:-0.2px; }
+  .refer-card p{ margin:0; color:var(--mist); font-size:14.5px; line-height:1.6; max-width:540px; }
+  .refer-badge{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:14px; color:#0a0d14;
+    background:linear-gradient(100deg, var(--cyan), var(--violet)); padding:12px 20px; border-radius:999px; white-space:nowrap;
+  }
+
+  .faq{ display:flex; flex-direction:column; gap:10px; }
+  .faq details{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:0 20px; transition:border-color .2s ease;
+  }
+  .faq details[open]{ border-color:rgba(102,255,255,0.35); }
+  .faq summary{
+    cursor:pointer; list-style:none; padding:18px 0; font-weight:600; font-size:15.5px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+  }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:'+'; font-family:'JetBrains Mono',monospace; font-size:20px; color:var(--cyan); flex:none; }
+  .faq details[open] summary::after{ content:'\2212'; }
+  .faq details p{ margin:0 0 18px; color:var(--mist); font-size:14.5px; line-height:1.65; }
+
+  /* ---------- polish: motion + hover glow ---------- */
+  .js .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.in{ opacity:1; transform:none; }
+  .terminal{ transition:border-color .25s ease, box-shadow .25s ease; }
+  .terminal:hover{ border-color:#5a6290; box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(102,255,255,0.10) inset, 0 0 60px -28px rgba(102,255,255,0.35); }
+  @media (prefers-reduced-motion: reduce){ .js .reveal{ opacity:1; transform:none; transition:none; } }
+
+  /* ---------- social proof ---------- */
+  .trust{
+    display:inline-flex; align-items:center; gap:14px; margin-top:0;
+    padding:10px 20px 10px 12px; border-radius:999px;
+    border:1px solid rgba(102,255,255,0.22);
+    background:linear-gradient(100deg, rgba(102,255,255,0.07), rgba(137,59,204,0.10));
+    box-shadow:0 14px 34px -20px rgba(102,255,255,0.5);
+  }
+  .trust-wrap{ display:flex; justify-content:center; margin:-26px 0 -8px; }
+  .trust-avatars{ display:flex; }
+  .trust-avatars span{
+    width:32px; height:32px; border-radius:50%; margin-left:-10px;
+    border:2px solid #070c30; display:flex; align-items:center; justify-content:center;
+  }
+  .trust-avatars span:first-child{ margin-left:0; }
+  .trust-avatars span:nth-child(1){ background:linear-gradient(135deg,#66ffff,#3aa6d8); }
+  .trust-avatars span:nth-child(2){ background:linear-gradient(135deg,#9bffff,#893bcc); }
+  .trust-avatars span:nth-child(3){ background:linear-gradient(135deg,#893bcc,#4c1f80); }
+  .trust-avatars span:nth-child(4){ background:linear-gradient(135deg,#6ef0bd,#2c8a68); }
+  .trust-avatars svg{ width:16px; height:16px; stroke:#09103d; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .trust-avatars span:nth-child(3) svg{ stroke:#e6eaed; }
+  .trust-text{ display:flex; flex-direction:column; line-height:1.25; }
+  .trust-text b{ font-size:15px; font-weight:700; color:var(--ink); letter-spacing:-0.1px; }
+  .trust-text b em{ font-style:normal; background:linear-gradient(96deg, var(--cyan-bright), var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .trust-text small{ font-size:11.5px; color:var(--mist); font-family:'JetBrains Mono',monospace; }
+  .trust-text b, .trust-text small{ white-space:nowrap; }
+  @media (max-width:520px){ .trust{ padding-right:14px; gap:10px; max-width:100%; } .trust-text b{ font-size:13.5px; } .trust-text small{ font-size:10.5px; } .trust-avatars span{ width:28px; height:28px; } }
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does WrksNet work?", "acceptedAnswer": {"@type": "Answer", "text": "Open our bot on Telegram, add balance, and pick a service. Your order is delivered right in the same conversation."}}, {"@type": "Question", "name": "Do I need to create an account?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs inside Telegram, so there is no separate account or sign-up form to complete."}}, {"@type": "Question", "name": "How do I add balance?", "acceptedAnswer": {"@type": "Answer", "text": "In the bot, open My Account and choose Fund Account. You can pay with crypto (USDT) or bank transfer, and your balance updates automatically."}}, {"@type": "Question", "name": "How fast is delivery?", "acceptedAnswer": {"@type": "Answer", "text": "Most services are delivered instantly in the chat. Phone numbers typically get their code within 1–4 minutes, proxies arrive within 1–3 minutes, and Print & Mail orders are reviewed before they are sent."}}, {"@type": "Question", "name": "What happens if an order fails?", "acceptedAnswer": {"@type": "Answer", "text": "Phone number orders are refunded automatically to your balance if no code arrives. For any other issue, tap Contact Support in the bot and our team will sort it out."}}, {"@type": "Question", "name": "Can I withdraw my balance?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your balance is used to buy services inside the bot and cannot be withdrawn as cash. Details are in our Privacy Policy & Terms of Service."}}]}</script>
 </head>
 <body>
 
@@ -342,6 +432,7 @@
           </a>
           <span class="cta-note">Opens a chat in the Telegram app</span>
         </div>
+
       </div>
     </div>
 
@@ -395,7 +486,19 @@
       </div>
     </div>
 
-    <section class="section" id="how">
+    <div class="pay-strip">
+      <span class="pay-label">Fund your balance with</span>
+      <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 8h8M12 8v9"/></svg>Crypto (USDT)</span>
+      <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><line x1="5" y1="10" x2="5" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="19" y1="10" x2="19" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></svg>Bank transfer</span>
+    </div>
+
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — how it works</span>
+      </div>
+      <div class="terminal-body">
+        <section class="section" id="how" style="border-top:none; padding:0;">
       <div class="section-head">
         <p class="section-eyebrow">// how it works</p>
         <h2>Three steps, no forms.</h2>
@@ -417,7 +520,50 @@
           <p>Pick a service from the menu and it's delivered in the same conversation.</p>
         </div>
       </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="section" style="border-top:none; padding:20px 0 40px;">
+      <div class="refer-card">
+        <div>
+          <p class="section-eyebrow">// refer &amp; earn</p>
+          <h3>Invite friends. Earn balance.</h3>
+          <p>Share your personal invite link from the bot. When someone you invite makes their first purchase, you get $0.50 in balance credit.</p>
+        </div>
+        <span class="refer-badge">Earn up to $250</span>
+      </div>
     </section>
+
+    <section class="section" id="faq">
+      <div class="section-head">
+        <p class="section-eyebrow">// faq</p>
+        <h2>Common questions.</h2>
+      </div>
+      <div class="faq">
+        <details><summary>How does WrksNet work?</summary><p>Open our bot on Telegram, add balance, and pick a service. Your order is delivered right in the same conversation.</p></details>
+        <details><summary>Do I need to create an account?</summary><p>No. Everything runs inside Telegram, so there is no separate account or sign-up form to complete.</p></details>
+        <details><summary>How do I add balance?</summary><p>In the bot, open My Account and choose Fund Account. You can pay with crypto (USDT) or bank transfer, and your balance updates automatically.</p></details>
+        <details><summary>How fast is delivery?</summary><p>Most services are delivered instantly in the chat. Phone numbers typically get their code within 1&ndash;4 minutes, proxies arrive within 1&ndash;3 minutes, and Print &amp; Mail orders are reviewed before they are sent.</p></details>
+        <details><summary>What happens if an order fails?</summary><p>Phone number orders are refunded automatically to your balance if no code arrives. For any other issue, tap Contact Support in the bot and our team will sort it out.</p></details>
+        <details><summary>Can I withdraw my balance?</summary><p>No. Your balance is used to buy services inside the bot and cannot be withdrawn as cash. Details are in our Privacy Policy &amp; Terms of Service.</p></details>
+      </div>
+    </section>
+
+    <div class="trust-wrap">
+      <div class="trust">
+        <div class="trust-avatars" aria-hidden="true">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+        </div>
+        <div class="trust-text">
+          <b>Trusted by <em>1,000+</em> users</b>
+          <small>Instant delivery on Telegram</small>
+        </div>
+      </div>
+    </div>
 
     <section class="section" id="testimonials">
       <div class="section-head">
@@ -548,6 +694,24 @@
       reviewStatus.className = 'f-status status-error';
     }
   });
+</script>
+
+
+<script>
+(function(){
+  try{
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(!('IntersectionObserver' in window)) return;
+    var SEL='.terminal,.safe-box,.section,.final-cta,.pay-strip,.refer-card,.trust-wrap,.faq details';
+    var all=Array.prototype.slice.call(document.querySelectorAll(SEL));
+    var els=all.filter(function(e){ return !(e.parentElement && e.parentElement.closest(SEL)); });
+    document.documentElement.classList.add('js');
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{threshold:0.08, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ e.classList.add('reveal'); io.observe(e); });
+  }catch(err){}
+})();
 </script>
 
 </body>
