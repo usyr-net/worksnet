@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WrksNet</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void:#04071b;
+    --bg-top:#080e36;
+    --bg-bottom:#030618;
+    --panel:#070c30;
+    --panel-2:#050a27;
+    --line:#464d6e;
+    --line-soft:#272e55;
+    --cyan:#66ffff;
+    --cyan-bright:#9bffff;
+    --violet:#893bcc;
+    --ink:#e6eaed;
+    --mist:#82879d;
+    --mist-dim:#565c7a;
+    --mint:#6ef0bd;
+    --mint-bg:#0f2019;
+    --mint-line:#2c6a4f;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%; background:var(--bg-bottom);}
+  body{
+    margin:0;
+    width:100%;
+    position:relative;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom) 70%);
+    color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  /* ambient dot grid + glow, purely decorative */
+  .bg-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100%; height:100%; }
+  .field{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(120,150,190,0.16) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 90%);
+  }
+  .glow{ position:absolute; filter:blur(90px); border-radius:50%; }
+  .glow-a{ width:640px; height:640px; top:-220px; left:50%; transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(150,96,255,0.35), transparent 70%); }
+  .glow-b{ width:520px; height:520px; top:30%; left:-160px;
+    background:radial-gradient(circle, rgba(64,217,255,0.22), transparent 70%); }
+  .glow-c{ width:560px; height:560px; bottom:-140px; right:-160px;
+    background:radial-gradient(circle, rgba(150,96,255,0.20), transparent 70%); }
+
+  .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- header ---------- */
+  header{ padding:28px 0 10px; }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{
+    width:42px; height:42px; border-radius:50%; flex:none;
+    object-fit:cover; display:block;
+    border:1.5px solid rgba(170,246,255,0.7);
+    box-shadow:0 0 22px rgba(64,217,255,0.55);
+  }
+  .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
+  .brand-name .accent{ color:var(--cyan); }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
+    border:1px solid var(--mint-line); background:rgba(20,40,32,0.55);
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  .eyebrow-dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--mint); box-shadow:0 0 8px var(--mint);
+    animation:pulse 2.2s ease-in-out infinite;
+    margin-right:9px; vertical-align:middle;
+  }
+
+  /* ---------- terminal card (signature element) ---------- */
+  .terminal{
+    margin:34px 0 0;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(64,217,255,0.04) inset;
+    overflow:hidden;
+  }
+  .titlebar{
+    display:flex; align-items:center; justify-content:center; position:relative;
+    padding:15px 18px; border-bottom:1px solid var(--line-soft);
+    background:rgba(255,255,255,0.015);
+  }
+  .tl-dots{ position:absolute; left:18px; display:flex; gap:7px; }
+  .tl-dots span{ width:11px; height:11px; border-radius:50%; display:block; }
+  .tl-dots span:nth-child(1){ background:#ff5f57; }
+  .tl-dots span:nth-child(2){ background:#febc2e; }
+  .tl-dots span:nth-child(3){ background:#28c840; }
+  .titlebar-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); }
+
+  .terminal-body{ padding:44px 40px 46px; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mint);
+    display:flex; align-items:center; gap:4px; margin:0 0 18px;
+  }
+  .caret{
+    width:9px; height:18px; background:var(--mint); display:inline-block;
+    animation:blink 1s step-end infinite; margin-left:2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1{
+    font-size:52px; line-height:1.06; font-weight:800; letter-spacing:-0.5px;
+    margin:0 0 22px; color:var(--ink);
+  }
+  h1 .grad{
+    background:linear-gradient(96deg, var(--cyan-bright), var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .lede{ font-size:17.5px; line-height:1.6; color:var(--mist); max-width:520px; margin:0 0 30px; }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:12px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:16px;
+    padding:16px 26px; border-radius:999px; text-decoration:none;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset, 0 18px 40px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,255,255,0.12) inset, 0 22px 46px -12px rgba(64,217,255,0.7); }
+  .cta svg{ width:19px; height:19px; flex:none; }
+  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-bottom:34px; }
+  .cta-note{ font-size:13.5px; color:var(--mist-dim); }
+
+  .safe-box{
+    display:flex; align-items:center; justify-content:center; gap:20px;
+    font-family:'Poppins',system-ui,sans-serif; font-weight:500; font-size:12.5px;
+    letter-spacing:.34em; text-transform:uppercase; color:var(--ink);
+    width:fit-content; max-width:100%; margin:44px auto; padding:0;
+    border:none; background:none; flex-wrap:nowrap; white-space:nowrap;
+  }
+  .safe-box::before, .safe-box::after{
+    content:''; flex:none; width:84px; height:1px;
+  }
+  .safe-box::before{ background:linear-gradient(90deg, transparent, var(--violet)); }
+  .safe-box::after{ background:linear-gradient(270deg, transparent, var(--cyan)); }
+  .safe-box b{ font-weight:500; color:var(--ink); margin-right:-.34em; }
+  .safe-box .sep{
+    font-size:0; width:5px; height:5px; flex:none; transform:rotate(45deg);
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+  }
+  @media (max-width:520px){
+    .safe-box{ gap:12px; font-size:10.5px; letter-spacing:.26em; margin:34px auto; }
+    .safe-box b{ margin-right:-.26em; }
+    .safe-box::before, .safe-box::after{ width:28px; }
+  }
+
+  .services-prompt{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mist-dim);
+    margin:0 0 16px; display:flex; align-items:center; gap:2px;
+  }
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
+  }
+  .svc-card{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:20px 18px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .svc-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .svc-icon{
+    width:42px; height:42px; border-radius:12px; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+  }
+  .svc-icon svg{ width:22px; height:22px; stroke:var(--cyan-bright); }
+  .svc-name{ font-weight:600; font-size:15.5px; margin:0 0 6px; }
+  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0; line-height:1.5; }
+
+  /* ---------- how it works ---------- */
+  .section{ padding:74px 0; }
+  .section-head{ margin-bottom:38px; }
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px;
+  }
+  .section h2{ font-size:32px; font-weight:700; margin:0; letter-spacing:-0.3px; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .step{ position:relative; padding-left:0; }
+  .step-num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--void);
+    background:linear-gradient(100deg, var(--cyan-bright), var(--violet));
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    margin-bottom:16px;
+  }
+  .step h3{ font-size:17px; margin:0 0 8px; font-weight:600; }
+  .step p{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
+  .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-brand .brand-mark{ width:30px; height:30px; }
+  .footer-tagline{ font-size:13px; color:var(--mist-dim); margin-top:2px; }
+  .footer-cta{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
+  }
+  .footer-links{ display:flex; gap:12px; align-items:center; }
+  .footer-cta{
+    width:40px; height:40px; border-radius:50%; flex:none;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-bright);
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .footer-cta:hover{ border-color:rgba(64,217,255,0.6); transform:translateY(-2px); }
+  .footer-cta svg{ width:19px; height:19px; }
+  .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
+
+  @media (max-width:820px){
+    h1{ font-size:38px; }
+    .terminal-body{ padding:32px 22px 34px; }
+    .services-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .section{ padding:56px 0; }
+  }
+  @media (max-width:420px){
+    .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .caret, .status-dot, .eyebrow-dot{ animation:none; }
+  }
+
+  /* ---------- new homepage specific ---------- */
+  .hero{ padding:56px 0 20px; max-width:760px; }
+  .hero-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--mint);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 18px;
+  }
+  .hero h1{
+    font-size:50px; line-height:1.1; font-weight:800; letter-spacing:-0.5px;
+    margin:0 0 22px; color:var(--ink);
+  }
+  .hero h1 .grad{
+    background:linear-gradient(96deg, var(--cyan-bright), var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero-lede{ font-size:17px; line-height:1.7; color:var(--mist); max-width:600px; margin:0 0 32px; }
+
+  .hero-cta-row{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px; margin-bottom:8px; }
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:15.5px;
+    padding:15px 28px; border-radius:999px; text-decoration:none;
+    box-shadow:0 16px 38px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-primary svg{ width:17px; height:17px; }
+  .link-secondary{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--mist);
+    text-decoration:none; border-bottom:1px dashed var(--line);
+  }
+  .link-secondary:hover{ color:var(--cyan-bright); }
+
+  .section{ padding:70px 0; border-top:1px solid var(--line-soft); }
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px;
+  }
+  .section h2{ font-size:30px; font-weight:700; margin:0 0 36px; letter-spacing:-0.3px; max-width:520px; }
+
+  .capability-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
+  .cap-card{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:22px 20px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .cap-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .cap-icon{
+    width:38px; height:38px; border-radius:10px; margin-bottom:16px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+  }
+  .cap-icon svg{ width:19px; height:19px; stroke:var(--cyan-bright); }
+  .cap-card h3{ font-size:15.5px; font-weight:600; margin:0 0 8px; }
+  .cap-card p{ font-size:13.5px; color:var(--mist); line-height:1.55; margin:0; }
+
+  .final-cta{
+    text-align:center; padding:64px 40px; border-radius:var(--radius-lg);
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line);
+  }
+  .final-cta h2{ margin:0 0 14px; }
+  .final-cta p{ color:var(--mist); font-size:15.5px; margin:0 0 28px; }
+
+  @media (max-width:820px){
+    .hero h1{ font-size:36px; }
+    .capability-grid{ grid-template-columns:1fr 1fr; }
+    .final-cta{ padding:44px 24px; }
+  }
+
+  /* ---------- approach / how-it-works (replaces service preview) ---------- */
+  .approach{ display:block; }
+  .approach-lead{ font-size:22px; line-height:1.5; font-weight:600; color:var(--ink); margin:0 0 18px; max-width:420px; }
+  .approach p.body{ font-size:15px; line-height:1.75; color:var(--mist); margin:0 0 16px; max-width:440px; }
+
+
+  /* ---------- in-chat preview ---------- */
+  .chat-split{ display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; }
+  .chat-copy .body{ margin:0 0 14px; }
+  .chat-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .chat-chip{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--cyan-bright);
+    border:1px solid rgba(102,255,255,0.28); background:rgba(102,255,255,0.06);
+    padding:6px 12px; border-radius:999px;
+  }
+  .phone{
+    width:100%; max-width:300px; margin:0 auto;
+    border-radius:34px; padding:10px;
+    background:linear-gradient(160deg,#2a3270,#0b1038 55%,#2c1650);
+    box-shadow:0 40px 80px -30px rgba(0,0,0,.75), 0 0 80px -30px rgba(137,59,204,.6), 0 0 0 1px rgba(255,255,255,.07) inset;
+  }
+  .phone-screen{ border-radius:26px; overflow:hidden; background:#0b1220; }
+  .ph-top{ display:flex; align-items:center; gap:10px; padding:12px 14px; background:#111a2e; border-bottom:1px solid #1d2842; }
+  .ph-ava{ width:30px; height:30px; border-radius:50%; background:#fff; padding:3px; flex:none; }
+  .ph-ava img{ width:100%; height:100%; object-fit:contain; display:block; }
+  .ph-name{ font-size:13px; font-weight:600; line-height:1.1; }
+  .ph-sub{ font-size:10.5px; color:var(--mist); }
+  .ph-body{ padding:16px 12px 18px; display:flex; flex-direction:column; gap:9px; min-height:300px; }
+  .bub{ max-width:86%; font-size:12.5px; line-height:1.45; padding:9px 12px; border-radius:14px; }
+  .bub.me{ align-self:flex-end; background:linear-gradient(100deg,#6a2fb0,#893bcc); color:#fff; border-bottom-right-radius:4px; }
+  .bub.bot{ align-self:flex-start; background:#18233b; color:var(--ink); border-bottom-left-radius:4px; }
+  .bub .ok{ display:flex; align-items:center; gap:6px; color:var(--mint); font-weight:600; margin-bottom:5px; }
+  .bub .ok svg{ width:14px; height:14px; }
+  .bub .code{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.5px;
+    background:#0b1220; border:1px dashed #33405f; border-radius:8px; padding:7px 9px; margin-top:7px; color:var(--cyan-bright);
+  }
+  .ph-note{ text-align:center; font-size:11.5px; color:var(--mist-dim); margin:14px 0 0; font-family:'JetBrains Mono',monospace; }
+  @media (max-width:820px){
+    .chat-split{ grid-template-columns:1fr; gap:30px; }
+  }
+
+  /* ---------- polish: motion + hover glow ---------- */
+  .js .reveal{ opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.in{ opacity:1; transform:none; }
+  .terminal{ transition:border-color .25s ease, box-shadow .25s ease; }
+  .terminal:hover{ border-color:#5a6290; box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(102,255,255,0.10) inset, 0 0 60px -28px rgba(102,255,255,0.35); }
+  @media (prefers-reduced-motion: reduce){ .js .reveal{ opacity:1; transform:none; transition:none; } }
+
+
+  /* ---------- social proof ---------- */
+  .trust{
+    display:inline-flex; align-items:center; gap:14px; margin-top:0;
+    padding:10px 20px 10px 12px; border-radius:999px;
+    border:1px solid rgba(102,255,255,0.22);
+    background:linear-gradient(100deg, rgba(102,255,255,0.07), rgba(137,59,204,0.10));
+    box-shadow:0 14px 34px -20px rgba(102,255,255,0.5);
+  }
+  .trust-wrap{ display:flex; justify-content:center; margin:40px 0 0; }
+  .trust-avatars{ display:flex; }
+  .trust-avatars span{
+    width:32px; height:32px; border-radius:50%; margin-left:-10px;
+    border:2px solid #070c30; display:flex; align-items:center; justify-content:center;
+  }
+  .trust-avatars span:first-child{ margin-left:0; }
+  .trust-avatars span:nth-child(1){ background:linear-gradient(135deg,#66ffff,#3aa6d8); }
+  .trust-avatars span:nth-child(2){ background:linear-gradient(135deg,#9bffff,#893bcc); }
+  .trust-avatars span:nth-child(3){ background:linear-gradient(135deg,#893bcc,#4c1f80); }
+  .trust-avatars span:nth-child(4){ background:linear-gradient(135deg,#6ef0bd,#2c8a68); }
+  .trust-avatars svg{ width:16px; height:16px; stroke:#09103d; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .trust-avatars span:nth-child(3) svg{ stroke:#e6eaed; }
+  .trust-text{ display:flex; flex-direction:column; line-height:1.25; }
+  .trust-text b{ font-size:15px; font-weight:700; color:var(--ink); letter-spacing:-0.1px; }
+  .trust-text b em{ font-style:normal; background:linear-gradient(96deg, var(--cyan-bright), var(--violet)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .trust-text small{ font-size:11.5px; color:var(--mist); font-family:'JetBrains Mono',monospace; }
+  .trust-text b, .trust-text small{ white-space:nowrap; }
+  @media (max-width:520px){ .trust{ padding-right:14px; gap:10px; max-width:100%; } .trust-text b{ font-size:13.5px; } .trust-text small{ font-size:10.5px; } .trust-avatars span{ width:28px; height:28px; } }
+
+  /* ---------- landing page extras ---------- */
+  .avatar-wrap{
+    width:190px; height:190px; margin:0 auto 18px; padding:4px; border-radius:50%;
+    background:linear-gradient(135deg, var(--cyan), var(--violet));
+    box-shadow:0 0 70px -12px rgba(137,59,204,.75), 0 0 100px -34px rgba(102,255,255,.7);
+  }
+  .avatar-wrap img{ width:100%; height:100%; display:block; border-radius:50%; object-fit:cover; border:4px solid var(--panel); }
+  .handle-pill{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--cyan-bright);
+    border:1px solid rgba(102,255,255,0.28); background:rgba(102,255,255,0.06); padding:6px 14px; border-radius:999px;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="field"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="glow glow-c"></div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+        <span class="brand-name">WRKS<span class="accent">NET</span></span>
+      </a>
+      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="terminal" style="margin-top:0;">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — welcome</span>
+      </div>
+      <div class="terminal-body" style="text-align:center;">
+        <div class="avatar-wrap"><img src="sirporry.jpg" alt="Sir Porry" width="360" height="360"></div>
+        <span class="handle-pill">@sirporry</span>
+        <h1 style="margin:22px 0 16px;">One bot.<br><span class="grad">Everything delivered.</span></h1>
+        <p class="hero-lede" style="margin:0 auto 30px;">Gift cards, numbers, eSIMs, proxies, license keys, bill pay and print &amp; mail &mdash; quick, simple and private, delivered right in Telegram.</p>
+        <a class="cta" href="https://t.me/worksnet_bot?start=ref_7984671418" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 11.5L21 3l-4 18-6-5-3.5 3-.5-5L2 11.5z" stroke="#0a0d14" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" fill="#0a0d14"/></svg>
+          Access Our Bot
+        </a>
+        <p class="cta-note" style="margin:14px 0 0;">Opens a chat in the Telegram app</p>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — in chat</span>
+      </div>
+      <div class="terminal-body">
+        <section class="section" style="border-top:none; padding:0;">
+          <div class="chat-split">
+            <div class="chat-copy">
+              <p class="section-eyebrow"><span class="eyebrow-dot"></span>// in action</p>
+              <h2>No apps. No forms. Just ask.</h2>
+              <p class="body" style="margin-top:16px;">Pick what you need from our Telegram bot and it arrives right in the conversation: codes, numbers, QR codes and confirmations. Nothing to install and nothing to fill in.</p>
+              <div class="chat-chips">
+                <span class="chat-chip">Gift Cards</span><span class="chat-chip">Numbers &amp; eSIMs</span><span class="chat-chip">Proxies</span><span class="chat-chip">License Keys</span><span class="chat-chip">Bill Pay</span><span class="chat-chip">Print &amp; Mail</span>
+              </div>
+            </div>
+            <div>
+              <div class="phone">
+                <div class="phone-screen">
+                  <div class="ph-top">
+                    <span class="ph-ava"><img src="logo.png" alt=""></span>
+                    <span><div class="ph-name">WrksNet</div><div class="ph-sub">bot</div></span>
+                  </div>
+                  <div class="ph-body">
+                    <div class="bub me">Gift Cards</div>
+                    <div class="bub bot">Choose a brand and amount. Your balance is checked automatically.</div>
+                    <div class="bub me">Apple &middot; $25</div>
+                    <div class="bub bot">
+                      <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg>Order delivered</div>
+                      Your Apple gift card is ready.
+                      <div class="code">XXXX-XXXX-XXXX</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="ph-note">Example conversation</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="trust-wrap">
+      <div class="trust">
+        <div class="trust-avatars" aria-hidden="true">
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+          <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
+        </div>
+        <div class="trust-text">
+          <b>Trusted by <em>1,000+</em> users</b>
+          <small>Instant delivery on Telegram</small>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" style="border-top:none; padding-top:40px;">
+      <div class="final-cta">
+        <h2 style="margin-bottom:8px;">Ready to get started?</h2>
+        <p>Open the bot and see what's available. No commitment, no account needed to look.</p>
+        <a class="cta" href="https://t.me/worksnet_bot?start=ref_7984671418" target="_blank" rel="noopener" style="margin-top:6px;">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M2 11.5L21 3l-4 18-6-5-3.5 3-.5-5L2 11.5z" stroke="#0a0d14" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" fill="#0a0d14"/></svg>
+          Access Our Bot
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand">
+          <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+          <span class="brand-name">WRKS<span class="accent">NET</span></span>
+        </div>
+        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
+        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on Instagram" title="Follow @wrksnet on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="footer-cta" href="https://x.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on X" title="Follow @wrksnet on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></a>
+        <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
+      </div>
+    </div>
+    <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram bot. Services are for personal use and subject to the terms of the
+      platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a></p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+
+<script>
+(function(){
+  try{
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(!('IntersectionObserver' in window)) return;
+    var SEL='.terminal,.safe-box,.section,.final-cta,.pay-strip,.refer-card,.trust-wrap,.faq details';
+    var all=Array.prototype.slice.call(document.querySelectorAll(SEL));
+    var els=all.filter(function(e){ return !(e.parentElement && e.parentElement.closest(SEL)); });
+    document.documentElement.classList.add('js');
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{threshold:0.08, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ e.classList.add('reveal'); io.observe(e); });
+  }catch(err){}
+})();
+</script>
+
+</body>
+</html>
