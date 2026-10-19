@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /proxy-setup-guide-v2.pdf
+Disallow: /esim-guide.pdf
 
 Sitemap: https://www.wrksnet.com/sitemap.xml
