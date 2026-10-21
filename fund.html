@@ -84,14 +84,6 @@
   }
   .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
   .brand-name .accent{ color:var(--cyan); }
-  .status-pill{
-    display:flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
-    border:1px solid var(--mint-line); background:rgba(20,40,32,0.55);
-    padding:7px 14px; border-radius:999px; white-space:nowrap;
-  }
-  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint);
-    box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
 
   /* ---------- terminal card (signature element) ---------- */
@@ -232,7 +224,6 @@
     .section{ padding:56px 0; }
   }
   @media (max-width:420px){
-    .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
   }
   @media (prefers-reduced-motion: reduce){
     .caret, .status-dot{ animation:none; }
@@ -323,7 +314,6 @@
         <img class="brand-mark" src="logo.png" alt="WrksNet logo">
         <span class="brand-name">WRKS<span class="accent">NET</span></span>
       </a>
-      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
     </div>
   </header>
 
@@ -393,7 +383,7 @@
           <img class="brand-mark" src="logo.png" alt="WrksNet logo">
           <span class="brand-name">WRKS<span class="accent">NET</span></span>
         </div>
-        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
+        <p class="footer-tagline">Built for scale. Delivered in seconds.</p>
       </div>
       <div class="footer-links">
         <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
@@ -402,10 +392,9 @@
         <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
       </div>
     </div>
-    <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, proxies,
-      license keys, and bill pay) delivered via Telegram. Services are for personal use and subject to the terms of the
+    <p class="fine-print">WRKSNET LLC provides paid digital services delivered via our Telegram bot. Services are for personal and business use and subject to the terms of the
       platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
-      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a></p>
+      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy, Terms &amp; Acceptable Use</a></p>
   </footer>
 
 </div>
