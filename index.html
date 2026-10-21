@@ -42,7 +42,7 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth; overflow-x:hidden; width:100%; background:var(--bg-bottom);}
+  html{scroll-behavior:smooth; width:100%; background:var(--bg-bottom);}
   body{
     margin:0;
     width:100%;
@@ -51,7 +51,6 @@
     color:var(--ink);
     font-family:'Poppins',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
   }
 
   .mono{ font-family:'JetBrains Mono',monospace; }
@@ -75,7 +74,24 @@
   .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
 
   /* ---------- header ---------- */
-  header{ padding:28px 0 10px; }
+  header{
+    position:sticky; top:0; z-index:60;
+    padding:16px 0 14px;
+    margin:0 -24px; padding-left:24px; padding-right:24px;
+    background:rgba(6,10,34,0.72);
+    -webkit-backdrop-filter:saturate(150%) blur(14px);
+    backdrop-filter:saturate(150%) blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  header.is-stuck{
+    background:rgba(6,10,34,0.9);
+    border-bottom-color:var(--line-soft);
+    box-shadow:0 14px 34px -26px rgba(0,0,0,0.9);
+  }
+  header .brand-mark{ width:36px; height:36px; }
+  /* keep anchored sections clear of the fixed header */
+  section[id], div[id]{ scroll-margin-top:96px; }
   .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
   .brand-mark{
@@ -128,7 +144,6 @@
     background:var(--cyan); box-shadow:0 0 8px var(--cyan);
   }
   @media (max-width:560px){
-    header{ position:relative; }
     .nav{ position:static; }
     .nav-menu{ left:0; right:0; width:auto; min-width:0; top:calc(100% + 14px); }
     .nav-btn .nav-label{ display:none; }
@@ -304,6 +319,10 @@
   }
   .contact-route:hover{ border-color:rgba(102,255,255,0.45); transform:translateY(-1px); }
   .contact-route svg{ width:16px; height:16px; flex:none; }
+  @media (max-width:400px){
+    .contact-routes{ width:100%; }
+    .contact-route{ white-space:normal; padding:11px 15px; }
+  }
 
   .footer-grid{
     display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr; gap:40px; padding-bottom:34px;
@@ -659,8 +678,8 @@
             it in writing.</p>
         </div>
         <div class="contact-routes">
-          <a class="contact-route" href="https://t.me/worksnet_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg> Contact support on Telegram</a>
-          <a class="contact-route" href="mailto:contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg> contact@wrksnet.com</a>
+          <a class="contact-route" href="https://t.me/worksnet_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg> 24/7 Live Support</a>
+          <a class="contact-route" href="mailto:contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg> Email Support</a>
         </div>
       </div>
     </section>
@@ -822,6 +841,16 @@
   document.addEventListener('visibilitychange', function(){
     if(document.hidden) stop();
   });
+})();
+</script>
+
+<script>
+(function(){
+  var h = document.querySelector('header');
+  if(!h) return;
+  function onScroll(){ h.classList.toggle('is-stuck', window.scrollY > 6); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
 })();
 </script>
 
