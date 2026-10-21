@@ -84,6 +84,56 @@
   }
   .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
   .brand-name .accent{ color:var(--cyan); }
+  /* ---------- header navigation ---------- */
+  .nav{ position:relative; }
+  .nav-btn{
+    display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.6px;
+    text-transform:uppercase; color:var(--ink);
+    background:rgba(255,255,255,0.03); border:1px solid var(--line-soft);
+    padding:9px 16px; border-radius:999px;
+    transition:border-color .18s ease, background .18s ease;
+  }
+  .nav-btn:hover{ border-color:rgba(102,255,255,0.45); background:rgba(102,255,255,0.05); }
+  .nav-btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+  .nav-ico{ display:flex; flex-direction:column; gap:3.5px; width:15px; }
+  .nav-ico span{
+    display:block; height:1.6px; background:var(--cyan-bright); border-radius:2px;
+    transition:transform .22s ease, opacity .22s ease;
+  }
+  .nav-btn[aria-expanded="true"] .nav-ico span:nth-child(1){ transform:translateY(5.1px) rotate(45deg); }
+  .nav-btn[aria-expanded="true"] .nav-ico span:nth-child(2){ opacity:0; }
+  .nav-btn[aria-expanded="true"] .nav-ico span:nth-child(3){ transform:translateY(-5.1px) rotate(-45deg); }
+  .nav-menu{
+    position:absolute; top:calc(100% + 12px); right:0; z-index:40; min-width:252px;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:var(--radius-md);
+    box-shadow:0 30px 70px -26px rgba(0,0,0,0.75), 0 0 0 1px rgba(102,255,255,0.05) inset;
+    padding:10px;
+  }
+  .nav-menu[hidden]{ display:none; }
+  .nav-menu a{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    font-size:14.5px; color:var(--mist); text-decoration:none;
+    padding:10px 13px; border-radius:var(--radius-sm);
+    transition:background .16s ease, color .16s ease;
+  }
+  .nav-menu a:hover{ background:rgba(255,255,255,0.04); color:var(--ink); }
+  .nav-menu a:focus-visible{ outline:2px solid var(--cyan); outline-offset:-2px; }
+  .nav-menu a[aria-current="page"]{ color:var(--cyan-bright); background:rgba(102,255,255,0.07); }
+  .nav-menu a[aria-current="page"]::after{
+    content:''; width:6px; height:6px; border-radius:50%; flex:none;
+    background:var(--cyan); box-shadow:0 0 8px var(--cyan);
+  }
+  @media (max-width:560px){
+    header{ position:relative; }
+    .nav{ position:static; }
+    .nav-menu{ left:0; right:0; width:auto; min-width:0; top:calc(100% + 14px); }
+    .nav-btn .nav-label{ display:none; }
+    .nav-btn{ padding:10px 13px; }
+  }
+
+  .header-right{ display:flex; align-items:center; gap:12px; }
   .status-pill{
     display:flex; align-items:center; gap:8px;
     font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
@@ -222,6 +272,33 @@
   }
   .footer-cta:hover{ border-color:rgba(64,217,255,0.6); transform:translateY(-2px); }
   .footer-cta svg{ width:19px; height:19px; }
+  .footer-grid{
+    display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr; gap:40px; padding-bottom:34px;
+  }
+  .footer-grid .footer-tagline{ margin:10px 0 20px; max-width:250px; }
+  .footer-head{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:1.4px;
+    text-transform:uppercase; color:var(--cyan); margin:0 0 16px;
+  }
+  .footer-col a{
+    display:block; font-size:14px; color:var(--mist); text-decoration:none;
+    margin-bottom:11px; transition:color .18s ease;
+  }
+  .footer-col a:hover{ color:var(--cyan-bright); }
+  .footer-base{
+    border-top:1px solid var(--line-soft); padding-top:22px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:28px; flex-wrap:wrap;
+  }
+  .footer-base .fine-print{ margin:0; max-width:620px; }
+  .footer-copy{ font-size:12px; color:var(--mist-dim); margin:0; white-space:nowrap; }
+  @media (max-width:820px){
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:30px; }
+  }
+  @media (max-width:520px){
+    .footer-grid{ grid-template-columns:1fr; gap:26px; }
+    .footer-copy{ white-space:normal; }
+  }
+
   .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
 
   @media (max-width:820px){
@@ -255,12 +332,6 @@
     font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--cyan-bright);
     background:rgba(64,217,255,0.08); padding:2px 7px; border-radius:5px;
   }
-  .back-link{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
-    text-decoration:none; margin-bottom:28px; opacity:0.9;
-  }
-  .back-link:hover{ opacity:1; }
   @media (max-width:820px){
     .policy-body{ padding:32px 22px 36px; }
   }
@@ -284,12 +355,28 @@
         <img class="brand-mark" src="logo.png" alt="WrksNet logo">
         <span class="brand-name">WRKS<span class="accent">NET</span></span>
       </a>
-      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+      <div class="header-right">
+        <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+        <nav class="nav">
+          <button class="nav-btn" id="navBtn" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
+            <span class="nav-ico" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span class="nav-label">Menu</span>
+          </button>
+          <div class="nav-menu" id="navMenu" hidden>
+          <a href="index.html">Home</a>
+          <a href="services.html">Services &amp; Pricing</a>
+          <a href="approach.html">Our Approach</a>
+          <a href="refer.html">Refer &amp; Earn</a>
+          <a href="services.html#testimonials">Testimonials</a>
+          <a href="contact.html" aria-current="page">Contact</a>
+          <a href="privacy.html">Privacy Policy &amp; Terms</a>
+          </div>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main>
-    <a class="back-link" href="index.html">&larr; back to home</a>
 
     <div class="terminal">
       <div class="titlebar">
@@ -319,30 +406,70 @@
   </main>
 
   <footer>
-    <div class="footer-row">
+    <div class="footer-grid">
       <div>
         <div class="footer-brand">
           <img class="brand-mark" src="logo.png" alt="WrksNet logo">
           <span class="brand-name">WRKS<span class="accent">NET</span></span>
         </div>
-        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
-      </div>
-      <div class="footer-links">
+        <p class="footer-tagline">Built for scale. Delivered in seconds.</p>
+        <div class="footer-links">
         <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
         <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on Instagram" title="Follow @wrksnet on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a class="footer-cta" href="https://x.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on X" title="Follow @wrksnet on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></a>
         <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Explore</p>
+        <a href="services.html">Services</a>
+        <a href="approach.html">Our Approach</a>
+        <a href="refer.html">Refer &amp; Earn</a>
+        <a href="services.html#testimonials">Testimonials</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Company</p>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="privacy.html">Terms &amp; Acceptable Use</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-head">Get started</p>
+        <a href="https://t.me/worksnet_bot" target="_blank" rel="noopener">Open the bot</a>
+        <a href="contact.html">Talk to support</a>
       </div>
     </div>
-    <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram bot. Services are for personal use and subject to the terms of the
-      platforms you use them with. &copy; <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
-      <a href="privacy.html" style="color:var(--mist-dim); text-decoration:underline;">Privacy Policy &amp; Terms of Service</a> &nbsp;&middot;&nbsp; <a href="approach.html" style="color:var(--mist-dim); text-decoration:underline;">Our Approach</a> &nbsp;&middot;&nbsp; <a href="refer.html" style="color:var(--mist-dim); text-decoration:underline;">Refer &amp; Earn</a> &nbsp;&middot;&nbsp; <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="services.html#testimonials" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
+    <div class="footer-base">
+      <p class="fine-print">WRKSNET LLC provides paid digital services delivered via our Telegram
+        bot. Services are for personal and business use and subject to the terms of the platforms you use
+        them with.</p>
+      <p class="footer-copy">&copy; <span id="year"></span> WRKSNET LLC</p>
+    </div>
   </footer>
 
 </div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('navBtn'), menu = document.getElementById('navMenu');
+  if(!btn || !menu) return;
+  function setOpen(v){
+    menu.hidden = !v;
+    btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    btn.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(menu.hidden); });
+  document.addEventListener('click', function(e){
+    if(!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !menu.hidden){ setOpen(false); btn.focus(); }
+  });
+})();
 </script>
 
 </body>
