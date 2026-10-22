@@ -230,17 +230,12 @@
   .ph-ava img{ width:100%; height:100%; object-fit:contain; display:block; }
   .ph-name{ font-size:13px; font-weight:600; line-height:1.1; }
   .ph-sub{ font-size:10.5px; color:var(--mist); }
-  .ph-body{ padding:16px 12px 18px; display:flex; flex-direction:column; justify-content:flex-end; gap:9px;
-    height:328px; overflow:hidden; transition:opacity .45s ease; }
-  .ph-body.swapping{ opacity:0; }
-  .ph-body.anim .bub{ opacity:0; transform:translateY(7px);
-    transition:opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
-  .ph-body.anim .bub.show{ opacity:1; transform:none; }
-  .dots{ display:inline-flex; gap:4px; align-items:center; height:16px; }
-  .dots i{ width:5px; height:5px; border-radius:50%; background:var(--mist); display:block;
-    animation:phtype 1.25s infinite ease-in-out; }
-  .dots i:nth-child(2){ animation-delay:.18s; } .dots i:nth-child(3){ animation-delay:.36s; }
-  @keyframes phtype{ 0%,65%,100%{ opacity:.28; transform:none; } 32%{ opacity:1; transform:translateY(-2px); } }
+  .ph-body{ position:relative; height:328px; overflow:hidden; }
+  .ph-scene{ position:absolute; left:12px; right:12px; top:16px; bottom:18px;
+    display:flex; flex-direction:column; justify-content:flex-end; gap:9px;
+    opacity:0; visibility:hidden; transition:opacity .4s ease, visibility .4s; }
+  .ph-scene.on{ opacity:1; visibility:visible; }
+  @media (prefers-reduced-motion: reduce){ .ph-scene{ transition:none; } }
   .bub{ max-width:86%; font-size:12.5px; line-height:1.45; padding:9px 12px; border-radius:14px; }
   .bub.me{ align-self:flex-end; background:linear-gradient(100deg,#6a2fb0,#893bcc); color:#fff; border-bottom-right-radius:4px; }
   .bub.bot{ align-self:flex-start; background:#19243d; color:var(--ink); border-bottom-left-radius:4px; }
@@ -250,6 +245,20 @@
     background:#070c1a; border:1px dashed #33405f; border-radius:8px; padding:7px 9px; margin-top:7px; color:var(--cyan-bright); }
   .ph-note{ text-align:center; font-size:11px; color:var(--mist-dim); margin:14px 0 0;
     font-family:'JetBrains Mono',monospace; position:relative; z-index:1; }
+
+  /* manual slideshow controls */
+  .ph-tabs{ position:relative; z-index:3; display:flex; gap:6px; margin:22px 0 0; padding:5px;
+    border-radius:999px; border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015)); }
+  .ph-tab{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:1.1px;
+    text-transform:uppercase; color:var(--mist); background:none; border:0; cursor:pointer;
+    padding:9px 13px; border-radius:999px; white-space:nowrap;
+    transition:color .2s ease, background-color .2s ease; }
+  .ph-tab:hover{ color:var(--ink); }
+  .ph-tab.is-on{ color:#04071b; font-weight:700;
+    background:linear-gradient(120deg,var(--cyan),var(--violet-soft)); }
+  .ph-tab:focus-visible{ outline:2px solid var(--cyan-bright); outline-offset:2px; }
+  @media (max-width:380px){ .ph-tab{ font-size:9.5px; padding:9px 9px; letter-spacing:.7px; } }
 
   /* ---------- hero centered ---------- */
   .hero-grid > div:first-child{ text-align:center; }
@@ -522,16 +531,64 @@
                     <span><div class="ph-name">WrksNet</div><div class="ph-sub">bot</div></span>
                   </div>
                   <div class="ph-body" id="phBody">
-                    <div class="bub me">Gift Cards</div>
-                    <div class="bub bot">Choose a brand and amount. Your balance is checked automatically.</div>
-                    <div class="bub me">Apple &middot; $25</div>
-                    <div class="bub bot">
-                      <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Order delivered</div>
-                      Your Apple gift card is ready.
-                      <div class="code">XXXX-XXXX-XXXX</div>
+                    <div class="ph-scene on" id="phScene0" role="tabpanel" aria-label="Gift Cards order">
+                      <div class="bub me">
+                        Gift Cards
+                      </div>
+                      <div class="bub bot">
+                        Choose a brand and amount. Your balance is checked automatically.
+                      </div>
+                      <div class="bub me">
+                        Apple &middot; $25
+                      </div>
+                      <div class="bub bot">
+                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Order delivered</div>
+                        Your Apple gift card is ready.
+                        <div class="code">XXXX-XXXX-XXXX</div>
+                      </div>
+                    </div>
+                    <div class="ph-scene" id="phScene1" role="tabpanel" aria-label="eSIM order" aria-hidden="true">
+                      <div class="bub me">
+                        Phone Services
+                      </div>
+                      <div class="bub bot">
+                        Choose eSIM or Phone Numbers.
+                      </div>
+                      <div class="bub me">
+                        eSIM &middot; United Kingdom
+                      </div>
+                      <div class="bub bot">
+                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> eSIM ready</div>
+                        Scan the QR code in your phone settings to install.
+                        <div class="code">LPA:1$••••••••</div>
+                      </div>
+                    </div>
+                    <div class="ph-scene" id="phScene2" role="tabpanel" aria-label="Print &amp; Mail order" aria-hidden="true">
+                      <div class="bub me">
+                        Print &amp; Mail
+                      </div>
+                      <div class="bub bot">
+                        Letter or postcard?
+                      </div>
+                      <div class="bub me">
+                        Letter
+                      </div>
+                      <div class="bub bot">
+                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Details confirmed</div>
+                        Recipient details saved.
+                      </div>
+                      <div class="bub bot">
+                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Order confirmed</div>
+                        Posting to USA &middot; Standard delivery.
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="ph-tabs" role="tablist" aria-label="Example orders">
+                <button class="ph-tab is-on" type="button" role="tab" aria-selected="true" aria-controls="phScene0" tabindex="0" data-i="0">Gift Cards</button>
+                <button class="ph-tab" type="button" role="tab" aria-selected="false" aria-controls="phScene1" tabindex="-1" data-i="1">eSIM</button>
+                <button class="ph-tab" type="button" role="tab" aria-selected="false" aria-controls="phScene2" tabindex="-1" data-i="2">Print &amp; Mail</button>
               </div>
         </div>
       </div>
@@ -741,97 +798,45 @@
 </script>
 <script>
 (function(){
-  var body = document.getElementById('phBody');
-  if(!body) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce || !('IntersectionObserver' in window)) return;   // leave the finished scene in place
+  var stage = document.querySelector('.phone-stage');
+  if(!stage) return;
+  var scenes = stage.querySelectorAll('.ph-scene');
+  var tabs   = stage.querySelectorAll('.ph-tab');
+  if(!scenes.length || scenes.length !== tabs.length) return;
 
-  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg>';
-  var SCENES = [
-    [ {me:'Gift Cards'},
-      {bot:'Choose a brand and amount. Your balance is checked automatically.'},
-      {me:'Apple &middot; $25'},
-      {bot:'Your Apple gift card is ready.', ok:'Order delivered', code:'XXXX-XXXX-XXXX'} ],
-
-    [ {me:'Phone Services'},
-      {bot:'Choose eSIM or Phone Numbers.'},
-      {me:'eSIM &middot; United Kingdom'},
-      {bot:'Scan the QR code in your phone settings to install.', ok:'eSIM ready', code:'LPA:1$\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'} ],
-
-    [ {me:'Print &amp; Mail'},
-      {bot:'Letter or postcard?'},
-      {me:'Letter'},
-      {bot:'Recipient details saved.', ok:'Details confirmed'},
-      {bot:'Posting to USA &middot; Standard delivery.', ok:'Order confirmed'} ]
-  ];
-
-  var STEP = 1700, TYPE = 900, HOLD = 2600;
-  var scene = 0, timers = [], running = false;
-
-  // the glass stage behind the phone takes its glow from the scene playing
-  var stage = body.parentNode;
-  while(stage && !(stage.className && String(stage.className).indexOf('phone-stage') > -1)) stage = stage.parentNode;
+  // the glass behind the phone takes its colour from the order on screen
   var GLOW = ['rgba(102,255,255,.24)','rgba(137,59,204,.40)','rgba(110,240,189,.22)'];
-  function setGlow(){ if(stage) stage.style.setProperty('--glow', GLOW[scene] || GLOW[0]); }
 
-  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
-  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
-
-  function build(steps){
-    body.innerHTML = '';
-    return steps.map(function(st){
-      var el = document.createElement('div');
-      el.className = 'bub ' + (st.me ? 'me' : 'bot');
-      body.appendChild(el);
-      return el;
-    });
+  function show(i){
+    for(var k = 0; k < scenes.length; k++){
+      var on = (k === i);
+      scenes[k].classList.toggle('on', on);
+      if(on){ scenes[k].removeAttribute('aria-hidden'); }
+      else  { scenes[k].setAttribute('aria-hidden','true'); }
+      tabs[k].classList.toggle('is-on', on);
+      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[k].tabIndex = on ? 0 : -1;
+    }
+    stage.style.setProperty('--glow', GLOW[i] || GLOW[0]);
   }
 
-  function fill(el, st){
-    var html = '';
-    if(st.ok) html += '<div class="ok">' + TICK + ' ' + st.ok + '</div>';
-    html += st.me || st.bot;
-    if(st.code) html += '<div class="code">' + st.code + '</div>';
-    el.innerHTML = html;
+  function bind(n){
+    tabs[n].addEventListener('click', function(){ show(n); });
   }
+  for(var i = 0; i < tabs.length; i++) bind(i);
 
-  function play(){
-    var steps = SCENES[scene], els = build(steps), t = 0;
-    body.classList.add('anim');
-    setGlow();
-    steps.forEach(function(st, i){
-      later(function(){
-        var el = els[i];
-        if(st.me){
-          fill(el, st);
-          el.classList.add('show');
-        } else {
-          el.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
-          el.classList.add('show');
-          later(function(){ fill(el, st); }, TYPE);
-        }
-      }, t);
-      t += st.me ? STEP - 500 : STEP + TYPE;
-    });
-    later(function(){
-      body.classList.add('swapping');
-      later(function(){
-        scene = (scene + 1) % SCENES.length;
-        body.classList.remove('swapping');
-        if(running) play();
-      }, 480);
-    }, t + HOLD);
-  }
-
-  function start(){ if(running) return; running = true; play(); }
-  function stop(){ running = false; clearTimers(); body.classList.remove('swapping'); }
-
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ en.isIntersecting ? start() : stop(); });
-  }, {threshold:0.25}).observe(body);
-
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden) stop();
+  stage.addEventListener('keydown', function(e){
+    var k = e.key, cur = -1, n;
+    if(k !== 'ArrowRight' && k !== 'ArrowLeft' && k !== 'Home' && k !== 'End') return;
+    for(var j = 0; j < tabs.length; j++) if(tabs[j].classList.contains('is-on')) cur = j;
+    if(cur < 0) return;
+    if(k === 'ArrowRight') n = (cur + 1) % tabs.length;
+    else if(k === 'ArrowLeft') n = (cur - 1 + tabs.length) % tabs.length;
+    else if(k === 'Home') n = 0;
+    else n = tabs.length - 1;
+    e.preventDefault();
+    show(n);
+    tabs[n].focus();
   });
 })();
 </script>
