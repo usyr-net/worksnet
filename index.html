@@ -188,9 +188,39 @@
   .trust b em{ font-style:normal; color:var(--cyan-bright); }
 
   /* ---------- phone ---------- */
-  .phone-stage{ position:relative; display:flex; flex-direction:column; align-items:center; }
-  .phone-stage::before{ content:''; position:absolute; width:min(118%,440px); aspect-ratio:1;
-    background:radial-gradient(circle,rgba(137,59,204,.38),transparent 64%); filter:blur(42px); z-index:0; }
+  /* the phone sits on a glass stage, not in a second frame */
+  .phone-stage{
+    --glow:rgba(102,255,255,.24);
+    position:relative; overflow:hidden; isolation:isolate;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:clamp(30px,3.6vw,52px) clamp(24px,3vw,44px);
+    border-radius:clamp(22px,2.6vw,32px);
+    background:
+      linear-gradient(90deg,transparent,rgba(102,255,255,.42) 34%,rgba(137,59,204,.36) 66%,transparent) top left/100% 1px no-repeat,
+      linear-gradient(165deg,rgba(255,255,255,.058),rgba(255,255,255,.016) 56%,rgba(255,255,255,.008));
+    border:1px solid rgba(255,255,255,.088);
+    -webkit-backdrop-filter:blur(18px) saturate(135%);
+    backdrop-filter:blur(18px) saturate(135%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 26px 64px -34px rgba(2,5,22,.92);
+  }
+  /* scene-reactive glow — colour follows the conversation playing inside */
+  .phone-stage::before{
+    content:''; position:absolute; left:50%; top:48%; transform:translate(-50%,-50%);
+    width:min(122%,430px); aspect-ratio:1; border-radius:50%; z-index:0; pointer-events:none;
+    background-color:var(--glow); filter:blur(58px);
+    transition:background-color 1.6s ease;
+  }
+  /* fine grain so the surface does not read as flat CSS */
+  .phone-stage::after{
+    content:''; position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.15;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+  @media (prefers-reduced-motion: reduce){
+    .phone-stage::before{ transition:none; }
+  }
+  @media (max-width:560px){
+    .phone-stage{ padding:28px 20px; border-radius:22px; }
+  }
   .phone{ position:relative; z-index:1; width:100%; max-width:296px; border-radius:36px; padding:9px;
     background:linear-gradient(165deg,#3a4486,#0a0f33 52%,#3a1b64);
     box-shadow:0 44px 90px -34px rgba(0,0,0,.92), 0 0 0 1px rgba(255,255,255,.08) inset; }
@@ -738,6 +768,12 @@
   var STEP = 1700, TYPE = 900, HOLD = 2600;
   var scene = 0, timers = [], running = false;
 
+  // the glass stage behind the phone takes its glow from the scene playing
+  var stage = body.parentNode;
+  while(stage && !(stage.className && String(stage.className).indexOf('phone-stage') > -1)) stage = stage.parentNode;
+  var GLOW = ['rgba(102,255,255,.24)','rgba(137,59,204,.40)','rgba(110,240,189,.22)'];
+  function setGlow(){ if(stage) stage.style.setProperty('--glow', GLOW[scene] || GLOW[0]); }
+
   function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
   function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
 
@@ -762,6 +798,7 @@
   function play(){
     var steps = SCENES[scene], els = build(steps), t = 0;
     body.classList.add('anim');
+    setGlow();
     steps.forEach(function(st, i){
       later(function(){
         var el = els[i];
