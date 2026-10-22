@@ -153,6 +153,7 @@
   .btn-soft{ background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.12); color:var(--ink); }
   .btn-soft:hover{ border-color:rgba(102,255,255,0.45); transform:translateY(-2px); }
   .btn-row{ display:flex; flex-wrap:wrap; gap:13px; align-items:center; }
+  .btn-sm{ font-size:13.5px; padding:11px 20px; gap:8px; }
 
   /* ---------- glass card ---------- */
   .card{
@@ -187,9 +188,39 @@
   .trust b em{ font-style:normal; color:var(--cyan-bright); }
 
   /* ---------- phone ---------- */
-  .phone-stage{ position:relative; display:flex; flex-direction:column; align-items:center; }
-  .phone-stage::before{ content:''; position:absolute; width:min(118%,440px); aspect-ratio:1;
-    background:radial-gradient(circle,rgba(137,59,204,.38),transparent 64%); filter:blur(42px); z-index:0; }
+  /* the phone sits on a glass stage, not in a second frame */
+  .phone-stage{
+    --glow:rgba(102,255,255,.24);
+    position:relative; overflow:hidden; isolation:isolate;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:clamp(30px,3.6vw,52px) clamp(24px,3vw,44px);
+    border-radius:clamp(22px,2.6vw,32px);
+    background:
+      linear-gradient(90deg,transparent,rgba(102,255,255,.42) 34%,rgba(137,59,204,.36) 66%,transparent) top left/100% 1px no-repeat,
+      linear-gradient(165deg,rgba(255,255,255,.058),rgba(255,255,255,.016) 56%,rgba(255,255,255,.008));
+    border:1px solid rgba(255,255,255,.088);
+    -webkit-backdrop-filter:blur(18px) saturate(135%);
+    backdrop-filter:blur(18px) saturate(135%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 26px 64px -34px rgba(2,5,22,.92);
+  }
+  /* scene-reactive glow — colour follows the conversation playing inside */
+  .phone-stage::before{
+    content:''; position:absolute; left:50%; top:48%; transform:translate(-50%,-50%);
+    width:min(122%,430px); aspect-ratio:1; border-radius:50%; z-index:0; pointer-events:none;
+    background-color:var(--glow); filter:blur(58px);
+    transition:background-color 1.6s ease;
+  }
+  /* fine grain so the surface does not read as flat CSS */
+  .phone-stage::after{
+    content:''; position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.15;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
+  @media (prefers-reduced-motion: reduce){
+    .phone-stage::before{ transition:none; }
+  }
+  @media (max-width:560px){
+    .phone-stage{ padding:28px 20px; border-radius:22px; }
+  }
   .phone{ position:relative; z-index:1; width:100%; max-width:296px; border-radius:36px; padding:9px;
     background:linear-gradient(165deg,#3a4486,#0a0f33 52%,#3a1b64);
     box-shadow:0 44px 90px -34px rgba(0,0,0,.92), 0 0 0 1px rgba(255,255,255,.08) inset; }
@@ -199,17 +230,12 @@
   .ph-ava img{ width:100%; height:100%; object-fit:contain; display:block; }
   .ph-name{ font-size:13px; font-weight:600; line-height:1.1; }
   .ph-sub{ font-size:10.5px; color:var(--mist); }
-  .ph-body{ padding:16px 12px 18px; display:flex; flex-direction:column; justify-content:flex-end; gap:9px;
-    height:328px; overflow:hidden; transition:opacity .45s ease; }
-  .ph-body.swapping{ opacity:0; }
-  .ph-body.anim .bub{ opacity:0; transform:translateY(7px);
-    transition:opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1); }
-  .ph-body.anim .bub.show{ opacity:1; transform:none; }
-  .dots{ display:inline-flex; gap:4px; align-items:center; height:16px; }
-  .dots i{ width:5px; height:5px; border-radius:50%; background:var(--mist); display:block;
-    animation:phtype 1.25s infinite ease-in-out; }
-  .dots i:nth-child(2){ animation-delay:.18s; } .dots i:nth-child(3){ animation-delay:.36s; }
-  @keyframes phtype{ 0%,65%,100%{ opacity:.28; transform:none; } 32%{ opacity:1; transform:translateY(-2px); } }
+  .ph-body{ position:relative; height:328px; overflow:hidden; }
+  .ph-scene{ position:absolute; left:12px; right:12px; top:16px; bottom:18px;
+    display:flex; flex-direction:column; justify-content:flex-end; gap:9px;
+    opacity:0; visibility:hidden; transition:opacity .4s ease, visibility .4s; }
+  .ph-scene.on{ opacity:1; visibility:visible; }
+  @media (prefers-reduced-motion: reduce){ .ph-scene{ transition:none; } }
   .bub{ max-width:86%; font-size:12.5px; line-height:1.45; padding:9px 12px; border-radius:14px; }
   .bub.me{ align-self:flex-end; background:linear-gradient(100deg,#6a2fb0,#893bcc); color:#fff; border-bottom-right-radius:4px; }
   .bub.bot{ align-self:flex-start; background:#19243d; color:var(--ink); border-bottom-left-radius:4px; }
@@ -219,6 +245,20 @@
     background:#070c1a; border:1px dashed #33405f; border-radius:8px; padding:7px 9px; margin-top:7px; color:var(--cyan-bright); }
   .ph-note{ text-align:center; font-size:11px; color:var(--mist-dim); margin:14px 0 0;
     font-family:'JetBrains Mono',monospace; position:relative; z-index:1; }
+
+  /* manual slideshow controls */
+  .ph-tabs{ position:relative; z-index:3; display:flex; gap:6px; margin:22px 0 0; padding:5px;
+    border-radius:999px; border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015)); }
+  .ph-tab{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:1.1px;
+    text-transform:uppercase; color:var(--mist); background:none; border:0; cursor:pointer;
+    padding:9px 13px; border-radius:999px; white-space:nowrap;
+    transition:color .2s ease, background-color .2s ease; }
+  .ph-tab:hover{ color:var(--ink); }
+  .ph-tab.is-on{ color:#04071b; font-weight:700;
+    background:linear-gradient(120deg,var(--cyan),var(--violet-soft)); }
+  .ph-tab:focus-visible{ outline:2px solid var(--cyan-bright); outline-offset:2px; }
+  @media (max-width:380px){ .ph-tab{ font-size:9.5px; padding:9px 9px; letter-spacing:.7px; } }
 
   /* ---------- hero centered ---------- */
   .hero-grid > div:first-child{ text-align:center; }
@@ -330,6 +370,10 @@
   .svc-icon svg{ width:21px; height:21px; stroke:var(--cyan-bright); }
   .svc-name{ font-weight:650; font-size:16px; margin:0 0 7px; }
   .svc-desc{ font-size:13.5px; color:var(--mist); margin:0; line-height:1.55; }
+  .svc-foot{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:17px; }
+  .svc-more{ font-size:12.5px; font-weight:600; color:var(--cyan-bright); text-decoration:none;
+    white-space:nowrap; transition:opacity .18s ease; }
+  .svc-more:hover{ opacity:.75; }
 
   /* ---------- steps ---------- */
   .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,2.4vw,30px); }
@@ -434,6 +478,64 @@
   .article ul{ margin:0 0 16px; padding-left:20px; font-size:15.5px; line-height:1.78; color:var(--mist); }
   .article li{ margin-bottom:8px; }
   .article li::marker{ color:var(--cyan); }
+  .article ol.steps-list{ margin:0 0 16px; padding-left:22px; font-size:15.5px; line-height:1.78;
+    color:var(--mist); }
+  .article ol.steps-list li{ margin-bottom:11px; padding-left:4px; }
+  .article ol.steps-list li::marker{ color:var(--cyan-bright); font-weight:700;
+    font-family:'JetBrains Mono',monospace; font-size:14px; }
+
+  /* ---------- USD virtual cards spotlight ---------- */
+  .spot{ display:grid; grid-template-columns:1.05fr .95fr; align-items:center;
+    gap:clamp(26px,4vw,54px); padding:clamp(28px,3.6vw,48px); }
+  .spot-tag{ display:inline-flex; align-items:center; gap:8px; margin:0 0 15px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.8px;
+    text-transform:uppercase; color:var(--mint); }
+  .spot-tag::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 0 3px rgba(110,240,189,.16); }
+  .spot h3{ font-size:clamp(22px,2.7vw,30px); font-weight:750; letter-spacing:-0.6px; margin:0 0 12px; }
+  .spot > div > p{ font-size:15px; line-height:1.7; color:var(--mist); margin:0 0 18px; max-width:46ch; }
+  .spot-list{ list-style:none; margin:0 0 24px; padding:0; }
+  .spot-list li{ position:relative; padding-left:25px; margin-bottom:9px;
+    font-size:14px; line-height:1.6; color:var(--mist); }
+  .spot-list li::before{ content:''; position:absolute; left:0; top:7px; width:13px; height:7px;
+    border-left:2px solid var(--cyan-bright); border-bottom:2px solid var(--cyan-bright);
+    transform:rotate(-45deg); border-radius:1px; }
+  .spot-visual{ display:flex; justify-content:center; }
+
+  /* the card itself — WrksNet's own design, no issuer or network marks */
+  .vcard{ width:100%; max-width:318px; aspect-ratio:1.586; border-radius:19px;
+    padding:21px 22px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(135deg,#1d2c74 0%,#6a2fb0 48%,#0a1030 100%);
+    box-shadow:0 34px 66px -30px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.2);
+    transform:rotate(-3deg); transition:transform .3s ease; }
+  .spot:hover .vcard{ transform:rotate(-1deg) translateY(-4px); }
+  .vcard::after{ content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 80% at 82% -10%,rgba(102,255,255,.3),transparent 58%); }
+  .vcard > *{ position:relative; z-index:1; }
+  .vc-top{ display:flex; align-items:flex-start; justify-content:space-between; }
+  .vc-brand{ font-size:14px; font-weight:800; letter-spacing:.4px; color:#fff; }
+  .vc-brand span{ color:var(--cyan); }
+  .vc-usd{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.6px;
+    color:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.34);
+    border-radius:999px; padding:4px 10px; }
+  .vc-chip{ width:36px; height:27px; border-radius:6px; margin:2px 0 0;
+    background:linear-gradient(145deg,#ffd98a,#c9922f); position:relative; }
+  .vc-chip::before, .vc-chip::after{ content:''; position:absolute; left:5px; right:5px; height:1px;
+    background:rgba(0,0,0,.32); }
+  .vc-chip::before{ top:9px; } .vc-chip::after{ top:17px; }
+  .vc-num{ font-family:'JetBrains Mono',monospace; font-size:14.5px; letter-spacing:2.4px;
+    color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.4); }
+  @media (max-width:860px){
+    .spot{ grid-template-columns:1fr; }
+    .spot-visual{ order:-1; }
+    .vcard{ transform:rotate(-2deg); max-width:300px; }
+  }
+  @media (max-width:560px){
+    .spot{ padding:26px 20px; }
+    .vcard{ transform:none; }
+    .spot:hover .vcard{ transform:translateY(-3px); }
+  }
   .page-head{ margin-bottom:clamp(30px,4vw,46px); }
   .page-head h1{ font-size:clamp(29px,4vw,44px); margin-bottom:14px; }
   .page-head p{ font-size:16.5px; color:var(--mist); margin:0; line-height:1.6; }
@@ -535,6 +637,7 @@
           <div class="nav-menu" id="navMenu" hidden>
           <a href="index.html">Home</a>
           <a href="services.html" aria-current="page">Services &amp; Pricing</a>
+          <a href="usd-virtual-cards.html">USD Virtual Cards</a>
           <a href="approach.html">Our Approach</a>
           <a href="refer.html">Refer &amp; Earn</a>
           <a href="services.html#testimonials">Testimonials</a>
@@ -545,6 +648,7 @@
     </div>
   </div>
 </header>
+
 
 <main>
 
@@ -565,6 +669,11 @@
   <section class="sec" style="padding-top:0;" id="services">
     <div class="wrap">
       <div class="svc-grid">
+          <div class="card">
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="9.8" x2="21.5" y2="9.8"/><line x1="6" y1="14.6" x2="9.8" y2="14.6"/></svg></div>
+            <p class="svc-name">USD Virtual Cards</p>
+            <p class="svc-desc">Dollar cards you can use on international sites and subscriptions.</p>
+          </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9v-1a3 3 0 0 1 3-3c2 0 3.5 2 6 4 2.5-2 4-4 6-4a3 3 0 0 1 3 3v1"/><line x1="12" y1="9" x2="12" y2="21"/></svg></div>
             <p class="svc-name">Gift Cards</p>
@@ -607,6 +716,39 @@
       <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 8h8M12 8v9"/></svg>Crypto (USDT)</span>
       <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><line x1="5" y1="10" x2="5" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="19" y1="10" x2="19" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></svg>Bank transfer</span>
     </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0;" id="cards">
+    <div class="wrap">
+      <div class="spot glass">
+        <div class="spot-copy">
+          <p class="spot-tag">New</p>
+          <h3>Spend in dollars,<br>wherever you are.</h3>
+          <p>A WrksNet USD card opens up the sites that turn a local card away &mdash; app stores,
+            subscriptions, ad platforms and dollar-priced bookings.</p>
+          <ul class="spot-list">
+            <li>Works on international sites that only take USD cards</li>
+            <li>Issued through our licensed card issuing partner</li>
+            <li>Topped up from the WrksNet balance you already have</li>
+            <li>Card details shown to you only</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-main btn-sm" href="https://t.me/worksnet_bot?start=cards" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg> Get a card</a>
+            <a class="svc-more" href="usd-virtual-cards.html">How it works &rarr;</a>
+          </div>
+        </div>
+        <div class="spot-visual">
+          <div class="vcard" role="img" aria-label="Illustration of a WrksNet USD virtual card">
+            <div class="vc-top">
+              <span class="vc-brand">WRKS<span>NET</span></span>
+              <span class="vc-usd">USD</span>
+            </div>
+            <div class="vc-chip" aria-hidden="true"></div>
+            <div class="vc-num" aria-hidden="true">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -747,6 +889,7 @@
       <div class="footer-col">
         <p class="footer-head">Explore</p>
         <a href="services.html">Services</a>
+        <a href="usd-virtual-cards.html">USD Virtual Cards</a>
         <a href="approach.html">Our Approach</a>
         <a href="refer.html">Refer &amp; Earn</a>
         <a href="services.html#testimonials">Testimonials</a>
@@ -770,6 +913,7 @@
       <p class="footer-copy">&copy; <span id="year"></span> WRKSNET LLC</p>
     </div>
   </footer>
+
 </div>
 
 <script>
@@ -799,95 +943,6 @@
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && !menu.hidden){ setOpen(false); btn.focus(); }
-  });
-})();
-</script>
-<script>
-(function(){
-  var body = document.getElementById('phBody');
-  if(!body) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce || !('IntersectionObserver' in window)) return;   // leave the finished scene in place
-
-  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg>';
-  var SCENES = [
-    [ {me:'Gift Cards'},
-      {bot:'Choose a brand and amount. Your balance is checked automatically.'},
-      {me:'Apple &middot; $25'},
-      {bot:'Your Apple gift card is ready.', ok:'Order delivered', code:'XXXX-XXXX-XXXX'} ],
-
-    [ {me:'Phone Services'},
-      {bot:'Choose eSIM or Phone Numbers.'},
-      {me:'eSIM &middot; United Kingdom'},
-      {bot:'Scan the QR code in your phone settings to install.', ok:'eSIM ready', code:'LPA:1$\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'} ],
-
-    [ {me:'Print &amp; Mail'},
-      {bot:'Letter or postcard?'},
-      {me:'Letter'},
-      {bot:'Recipient details saved.', ok:'Details confirmed'},
-      {bot:'Posting to USA &middot; Standard delivery.', ok:'Order confirmed'} ]
-  ];
-
-  var STEP = 1700, TYPE = 900, HOLD = 2600;
-  var scene = 0, timers = [], running = false;
-
-  function clearTimers(){ timers.forEach(clearTimeout); timers = []; }
-  function later(fn, ms){ timers.push(setTimeout(fn, ms)); }
-
-  function build(steps){
-    body.innerHTML = '';
-    return steps.map(function(st){
-      var el = document.createElement('div');
-      el.className = 'bub ' + (st.me ? 'me' : 'bot');
-      body.appendChild(el);
-      return el;
-    });
-  }
-
-  function fill(el, st){
-    var html = '';
-    if(st.ok) html += '<div class="ok">' + TICK + ' ' + st.ok + '</div>';
-    html += st.me || st.bot;
-    if(st.code) html += '<div class="code">' + st.code + '</div>';
-    el.innerHTML = html;
-  }
-
-  function play(){
-    var steps = SCENES[scene], els = build(steps), t = 0;
-    body.classList.add('anim');
-    steps.forEach(function(st, i){
-      later(function(){
-        var el = els[i];
-        if(st.me){
-          fill(el, st);
-          el.classList.add('show');
-        } else {
-          el.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
-          el.classList.add('show');
-          later(function(){ fill(el, st); }, TYPE);
-        }
-      }, t);
-      t += st.me ? STEP - 500 : STEP + TYPE;
-    });
-    later(function(){
-      body.classList.add('swapping');
-      later(function(){
-        scene = (scene + 1) % SCENES.length;
-        body.classList.remove('swapping');
-        if(running) play();
-      }, 480);
-    }, t + HOLD);
-  }
-
-  function start(){ if(running) return; running = true; play(); }
-  function stop(){ running = false; clearTimers(); body.classList.remove('swapping'); }
-
-  new IntersectionObserver(function(entries){
-    entries.forEach(function(en){ en.isIntersecting ? start() : stop(); });
-  }, {threshold:0.25}).observe(body);
-
-  document.addEventListener('visibilitychange', function(){
-    if(document.hidden) stop();
   });
 })();
 </script>
