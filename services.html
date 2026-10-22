@@ -226,6 +226,51 @@
   .hero .btn-row{ justify-content:center; }
   .hero .eyebrow, .hero .trust{ margin-left:auto; margin-right:auto; }
 
+  /* ---------- hero glass card ---------- */
+  .hero-card{
+    position:relative; overflow:hidden;
+    padding:clamp(32px,4.4vw,56px) clamp(22px,4vw,58px) clamp(32px,4vw,52px);
+    border-radius:clamp(20px,2.4vw,30px);
+    background:linear-gradient(165deg,rgba(255,255,255,0.072),rgba(255,255,255,0.021) 54%,rgba(255,255,255,0.010));
+    border:1px solid rgba(255,255,255,0.10);
+    -webkit-backdrop-filter:blur(20px) saturate(140%);
+    backdrop-filter:blur(20px) saturate(140%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.09), 0 30px 70px -34px rgba(2,5,22,0.95);
+  }
+  .hero-card::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px; pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(102,255,255,0.5) 32%,rgba(137,59,204,0.42) 68%,transparent);
+  }
+  .hero-card::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 85% at 50% -24%,rgba(102,255,255,0.085),transparent 62%);
+  }
+  .hero-card > *{ position:relative; z-index:1; }
+  .hero-card h1{ margin-top:0; }
+  .hero-card .btn-row{ margin-bottom:0; }
+  .hero-card + .qsp{ margin-top:clamp(20px,2.6vw,30px); }
+  @media (max-width:560px){
+    .hero-card{ padding:30px 20px 32px; border-radius:20px; }
+  }
+
+  /* ---------- glass panel (shared) ---------- */
+  .glass{
+    position:relative; overflow:hidden;
+    border-radius:clamp(18px,2.2vw,26px);
+    background:linear-gradient(165deg,rgba(255,255,255,0.055),rgba(255,255,255,0.016) 56%,rgba(255,255,255,0.008));
+    border:1px solid rgba(255,255,255,0.085);
+    -webkit-backdrop-filter:blur(16px) saturate(135%);
+    backdrop-filter:blur(16px) saturate(135%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.07), 0 24px 56px -32px rgba(2,5,22,0.9);
+  }
+  .glass::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:1px; pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(102,255,255,0.4) 34%,rgba(137,59,204,0.34) 66%,transparent);
+  }
+  .glass > *{ position:relative; z-index:1; }
+  .glass-pad{ padding:clamp(28px,3.4vw,46px) clamp(22px,3.2vw,46px); }
+  @media (max-width:560px){ .glass-pad{ padding:26px 20px; } }
+
   /* ---------- quick / simple / private strip ---------- */
   .strip{
     display:grid; grid-template-columns:repeat(3,1fr);
@@ -397,7 +442,9 @@
   .meta{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); margin:0 0 6px; }
 
   /* ---------- services page extras ---------- */
-  .pay-strip{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; margin:30px 0 0; }
+  .pay-strip{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;
+    margin:30px auto 0; width:fit-content; max-width:100%; padding:16px 26px; }
+  @media (max-width:560px){ .pay-strip{ padding:18px 20px; width:100%; } }
   .pay-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist); }
   .pay-chip{ display:inline-flex; align-items:center; gap:9px; font-size:13.5px; font-weight:500;
     border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03);
@@ -439,7 +486,8 @@
   .t-user{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); margin:0 0 9px; }
   .t-stars{ color:#ffc93c; font-size:14px; letter-spacing:2px; margin:0 0 12px; }
   .t-text{ font-size:14.5px; line-height:1.65; color:var(--mist); margin:0; }
-  .review-form{ margin-top:30px; max-width:620px; }
+  .review-form{ margin-top:30px; width:100%; max-width:620px; text-align:left; }
+  .review-form h3{ letter-spacing:-0.2px; }
   .f-row{ margin-bottom:17px; }
   .f-label{ display:block; font-size:13.5px; color:var(--mist); margin-bottom:8px; }
   .f-input, .f-textarea{ width:100%; font-family:'Poppins',sans-serif; font-size:14.5px; color:var(--ink);
@@ -448,6 +496,14 @@
   .f-textarea{ min-height:112px; resize:vertical; }
   .f-input:focus, .f-textarea:focus{ outline:none; border-color:rgba(102,255,255,0.5); }
   .f-status{ font-size:13.5px; margin:12px 0 0; min-height:20px; }
+  .f-submit{ font-family:'Poppins',sans-serif; font-size:14.5px; font-weight:650; color:#04071b;
+    background:linear-gradient(120deg,var(--cyan),var(--violet-soft)); border:0; cursor:pointer;
+    border-radius:999px; padding:13px 30px; transition:transform .15s ease, box-shadow .15s ease; }
+  .f-submit:hover{ transform:translateY(-1px); box-shadow:0 12px 26px -12px rgba(102,255,255,0.55); }
+  .f-submit:disabled{ opacity:.6; cursor:default; transform:none; box-shadow:none; }
+  .status-success{ color:var(--mint); }
+  .status-error{ color:#ff8e8e; }
+  .status-loading{ color:var(--mist); }
   .stars-input{ display:inline-flex; flex-direction:row-reverse; gap:5px; }
   .stars-input input{ display:none; }
   .stars-input label{ font-size:25px; color:#3a4164; cursor:pointer; transition:color .15s ease; }
@@ -494,9 +550,9 @@
 
   <section class="hero">
     <div class="wrap">
-      <div class="page-head center" style="text-align:center; max-width:720px; margin-left:auto; margin-right:auto;">
+      <div class="page-head center hero-card" style="text-align:center; max-width:780px; margin-left:auto; margin-right:auto;">
         <p class="eyebrow"><i></i>Services &amp; pricing</p>
-        <h1>Instant digital services,<br><span class="grad">delivered in seconds.</span></h1>
+        <h1>Choose a service.<br><span class="grad">The bot does the rest.</span></h1>
         <p>Gift cards, phone numbers, eSIMs, private proxies, license keys, bill pay and print &amp; mail &mdash;
           delivered straight through our bot on Telegram, funded by your own balance.</p>
         <div class="btn-row" style="justify-content:center; margin-top:28px;">
@@ -546,7 +602,7 @@
           </div>
       </div>
       <p class="grid-note">All services are subject to our <a href="privacy.html">Acceptable Use Policy</a>.</p>
-    <div class="pay-strip">
+    <div class="pay-strip glass">
       <span class="pay-label">Fund your balance with</span>
       <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 8h8M12 8v9"/></svg>Crypto (USDT)</span>
       <span class="pay-chip"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><line x1="5" y1="10" x2="5" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="19" y1="10" x2="19" y2="18"/><line x1="3" y1="20" x2="21" y2="20"/></svg>Bank transfer</span>
@@ -562,13 +618,15 @@
         <h2>Three steps, start to finish.</h2>
         <p>From opening the chat to holding what you ordered.</p>
       </div>
-      <div class="steps">
-        <div class="step"><div class="step-n">1</div><h3>Open the bot</h3>
-          <p>Message @worksnet_bot on Telegram &mdash; it opens like any other chat.</p></div>
-        <div class="step"><div class="step-n">2</div><h3>Top up your balance</h3>
-          <p>Add funds to your WrksNet balance directly inside the chat.</p></div>
-        <div class="step"><div class="step-n">3</div><h3>Get instant service</h3>
-          <p>Pick a service from the menu and it is delivered in the same conversation.</p></div>
+      <div class="glass glass-pad">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><h3>Open the bot</h3>
+            <p>Message @worksnet_bot on Telegram &mdash; it opens like any other chat.</p></div>
+          <div class="step"><div class="step-n">2</div><h3>Top up your balance</h3>
+            <p>Add funds to your WrksNet balance directly inside the chat.</p></div>
+          <div class="step"><div class="step-n">3</div><h3>Get instant service</h3>
+            <p>Pick a service from the menu and it is delivered in the same conversation.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -614,37 +672,37 @@
 
         <!-- REVIEW CARD — copy this whole block to add another review below it -->
         <div class="testimonial-card">
-          <p class="testimonial-id">User 17369*****</p>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Good services so far&rdquo;</p>
+          <p class="t-user">User 17369*****</p>
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-text" style="margin-bottom:0;">&ldquo;Good services so far&rdquo;</p>
         </div>
         <!-- END REVIEW CARD -->
 
         <!-- REVIEW CARD — copy this whole block to add another review below it -->
         <div class="testimonial-card">
-          <p class="testimonial-id">User 82207*****</p>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Yess! I purchased an Apple gift Card and it delivered instantly.. you guys keep it up please &#128077;&rdquo;</p>
+          <p class="t-user">User 82207*****</p>
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-text" style="margin-bottom:0;">&ldquo;Yess! I purchased an Apple gift Card and it delivered instantly.. you guys keep it up please &#128077;&rdquo;</p>
         </div>
         <!-- END REVIEW CARD -->
 
         <!-- REVIEW CARD — copy this whole block to add another review below it -->
         <div class="testimonial-card">
-          <p class="testimonial-id">User 17353*****</p>
-          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text" style="margin-bottom:0;">&ldquo;My experience has been great so far, I enjoy the swift service and accuracy.&rdquo;</p>
+          <p class="t-user">User 17353*****</p>
+          <div class="t-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="t-text" style="margin-bottom:0;">&ldquo;My experience has been great so far, I enjoy the swift service and accuracy.&rdquo;</p>
         </div>
         <!-- END REVIEW CARD -->
 
       </div>
       <div style="display:flex; justify-content:center;">
-        <div class="review-form">
+        <div class="glass glass-pad review-form">
           <h3 style="font-size:19px; font-weight:650; margin:0 0 6px;">Leave a Review</h3>
           <p style="font-size:14px; color:var(--mist); margin:0 0 20px;">Used WrksNet? Tell us how it went.</p>
-          <form id="review-form" class="review-form">
-        <div class="f-group">
+          <form id="review-form">
+        <div class="f-row">
           <label class="f-label" for="star5">Your Rating</label>
-          <div class="star-rating">
+          <div class="stars-input">
             <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
             <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
             <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
@@ -652,11 +710,11 @@
             <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
           </div>
         </div>
-        <div class="f-group">
+        <div class="f-row">
           <label class="f-label" for="reviewer-name">Name or Handle <span style="opacity:0.6;">(optional)</span></label>
           <input class="f-input" type="text" id="reviewer-name" name="name" placeholder="e.g. Alex, or leave blank to stay anonymous" />
         </div>
-        <div class="f-group">
+        <div class="f-row">
           <label class="f-label" for="reviewer-message">Your Review</label>
           <textarea class="f-textarea" id="reviewer-message" name="message" placeholder="Tell us about your experience with WrksNet" required></textarea>
         </div>
