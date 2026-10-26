@@ -483,6 +483,59 @@
   .article ol.steps-list li{ margin-bottom:11px; padding-left:4px; }
   .article ol.steps-list li::marker{ color:var(--cyan-bright); font-weight:700;
     font-family:'JetBrains Mono',monospace; font-size:14px; }
+
+  /* ---------- USD virtual cards spotlight ---------- */
+  .spot{ display:grid; grid-template-columns:1.05fr .95fr; align-items:center;
+    gap:clamp(26px,4vw,54px); padding:clamp(28px,3.6vw,48px); }
+  .spot-tag{ display:inline-flex; align-items:center; gap:8px; margin:0 0 15px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.8px;
+    text-transform:uppercase; color:var(--mint); }
+  .spot-tag::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 0 3px rgba(110,240,189,.16); }
+  .spot h3{ font-size:clamp(22px,2.7vw,30px); font-weight:750; letter-spacing:-0.6px; margin:0 0 12px; }
+  .spot > div > p{ font-size:15px; line-height:1.7; color:var(--mist); margin:0 0 18px; max-width:46ch; }
+  .spot-list{ list-style:none; margin:0 0 24px; padding:0; }
+  .spot-list li{ position:relative; padding-left:25px; margin-bottom:9px;
+    font-size:14px; line-height:1.6; color:var(--mist); }
+  .spot-list li::before{ content:''; position:absolute; left:0; top:7px; width:13px; height:7px;
+    border-left:2px solid var(--cyan-bright); border-bottom:2px solid var(--cyan-bright);
+    transform:rotate(-45deg); border-radius:1px; }
+  .spot-visual{ display:flex; justify-content:center; }
+
+  /* the card itself — WrksNet's own design, no issuer or network marks */
+  .vcard{ width:100%; max-width:318px; aspect-ratio:1.586; border-radius:19px;
+    padding:21px 22px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+    background:linear-gradient(135deg,#1d2c74 0%,#6a2fb0 48%,#0a1030 100%);
+    box-shadow:0 34px 66px -30px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.2);
+    transform:rotate(-3deg); transition:transform .3s ease; }
+  .spot:hover .vcard{ transform:rotate(-1deg) translateY(-4px); }
+  .vcard::after{ content:''; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(120% 80% at 82% -10%,rgba(102,255,255,.3),transparent 58%); }
+  .vcard > *{ position:relative; z-index:1; }
+  .vc-top{ display:flex; align-items:flex-start; justify-content:space-between; }
+  .vc-brand{ font-size:14px; font-weight:800; letter-spacing:.4px; color:#fff; }
+  .vc-brand span{ color:var(--cyan); }
+  .vc-usd{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.6px;
+    color:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.34);
+    border-radius:999px; padding:4px 10px; }
+  .vc-chip{ width:36px; height:27px; border-radius:6px; margin:2px 0 0;
+    background:linear-gradient(145deg,#ffd98a,#c9922f); position:relative; }
+  .vc-chip::before, .vc-chip::after{ content:''; position:absolute; left:5px; right:5px; height:1px;
+    background:rgba(0,0,0,.32); }
+  .vc-chip::before{ top:9px; } .vc-chip::after{ top:17px; }
+  .vc-num{ font-family:'JetBrains Mono',monospace; font-size:14.5px; letter-spacing:2.4px;
+    color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.4); }
+  @media (max-width:860px){
+    .spot{ grid-template-columns:1fr; }
+    .spot-visual{ order:-1; }
+    .vcard{ transform:rotate(-2deg); max-width:300px; }
+  }
+  @media (max-width:560px){
+    .spot{ padding:26px 20px; }
+    .vcard{ transform:none; }
+    .spot:hover .vcard{ transform:translateY(-3px); }
+  }
   .page-head{ margin-bottom:clamp(30px,4vw,46px); }
   .page-head h1{ font-size:clamp(29px,4vw,44px); margin-bottom:14px; }
   .page-head p{ font-size:16.5px; color:var(--mist); margin:0; line-height:1.6; }
@@ -641,7 +694,7 @@
           <h2>Refunds &amp; Order Issues</h2>
           <p>Phone number orders are refunded automatically and immediately to your
           balance if the order fails or times out — no need to contact support for this.</p>
-          <p>For any issue with other services (proxies, gift cards, eSIMs, license keys,
+          <p>For any issue with other services (web services, gift cards, eSIMs, license keys,
           bill pay, or print &amp; mail), tap Contact Support on the bot and our team will review
           and resolve it directly with you.</p>
           <h2>Account Balance</h2>

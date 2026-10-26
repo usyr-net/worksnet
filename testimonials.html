@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — WrksNet</title>
+<meta name="description" content="Real reviews from WrksNet users, plus a way to leave your own.">
+<link rel="canonical" href="https://www.wrksnet.com/testimonials.html">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --void:#04071b;
+    --bg-top:#080e36;
+    --bg-bottom:#030618;
+    --panel:#070c30;
+    --panel-2:#050a27;
+    --line:#464d6e;
+    --line-soft:#272e55;
+    --cyan:#66ffff;
+    --cyan-bright:#9bffff;
+    --violet:#893bcc;
+    --ink:#e6eaed;
+    --mist:#82879d;
+    --mist-dim:#565c7a;
+    --mint:#6ef0bd;
+    --mint-bg:#0f2019;
+    --mint-line:#2c6a4f;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; width:100%; background:var(--bg-bottom);}
+  body{
+    margin:0;
+    width:100%;
+    position:relative;
+    background:linear-gradient(180deg,var(--bg-top),var(--bg-bottom) 70%);
+    color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  .mono{ font-family:'JetBrains Mono',monospace; }
+
+  /* ambient dot grid + glow, purely decorative */
+  .bg-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; width:100%; height:100%; }
+  .field{
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(120,150,190,0.16) 1px, transparent 1px);
+    background-size:34px 34px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 40%, transparent 90%);
+  }
+  .glow{ position:absolute; filter:blur(90px); border-radius:50%; }
+  .glow-a{ width:640px; height:640px; top:-220px; left:50%; transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(150,96,255,0.35), transparent 70%); }
+  .glow-b{ width:520px; height:520px; top:30%; left:-160px;
+    background:radial-gradient(circle, rgba(64,217,255,0.22), transparent 70%); }
+  .glow-c{ width:560px; height:560px; bottom:-140px; right:-160px;
+    background:radial-gradient(circle, rgba(150,96,255,0.20), transparent 70%); }
+
+  .wrap{ position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+
+  /* ---------- header ---------- */
+  header{ padding:28px 0 10px; }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand-mark{
+    width:42px; height:42px; border-radius:50%; flex:none;
+    object-fit:cover; display:block;
+    border:1.5px solid rgba(170,246,255,0.7);
+    box-shadow:0 0 22px rgba(64,217,255,0.55);
+  }
+  .brand-name{ font-weight:700; font-size:19px; letter-spacing:0.2px; }
+  .brand-name .accent{ color:var(--cyan); }
+  .status-pill{
+    display:flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mint);
+    border:1px solid var(--mint-line); background:rgba(20,40,32,0.55);
+    padding:7px 14px; border-radius:999px; white-space:nowrap;
+  }
+  .status-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 8px var(--mint); animation:pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
+
+  /* ---------- terminal card (signature element) ---------- */
+  .terminal{
+    margin:34px 0 0;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid var(--line); border-radius:var(--radius-lg);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(64,217,255,0.04) inset;
+    overflow:hidden;
+  }
+  .titlebar{
+    display:flex; align-items:center; justify-content:center; position:relative;
+    padding:15px 18px; border-bottom:1px solid var(--line-soft);
+    background:rgba(255,255,255,0.015);
+  }
+  .tl-dots{ position:absolute; left:18px; display:flex; gap:7px; }
+  .tl-dots span{ width:11px; height:11px; border-radius:50%; display:block; }
+  .tl-dots span:nth-child(1){ background:#ff5f57; }
+  .tl-dots span:nth-child(2){ background:#febc2e; }
+  .tl-dots span:nth-child(3){ background:#28c840; }
+  .titlebar-label{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); }
+
+  .terminal-body{ padding:44px 40px 46px; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mint);
+    display:flex; align-items:center; gap:4px; margin:0 0 18px;
+  }
+  .caret{
+    width:9px; height:18px; background:var(--mint); display:inline-block;
+    animation:blink 1s step-end infinite; margin-left:2px;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1{
+    font-size:52px; line-height:1.06; font-weight:800; letter-spacing:-0.5px;
+    margin:0 0 22px; color:var(--ink);
+  }
+  h1 .grad{
+    background:linear-gradient(96deg, var(--cyan-bright), var(--violet));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .lede{ font-size:17.5px; line-height:1.6; color:var(--mist); max-width:520px; margin:0 0 30px; }
+
+  .cta{
+    display:inline-flex; align-items:center; gap:12px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:16px;
+    padding:16px 26px; border-radius:999px; text-decoration:none;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset, 0 18px 40px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 0 0 1px rgba(255,255,255,0.12) inset, 0 22px 46px -12px rgba(64,217,255,0.7); }
+  .cta svg{ width:19px; height:19px; flex:none; }
+  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-bottom:34px; }
+  .cta-note{ font-size:13.5px; color:var(--mist-dim); }
+
+  .safe-box{
+    display:flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--mint);
+    border:1px solid var(--mint-line); background:var(--mint-bg);
+    padding:14px 18px; border-radius:var(--radius-sm); margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .safe-box b{ color:#eafff5; font-weight:600; }
+  .safe-box .sep{ color:var(--mint-line); }
+
+  .services-prompt{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--mist-dim);
+    margin:0 0 16px; display:flex; align-items:center; gap:2px;
+  }
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;
+  }
+  .svc-card{
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:20px 18px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .svc-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .svc-icon{
+    width:42px; height:42px; border-radius:12px; margin-bottom:14px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+  }
+  .svc-icon svg{ width:22px; height:22px; stroke:var(--cyan-bright); }
+  .svc-name{ font-weight:600; font-size:15.5px; margin:0 0 6px; }
+  .svc-desc{ font-size:13.5px; color:var(--mist); margin:0; line-height:1.5; }
+
+  /* ---------- how it works ---------- */
+  .section{ padding:74px 0; }
+  .section-head{ margin-bottom:38px; }
+  .section-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--cyan);
+    text-transform:uppercase; letter-spacing:1.5px; margin:0 0 10px;
+  }
+  .section h2{ font-size:32px; font-weight:700; margin:0; letter-spacing:-0.3px; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .step{ position:relative; padding-left:0; }
+  .step-num{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--void);
+    background:linear-gradient(100deg, var(--cyan-bright), var(--violet));
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    margin-bottom:16px;
+  }
+  .step h3{ font-size:17px; margin:0 0 8px; font-weight:600; }
+  .step p{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0; }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--line-soft); padding:40px 0 50px; margin-top:20px; }
+  .footer-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-brand .brand-mark{ width:30px; height:30px; }
+  .footer-tagline{ font-size:13px; color:var(--mist-dim); margin-top:2px; }
+  .footer-cta{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; border-bottom:1px dashed rgba(64,217,255,0.4); padding-bottom:2px;
+  }
+  .footer-links{ display:flex; gap:12px; align-items:center; }
+  .footer-cta{
+    width:40px; height:40px; border-radius:50%; flex:none;
+    background:rgba(64,217,255,0.08); border:1px solid rgba(64,217,255,0.3);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-bright);
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .footer-cta:hover{ border-color:rgba(64,217,255,0.6); transform:translateY(-2px); }
+  .footer-cta svg{ width:19px; height:19px; }
+  .fine-print{ font-size:12px; color:var(--mist-dim); margin-top:26px; line-height:1.7; }
+
+  @media (max-width:820px){
+    h1{ font-size:38px; }
+    .terminal-body{ padding:32px 22px 34px; }
+    .services-grid{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .section{ padding:56px 0; }
+  }
+  @media (max-width:420px){
+    .status-pill{ font-size:10.5px; padding:6px 11px; gap:6px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .caret, .status-dot{ animation:none; }
+  }
+
+  /* ---------- policy page specific ---------- */
+  .policy-body{ padding:44px 40px 50px; }
+  .policy-meta{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--mist-dim);
+    margin:0 0 30px;
+  }
+
+  .testimonial-grid{ display:flex; flex-wrap:wrap; gap:20px; }
+  .testimonial-card{
+    flex:0 1 320px;
+    border:1px solid var(--line-soft); background:rgba(255,255,255,0.015);
+    border-radius:var(--radius-md); padding:24px 22px;
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .testimonial-card:hover{ border-color:rgba(64,217,255,0.4); transform:translateY(-3px); }
+  .testimonial-stars{ font-size:15px; letter-spacing:3px; margin-bottom:14px; color:#ffc94d; }
+  .testimonial-text{ font-size:14.5px; color:var(--mist); line-height:1.6; margin:0 0 16px; }
+  .testimonial-id{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mist-dim);
+    letter-spacing:0.3px; margin:0 0 10px;
+  }
+
+  .review-form{ max-width:480px; margin-top:6px; }
+  .f-group{ margin-bottom:16px; }
+  .f-label{ display:block; font-size:13.5px; color:var(--mist); margin-bottom:7px; }
+  .f-input, .f-textarea{
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:rgba(255,255,255,0.02); border:1px solid var(--line);
+    color:var(--ink); font-family:'Poppins',sans-serif; font-size:14.5px;
+    box-sizing:border-box;
+  }
+  .f-textarea{ resize:vertical; min-height:110px; }
+  .f-input:focus, .f-textarea:focus{ outline:none; border-color:rgba(64,217,255,0.5); }
+  .f-hint{ font-size:12px; color:var(--mist-dim); margin-top:6px; }
+
+  .f-submit{
+    display:inline-flex; align-items:center; gap:10px;
+    background:linear-gradient(100deg, var(--cyan), var(--violet));
+    color:#0a0d14; font-weight:700; font-size:15px; border:none; cursor:pointer;
+    padding:14px 26px; border-radius:999px;
+    box-shadow:0 14px 34px -14px rgba(64,217,255,0.55);
+    transition:transform .18s ease;
+  }
+  .f-submit:hover{ transform:translateY(-2px); }
+  .f-submit:disabled{ opacity:0.6; cursor:default; transform:none; }
+
+  .f-status{ font-family:'JetBrains Mono',monospace; font-size:13.5px; margin-top:14px; min-height:18px; }
+  .f-status.status-loading{ color:var(--mist); }
+  .f-status.status-success{ color:var(--mint); }
+  .f-status.status-error{ color:#ff8a8a; }
+
+  .star-rating{
+    display:flex; flex-direction:row-reverse; justify-content:flex-end;
+    gap:3px; font-size:22px; width:fit-content;
+  }
+  .star-rating input{ position:absolute; opacity:0; width:0; height:0; }
+  .star-rating label{
+    color:var(--line); cursor:pointer; transition:color .15s ease; line-height:1;
+  }
+  .star-rating input:checked ~ label,
+  .star-rating label:hover,
+  .star-rating label:hover ~ label{ color:#ffc94d; }
+  .policy-h2{
+    font-size:20px; font-weight:700; margin:34px 0 12px; color:var(--ink);
+  }
+  .policy-h2:first-of-type{ margin-top:0; }
+  .policy-p{
+    font-size:15.5px; line-height:1.7; color:var(--mist); margin:0 0 6px;
+  }
+  .policy-p code{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--cyan-bright);
+    background:rgba(64,217,255,0.08); padding:2px 7px; border-radius:5px;
+  }
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--cyan-bright);
+    text-decoration:none; margin-bottom:28px; opacity:0.9;
+  }
+  .back-link:hover{ opacity:1; }
+  @media (max-width:820px){
+    .policy-body{ padding:32px 22px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="field"></div>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <div class="glow glow-c"></div>
+</div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+        <span class="brand-name">WRKS<span class="accent">NET</span></span>
+      </a>
+      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </header>
+
+  <main>
+    <a class="back-link" href="index.html">&larr; back to home</a>
+
+    <div class="terminal">
+      <div class="titlebar">
+        <div class="tl-dots"><span></span><span></span><span></span></div>
+        <span class="titlebar-label">wrksnet — testimonials</span>
+      </div>
+
+      <div class="policy-body">
+        <p class="eyebrow">testimonials<span class="caret"></span></p>
+
+        <h1 style="font-size:34px; margin:0 0 8px;">What People Are Saying.</h1>
+        <p class="policy-meta">Real reviews from real WrksNet users.</p>
+
+        <div class="testimonial-grid">
+
+          <!-- REVIEW CARD — copy this whole block to add another review below it -->
+          <div class="testimonial-card">
+            <p class="testimonial-id">User 17369*****</p>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Good services so far&rdquo;</p>
+          </div>
+          <!-- END REVIEW CARD -->
+
+          <!-- REVIEW CARD — copy this whole block to add another review below it -->
+          <div class="testimonial-card">
+            <p class="testimonial-id">User 82207*****</p>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text" style="margin-bottom:0;">&ldquo;Yess! I purchased an Apple gift Card and it delivered instantly.. you guys keep it up please &#128077;&rdquo;</p>
+          </div>
+          <!-- END REVIEW CARD -->
+
+          <!-- REVIEW CARD — copy this whole block to add another review below it -->
+          <div class="testimonial-card">
+            <p class="testimonial-id">User 17353*****</p>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testimonial-text" style="margin-bottom:0;">&ldquo;My experience has been great so far, I enjoy the swift service and accuracy.&rdquo;</p>
+          </div>
+          <!-- END REVIEW CARD -->
+
+        </div>
+
+        <h2 class="policy-h2" style="margin-top:46px;">Leave a Review</h2>
+        <p class="policy-p">Used WrksNet? Tell us how it went.</p>
+
+        <form id="review-form" class="review-form">
+          <div class="f-group">
+            <label class="f-label" for="star5">Your Rating</label>
+            <div class="star-rating">
+              <input type="radio" id="star5" name="rating" value="5" required><label for="star5">&#9733;</label>
+              <input type="radio" id="star4" name="rating" value="4"><label for="star4">&#9733;</label>
+              <input type="radio" id="star3" name="rating" value="3"><label for="star3">&#9733;</label>
+              <input type="radio" id="star2" name="rating" value="2"><label for="star2">&#9733;</label>
+              <input type="radio" id="star1" name="rating" value="1"><label for="star1">&#9733;</label>
+            </div>
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="reviewer-name">Name or Handle <span style="opacity:0.6;">(optional)</span></label>
+            <input class="f-input" type="text" id="reviewer-name" name="name" placeholder="e.g. Alex, or leave blank to stay anonymous" />
+          </div>
+          <div class="f-group">
+            <label class="f-label" for="reviewer-message">Your Review</label>
+            <textarea class="f-textarea" id="reviewer-message" name="message" placeholder="Tell us about your experience with WrksNet" required></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="New WrksNet review submitted" />
+          <button type="submit" class="f-submit">Submit</button>
+          <p id="review-status" class="f-status"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand">
+          <img class="brand-mark" src="logo.png" alt="WrksNet logo">
+          <span class="brand-name">WRKS<span class="accent">NET</span></span>
+        </div>
+        <p class="footer-tagline">Built for scale. Optimized for privacy.</p>
+      </div>
+      <div class="footer-links">
+        <a class="footer-cta" href="https://t.me/worksnet_bot" target="_blank" rel="noopener" aria-label="Message us on Telegram" title="Message @worksnet_bot on Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg></a>
+        <a class="footer-cta" href="https://instagram.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on Instagram" title="Follow @wrksnet on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="footer-cta" href="https://x.com/wrksnet" target="_blank" rel="noopener" aria-label="Follow us on X" title="Follow @wrksnet on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></a>
+        <a class="footer-cta" href="mailto:contact@wrksnet.com" aria-label="Email us" title="contact@wrksnet.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></a>
+      </div>
+    </div>
+    <p class="fine-print">WrksNet provides paid digital services (gift cards, phone numbers, web services,
+      license keys, bill pay, and print &amp; mail) delivered via Telegram. Services are for personal use and subject to the terms of the
+      platforms you use them with. © <span id="year"></span> WrksNet. &nbsp;&middot;&nbsp;
+      <a href="contact.html" style="color:var(--mist-dim); text-decoration:underline;">Contact</a> &nbsp;&middot;&nbsp; <a href="testimonials.html" style="color:var(--mist-dim); text-decoration:underline;">Testimonials</a></p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script>
+  const reviewForm = document.getElementById('review-form');
+  const reviewStatus = document.getElementById('review-status');
+  const reviewButton = reviewForm.querySelector('button[type="submit"]');
+
+  reviewForm.addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    reviewStatus.textContent = 'Submitting...';
+    reviewStatus.className = 'f-status status-loading';
+    reviewButton.disabled = true;
+    reviewButton.textContent = 'Submitting...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xzezoyqz', {
+        method: 'POST',
+        body: new FormData(reviewForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit';
+
+      if (response.ok) {
+        reviewStatus.textContent = 'Thanks! Your review has been received and will be reviewed shortly.';
+        reviewStatus.className = 'f-status status-success';
+        reviewForm.reset();
+      } else {
+        reviewStatus.textContent = 'Something went wrong. Please try again.';
+        reviewStatus.className = 'f-status status-error';
+      }
+    } catch (err) {
+      reviewButton.disabled = false;
+      reviewButton.textContent = 'Submit';
+      reviewStatus.textContent = 'Something went wrong. Please try again.';
+      reviewStatus.className = 'f-status status-error';
+    }
+  });
+</script>
+
+</body>
+</html>
