@@ -484,65 +484,6 @@
   .article ol.steps-list li::marker{ color:var(--cyan-bright); font-weight:700;
     font-family:'JetBrains Mono',monospace; font-size:14px; }
 
-  /* ---------- USD virtual cards spotlight ---------- */
-  .spot{ display:grid; grid-template-columns:1.05fr .95fr; align-items:center;
-    gap:clamp(26px,4vw,54px); padding:clamp(28px,3.6vw,48px); }
-  .spot-tag{ display:inline-flex; align-items:center; gap:8px; margin:0 0 15px;
-    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.8px;
-    text-transform:uppercase; color:var(--mint); }
-  .spot-tag::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--mint);
-    box-shadow:0 0 0 3px rgba(110,240,189,.16); }
-  .spot h3{ font-size:clamp(22px,2.7vw,30px); font-weight:750; letter-spacing:-0.6px; margin:0 0 12px; }
-  .spot > div > p{ font-size:15px; line-height:1.7; color:var(--mist); margin:0 0 18px; max-width:46ch; }
-  .spot-list{ list-style:none; margin:0 0 24px; padding:0; }
-  .spot-list li{ position:relative; padding-left:25px; margin-bottom:9px;
-    font-size:14px; line-height:1.6; color:var(--mist); }
-  .spot-list li::before{ content:''; position:absolute; left:0; top:7px; width:13px; height:7px;
-    border-left:2px solid var(--cyan-bright); border-bottom:2px solid var(--cyan-bright);
-    transform:rotate(-45deg); border-radius:1px; }
-  .spot-visual{ display:flex; justify-content:center; }
-
-  /* the card itself — WrksNet's own design, no issuer or network marks */
-  .vcard{ width:100%; max-width:318px; aspect-ratio:1.586; border-radius:19px;
-    padding:21px 22px; position:relative; overflow:hidden;
-    display:flex; flex-direction:column; justify-content:space-between;
-    background:linear-gradient(135deg,#1d2c74 0%,#6a2fb0 48%,#0a1030 100%);
-    box-shadow:0 34px 66px -30px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.2);
-    transform:rotate(-3deg); transition:transform .3s ease; }
-  .spot:hover .vcard{ transform:rotate(-1deg) translateY(-4px); }
-  .vcard::after{ content:''; position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(120% 80% at 82% -10%,rgba(102,255,255,.3),transparent 58%); }
-  .vcard > *{ position:relative; z-index:1; }
-  .vc-top{ display:flex; align-items:flex-start; justify-content:space-between; }
-  .vc-brand{ font-size:14px; font-weight:800; letter-spacing:.4px; color:#fff; }
-  .vc-brand span{ color:var(--cyan); }
-  .vc-usd{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:1.6px;
-    color:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.34);
-    border-radius:999px; padding:4px 10px; }
-  .vc-chip{ width:36px; height:27px; border-radius:6px; margin:2px 0 0;
-    background:linear-gradient(145deg,#ffd98a,#c9922f); position:relative; }
-  .vc-chip::before, .vc-chip::after{ content:''; position:absolute; left:5px; right:5px; height:1px;
-    background:rgba(0,0,0,.32); }
-  .vc-chip::before{ top:9px; } .vc-chip::after{ top:17px; }
-  .vc-num{ font-family:'JetBrains Mono',monospace; font-size:14.5px; letter-spacing:2.4px;
-    color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.4); }
-  @media (max-width:860px){
-    .spot{ grid-template-columns:1fr; }
-    .spot-visual{ order:-1; }
-    .vcard{ transform:rotate(-2deg); max-width:300px; }
-  }
-  @media (max-width:560px){
-    .spot{ padding:26px 20px; }
-    .vcard{ transform:none; }
-    .spot:hover .vcard{ transform:translateY(-3px); }
-  }
-  .page-head{ margin-bottom:clamp(30px,4vw,46px); }
-  .page-head h1{ font-size:clamp(29px,4vw,44px); margin-bottom:14px; }
-  .page-head p{ font-size:16.5px; color:var(--mist); margin:0; line-height:1.6; }
-  .page-head .eyebrow{ margin:0 0 26px; font-size:11.5px; }
-  .page-head.center .eyebrow{ margin-left:auto; margin-right:auto; }
-  .meta{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--mist-dim); margin:0 0 6px; }
-
   /* ---------- services page extras ---------- */
   .pay-strip{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px;
     margin:30px auto 0; width:fit-content; max-width:100%; padding:16px 26px; }
@@ -637,7 +578,6 @@
           <div class="nav-menu" id="navMenu" hidden>
           <a href="index.html">Home</a>
           <a href="services.html" aria-current="page">Services &amp; Pricing</a>
-          <a href="usd-virtual-cards.html">USD Virtual Cards</a>
           <a href="approach.html">Our Approach</a>
           <a href="refer.html">Refer &amp; Earn</a>
           <a href="services.html#testimonials">Testimonials</a>
@@ -657,7 +597,7 @@
       <div class="page-head center hero-card" style="text-align:center; max-width:780px; margin-left:auto; margin-right:auto;">
         <p class="eyebrow"><i></i>Services &amp; pricing</p>
         <h1>Choose a service.<br><span class="grad">The bot does the rest.</span></h1>
-        <p>USD virtual cards, gift cards, phone numbers, eSIMs, web services, license keys, bill pay and
+        <p>Gift cards, phone numbers, eSIMs, web services, license keys, bill pay and
           print &amp; mail &mdash; delivered straight through our bot on Telegram, funded by your own balance.</p>
         <div class="btn-row" style="justify-content:center; margin-top:28px;">
           <a class="btn btn-main" href="https://t.me/worksnet_bot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg> Access our bot</a>
@@ -669,11 +609,6 @@
   <section class="sec" style="padding-top:0;" id="services">
     <div class="wrap">
       <div class="svc-grid">
-          <div class="card">
-            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="9.8" x2="21.5" y2="9.8"/><line x1="6" y1="14.6" x2="9.8" y2="14.6"/></svg></div>
-            <p class="svc-name">USD Virtual Cards</p>
-            <p class="svc-desc">Dollar cards you can use on international sites and subscriptions.</p>
-          </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9v-1a3 3 0 0 1 3-3c2 0 3.5 2 6 4 2.5-2 4-4 6-4a3 3 0 0 1 3 3v1"/><line x1="12" y1="9" x2="12" y2="21"/></svg></div>
             <p class="svc-name">Gift Cards</p>
@@ -719,38 +654,6 @@
     </div>
   </section>
 
-  <section class="sec" style="padding-top:0;" id="cards">
-    <div class="wrap">
-      <div class="spot glass">
-        <div class="spot-copy">
-          <p class="spot-tag">New</p>
-          <h3>Spend in dollars,<br>wherever you are.</h3>
-          <p>A WrksNet USD card opens up the sites that turn a local card away &mdash; app stores,
-            subscriptions, ad platforms and dollar-priced bookings.</p>
-          <ul class="spot-list">
-            <li>Works on international sites that only take USD cards</li>
-            <li>Issued through our licensed card issuing partner</li>
-            <li>Topped up from the WrksNet balance you already have</li>
-            <li>Card details shown to you only</li>
-          </ul>
-          <div class="btn-row">
-            <a class="btn btn-main btn-sm" href="https://t.me/wrksnetcardbot" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7Z"/></svg> Get a card</a>
-            <a class="svc-more" href="usd-virtual-cards.html">How it works &rarr;</a>
-          </div>
-        </div>
-        <div class="spot-visual">
-          <div class="vcard" role="img" aria-label="Illustration of a WrksNet USD virtual card">
-            <div class="vc-top">
-              <span class="vc-brand">WRKS<span>NET</span></span>
-              <span class="vc-usd">USD</span>
-            </div>
-            <div class="vc-chip" aria-hidden="true"></div>
-            <div class="vc-num" aria-hidden="true">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <hr class="rule">
 
@@ -889,7 +792,6 @@
       <div class="footer-col">
         <p class="footer-head">Explore</p>
         <a href="services.html">Services</a>
-        <a href="usd-virtual-cards.html">USD Virtual Cards</a>
         <a href="approach.html">Our Approach</a>
         <a href="refer.html">Refer &amp; Earn</a>
         <a href="services.html#testimonials">Testimonials</a>
