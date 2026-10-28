@@ -407,6 +407,28 @@
 
   /* ---------- footer ---------- */
   footer{ border-top:1px solid rgba(255,255,255,0.07); padding:clamp(44px,5vw,64px) 0 36px; margin-top:20px; }
+  /* ---------- hub strip (sits above the footer, every page) ---------- */
+  .hub-strip{ display:flex; align-items:center; justify-content:center; gap:9px 16px; flex-wrap:wrap;
+    margin:0 0 clamp(34px,4vw,48px); padding:17px 28px; border-radius:999px; text-align:center;
+    border:1px solid rgba(255,255,255,0.1);
+    background:linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.015)); }
+  .hub-strip span{ font-size:14.5px; color:var(--mist); line-height:1.5; }
+  .hub-strip a{ display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+    font-size:14.5px; font-weight:650; color:var(--cyan-bright); text-decoration:none;
+    transition:opacity .18s ease; }
+  .hub-strip a:hover{ opacity:.78; }
+  .hub-strip a svg{ width:15px; height:15px; }
+  @media (max-width:560px){
+    .hub-strip{ padding:18px 20px; border-radius:20px; }
+    .hub-strip span, .hub-strip a{ font-size:13.5px; }
+  }
+
+  /* ---------- updates page ---------- */
+  .upd-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    margin:0 0 clamp(34px,4vw,46px); }
+  .upd-cta{ display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; }
+  .upd-note{ font-size:13.5px; color:var(--mist-dim); margin:0; }
+  @media (max-width:860px){ .upd-grid{ grid-template-columns:1fr; } }
   .footer-grid{ display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr; gap:40px; padding-bottom:34px; }
   .footer-brand{ display:flex; align-items:center; gap:10px; }
   .footer-brand .brand-mark{ width:30px; height:30px; }
@@ -580,6 +602,7 @@
           <a href="services.html">Services &amp; Pricing</a>
           <a href="approach.html">Our Approach</a>
           <a href="refer.html" aria-current="page">Refer &amp; Earn</a>
+          <a href="updates.html">Stay Updated</a>
           <a href="services.html#testimonials">Testimonials</a>
           <a href="contact.html">Contact</a>
           <a href="privacy.html">Privacy Policy &amp; Terms</a>
@@ -637,6 +660,10 @@
 
 <div class="wrap">
   <footer>
+    <div class="hub-strip">
+      <span>Get live service alerts and new launches first.</span>
+      <a href="https://t.me/wrksnetbot" target="_blank" rel="noopener">Join the WRKSNET Hub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
@@ -654,6 +681,7 @@
       <div class="footer-col">
         <p class="footer-head">Explore</p>
         <a href="services.html">Services</a>
+        <a href="updates.html">Stay Updated</a>
         <a href="approach.html">Our Approach</a>
         <a href="refer.html">Refer &amp; Earn</a>
         <a href="services.html#testimonials">Testimonials</a>
