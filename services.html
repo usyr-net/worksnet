@@ -592,13 +592,6 @@
   /* the header pins directly beneath the bar */
   header{ top:var(--vbar) !important; }
   section[id], div[id]{ scroll-margin-top:calc(var(--vbar) + 92px); }
-  /* ---------- grouped service cards ---------- */
-  .svc-list{ list-style:none; margin:14px 0 0; padding:0; }
-  .svc-list li{ position:relative; padding-left:16px; margin-bottom:6px;
-    font-size:12.8px; line-height:1.5; color:var(--mist-dim); }
-  .svc-list li::before{ content:''; position:absolute; left:0; top:8px; width:6px; height:1.6px;
-    border-radius:1px; background:var(--cyan); opacity:.85; }
-  .card .svc-more{ display:inline-block; margin-top:14px; }
 
 
 
@@ -709,21 +702,11 @@
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="9.8" x2="21.5" y2="9.8"/><line x1="6" y1="14.6" x2="9.8" y2="14.6"/></svg></div>
             <p class="svc-name">Cards &amp; Keys</p>
             <p class="svc-desc">Gift cards, software license keys and USD virtual cards, delivered in seconds.</p>
-            <ul class="svc-list">
-              <li>Apple &amp; PlayStation gift cards</li>
-              <li>Microsoft 365 license keys</li>
-              <li>USD Visa virtual cards</li>
-            </ul>
           </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.4" width="12" height="19.2" rx="3"/><line x1="10.6" y1="18.5" x2="13.4" y2="18.5"/></svg></div>
             <p class="svc-name">Numbers &amp; eSIMs</p>
             <p class="svc-desc">Second phone numbers and travel data eSIMs, ready when you are.</p>
-            <ul class="svc-list">
-              <li>Second phone numbers</li>
-              <li>Data-only eSIMs</li>
-              <li>Data + SMS eSIMs</li>
-            </ul>
           </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/></svg></div>
