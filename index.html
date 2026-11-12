@@ -191,7 +191,7 @@
   /* ---------- phone ---------- */
   /* the phone sits on a glass stage, not in a second frame */
   .phone-stage{
-    --glow:rgba(102,255,255,.24);
+    --glow:rgba(137,59,204,.3);
     position:relative; overflow:hidden; isolation:isolate;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     padding:clamp(30px,3.6vw,52px) clamp(24px,3vw,44px);
@@ -222,24 +222,6 @@
   @media (max-width:560px){
     .phone-stage{ padding:28px 20px; border-radius:22px; }
   }
-  .phone{ position:relative; z-index:1; width:100%; max-width:296px; border-radius:36px; padding:9px;
-    background:linear-gradient(165deg,#3a4486,#0a0f33 52%,#3a1b64);
-    box-shadow:0 44px 90px -34px rgba(0,0,0,.92), 0 0 0 1px rgba(255,255,255,.08) inset; }
-  .phone-screen{ border-radius:28px; overflow:hidden; background:#0a1020; }
-  .ph-top{ display:flex; align-items:center; gap:10px; padding:12px 14px; background:#121b33; border-bottom:1px solid #1e2a49; }
-  .ph-ava{ width:30px; height:30px; border-radius:50%; background:#fff; padding:3px; flex:none; }
-  .ph-ava img{ width:100%; height:100%; object-fit:contain; display:block; }
-  .ph-name{ font-size:13px; font-weight:600; line-height:1.1; }
-  .ph-sub{ font-size:10.5px; color:var(--mist); }
-  .ph-body{ position:relative; height:328px; overflow:hidden; }
-  .ph-scene{ position:absolute; left:12px; right:12px; top:16px; bottom:18px;
-    display:flex; flex-direction:column; justify-content:flex-end; gap:9px;
-    opacity:0; visibility:hidden; transition:opacity .4s ease, visibility .4s; }
-  .ph-scene.on{ opacity:1; visibility:visible; }
-  @media (prefers-reduced-motion: reduce){ .ph-scene{ transition:none; } }
-  .bub{ max-width:86%; font-size:12.5px; line-height:1.45; padding:9px 12px; border-radius:14px; }
-  .bub.me{ align-self:flex-end; background:linear-gradient(100deg,#6a2fb0,#893bcc); color:#fff; border-bottom-right-radius:4px; }
-  .bub.bot{ align-self:flex-start; background:#19243d; color:var(--ink); border-bottom-left-radius:4px; }
   .bub .ok{ display:flex; align-items:center; gap:6px; color:var(--mint); font-weight:600; margin-bottom:5px; }
   .bub .ok svg{ width:14px; height:14px; }
   .bub .code{ font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.5px;
@@ -248,17 +230,6 @@
     font-family:'JetBrains Mono',monospace; position:relative; z-index:1; }
 
   /* manual slideshow controls */
-  .ph-tabs{ position:relative; z-index:3; display:flex; gap:6px; margin:22px 0 0; padding:5px;
-    border-radius:999px; border:1px solid rgba(255,255,255,.1);
-    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015)); }
-  .ph-tab{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:1.1px;
-    text-transform:uppercase; color:var(--mist); background:none; border:0; cursor:pointer;
-    padding:9px 13px; border-radius:999px; white-space:nowrap;
-    transition:color .2s ease, background-color .2s ease; }
-  .ph-tab:hover{ color:var(--ink); }
-  .ph-tab.is-on{ color:#04071b; font-weight:700;
-    background:linear-gradient(120deg,var(--cyan),var(--violet-soft)); }
-  .ph-tab:focus-visible{ outline:2px solid var(--cyan-bright); outline-offset:2px; }
   @media (max-width:380px){ .ph-tab{ font-size:9.5px; padding:9px 9px; letter-spacing:.7px; } }
 
   /* ---------- hero centered ---------- */
@@ -518,6 +489,73 @@
     .hero-card + .qsp{ margin-left:0; margin-right:auto; }
     .hero{ padding:clamp(52px,4.4vw,72px) 0 clamp(44px,4.6vw,66px); }
   }
+  /* ---------- hero still life ---------- */
+  .still{ position:relative; width:100%; max-width:468px; aspect-ratio:1/0.92; z-index:1; }
+  .still > *{ position:absolute; }
+
+  /* the card — the hero object */
+  .st-card{ left:4%; top:26%; width:74%; aspect-ratio:1.586;
+    transform:perspective(1400px) rotateY(-19deg) rotateX(9deg) rotate(-6deg); }
+  .c-face{ position:relative; z-index:1; width:100%; height:100%; border-radius:20px;
+    padding:17px 19px; overflow:hidden;
+    background:linear-gradient(140deg,#2b3a9c 0%,#8b3ecd 48%,#120c3a 100%);
+    box-shadow:10px 13px 0 0 #070b22,
+               inset 0 1px 0 rgba(255,255,255,.4),
+               0 30px 50px -22px rgba(0,0,0,.95); }
+  .c-face::before{ content:''; position:absolute; inset:0;
+    background:radial-gradient(130% 90% at 84% -14%,rgba(102,255,255,.4),transparent 58%); }
+  .c-top{ position:relative; display:flex; align-items:flex-start; justify-content:space-between; }
+  .c-brand{ font-size:15px; font-weight:750; letter-spacing:.8px; color:#fff; }
+  .c-brand em{ font-style:normal; color:var(--cyan); }
+  .c-usd{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1.6px;
+    color:rgba(255,255,255,.9); border:1.4px solid rgba(255,255,255,.45);
+    border-radius:999px; padding:3px 9px; }
+  .c-chip{ position:relative; display:block; margin-top:16px; width:38px; height:28px; border-radius:6px;
+    background:linear-gradient(145deg,#ffe3a0,#c9922f); }
+  .c-num{ position:absolute; left:19px; bottom:17px; font-family:'JetBrains Mono',monospace;
+    font-size:13px; letter-spacing:2.6px; color:rgba(255,255,255,.96); }
+
+  /* eSIM chip */
+  .st-sim{ right:1%; top:4%; width:25%; aspect-ratio:1.24; border-radius:12px;
+    background:linear-gradient(145deg,#ffe8ad,#d2a03a 56%,#8e6414);
+    transform:perspective(900px) rotateY(20deg) rotateX(-10deg) rotate(7deg);
+    box-shadow:7px 9px 0 0 #070b22,
+               0 20px 34px -14px rgba(0,0,0,.9),
+               inset 0 1px 0 rgba(255,255,255,.65); }
+  .s-pad{ position:absolute; inset:19%; border-radius:4px; border:2px solid rgba(9,16,61,.5); }
+  .s-pad::before, .s-pad::after{ content:''; position:absolute; left:-19%; right:-19%; height:2px;
+    background:rgba(9,16,61,.5); }
+  .s-pad::before{ top:32%; } .s-pad::after{ top:66%; }
+
+  /* envelope */
+  .st-env{ left:0; bottom:2%; width:42%; aspect-ratio:1.46; border-radius:9px; overflow:hidden;
+    background:linear-gradient(150deg,#f3f6ff,#c3cfee);
+    transform:perspective(1000px) rotateY(17deg) rotateX(-9deg) rotate(-9deg);
+    box-shadow:8px 10px 0 0 #070b22,
+               0 22px 38px -16px rgba(0,0,0,.88),
+               inset 0 1px 0 rgba(255,255,255,.9); }
+  .e-flap{ position:absolute; left:-6%; top:-60%; width:112%; aspect-ratio:1; background:#dfe6fa;
+    border-bottom:2px solid rgba(9,16,61,.16); transform:rotate(45deg); }
+  .e-stamp{ position:absolute; right:9%; top:11%; width:19%; aspect-ratio:.78; border-radius:3px;
+    background:linear-gradient(150deg,var(--violet),var(--cyan)); z-index:1; }
+
+  /* licence key */
+  .st-key{ right:9%; bottom:8%; width:31%; aspect-ratio:2.5;
+    transform:rotate(-24deg); opacity:.95; }
+  .k-bow{ position:absolute; left:0; top:50%; width:34%; aspect-ratio:1; border-radius:50%;
+    transform:translateY(-50%); border:4px solid var(--cyan-bright);
+    box-shadow:0 0 18px rgba(102,255,255,.45); }
+  .k-shaft{ position:absolute; left:30%; top:50%; width:70%; height:4px; border-radius:2px;
+    transform:translateY(-50%); background:var(--cyan-bright);
+    box-shadow:0 0 18px rgba(102,255,255,.45); }
+  .k-t1, .k-t2{ position:absolute; width:4px; border-radius:2px; background:var(--cyan-bright);
+    box-shadow:0 0 18px rgba(102,255,255,.45); }
+  .k-t1{ right:16%; top:50%; height:34%; }
+  .k-t2{ right:2%;  top:50%; height:50%; }
+
+  @media (max-width:860px){ .still{ max-width:360px; margin:0 auto; } }
+  @media (max-width:420px){ .still{ max-width:300px; } .c-num{ font-size:11px; letter-spacing:1.8px; } }
+
 
 
 
@@ -626,72 +664,33 @@
           </div>
         </div>
         <div class="phone-stage">
-              <div class="phone">
-                <div class="phone-screen">
-                  <div class="ph-top">
-                    <span class="ph-ava"><img src="logo.png" alt=""></span>
-                    <span><div class="ph-name">WrksNet</div><div class="ph-sub">bot</div></span>
-                  </div>
-                  <div class="ph-body" id="phBody">
-                    <div class="ph-scene on" id="phScene0" role="tabpanel" aria-label="Gift Cards order">
-                      <div class="bub me">
-                        Gift Cards
-                      </div>
-                      <div class="bub bot">
-                        Choose a brand and amount. Your balance is checked automatically.
-                      </div>
-                      <div class="bub me">
-                        Apple &middot; $25
-                      </div>
-                      <div class="bub bot">
-                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Order delivered</div>
-                        Your Apple gift card is ready.
-                        <div class="code">XXXX-XXXX-XXXX</div>
-                      </div>
-                    </div>
-                    <div class="ph-scene" id="phScene1" role="tabpanel" aria-label="eSIM order" aria-hidden="true">
-                      <div class="bub me">
-                        Phone Services
-                      </div>
-                      <div class="bub bot">
-                        Choose eSIM or Phone Numbers.
-                      </div>
-                      <div class="bub me">
-                        eSIM &middot; United Kingdom
-                      </div>
-                      <div class="bub bot">
-                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> eSIM ready</div>
-                        Scan the QR code in your phone settings to install.
-                        <div class="code">LPA:1$••••••••</div>
-                      </div>
-                    </div>
-                    <div class="ph-scene" id="phScene2" role="tabpanel" aria-label="Fax &amp; Mail order" aria-hidden="true">
-                      <div class="bub me">
-                        Fax &amp; Mail
-                      </div>
-                      <div class="bub bot">
-                        Letter or postcard?
-                      </div>
-                      <div class="bub me">
-                        Letter
-                      </div>
-                      <div class="bub bot">
-                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Details confirmed</div>
-                        Recipient details saved.
-                      </div>
-                      <div class="bub bot">
-                        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="8 12.5 11 15.5 16 9"/></svg> Order confirmed</div>
-                        Posting to USA &middot; Standard delivery.
-                      </div>
-                    </div>
-                  </div>
+          <div class="still" role="img" aria-label="A WrksNet USD card, an eSIM chip, a licence key and a posted envelope">
+
+            <div class="st-key" aria-hidden="true">
+              <span class="k-bow"></span><span class="k-shaft"></span>
+              <span class="k-t1"></span><span class="k-t2"></span>
+            </div>
+
+            <div class="st-env" aria-hidden="true">
+              <span class="e-flap"></span><span class="e-stamp"></span>
+            </div>
+
+            <div class="st-card" aria-hidden="true">
+              <div class="c-face">
+                <div class="c-top">
+                  <span class="c-brand">WRKS<em>NET</em></span>
+                  <span class="c-usd">USD</span>
                 </div>
+                <span class="c-chip"></span>
+                <span class="c-num">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 4821</span>
               </div>
-              <div class="ph-tabs" role="tablist" aria-label="Example orders">
-                <button class="ph-tab is-on" type="button" role="tab" aria-selected="true" aria-controls="phScene0" tabindex="0" data-i="0">Gift Cards</button>
-                <button class="ph-tab" type="button" role="tab" aria-selected="false" aria-controls="phScene1" tabindex="-1" data-i="1">eSIM</button>
-                <button class="ph-tab" type="button" role="tab" aria-selected="false" aria-controls="phScene2" tabindex="-1" data-i="2">Fax &amp; Mail</button>
-              </div>
+            </div>
+
+            <div class="st-sim" aria-hidden="true">
+              <span class="s-pad"></span>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -891,50 +890,6 @@
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && !menu.hidden){ setOpen(false); btn.focus(); }
-  });
-})();
-</script>
-<script>
-(function(){
-  var stage = document.querySelector('.phone-stage');
-  if(!stage) return;
-  var scenes = stage.querySelectorAll('.ph-scene');
-  var tabs   = stage.querySelectorAll('.ph-tab');
-  if(!scenes.length || scenes.length !== tabs.length) return;
-
-  // the glass behind the phone takes its colour from the order on screen
-  var GLOW = ['rgba(102,255,255,.24)','rgba(137,59,204,.40)','rgba(110,240,189,.22)'];
-
-  function show(i){
-    for(var k = 0; k < scenes.length; k++){
-      var on = (k === i);
-      scenes[k].classList.toggle('on', on);
-      if(on){ scenes[k].removeAttribute('aria-hidden'); }
-      else  { scenes[k].setAttribute('aria-hidden','true'); }
-      tabs[k].classList.toggle('is-on', on);
-      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
-      tabs[k].tabIndex = on ? 0 : -1;
-    }
-    stage.style.setProperty('--glow', GLOW[i] || GLOW[0]);
-  }
-
-  function bind(n){
-    tabs[n].addEventListener('click', function(){ show(n); });
-  }
-  for(var i = 0; i < tabs.length; i++) bind(i);
-
-  stage.addEventListener('keydown', function(e){
-    var k = e.key, cur = -1, n;
-    if(k !== 'ArrowRight' && k !== 'ArrowLeft' && k !== 'Home' && k !== 'End') return;
-    for(var j = 0; j < tabs.length; j++) if(tabs[j].classList.contains('is-on')) cur = j;
-    if(cur < 0) return;
-    if(k === 'ArrowRight') n = (cur + 1) % tabs.length;
-    else if(k === 'ArrowLeft') n = (cur - 1 + tabs.length) % tabs.length;
-    else if(k === 'Home') n = 0;
-    else n = tabs.length - 1;
-    e.preventDefault();
-    show(n);
-    tabs[n].focus();
   });
 })();
 </script>
