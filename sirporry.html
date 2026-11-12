@@ -408,6 +408,14 @@
 @media (max-width:560px){
     .phone-stage{ padding:28px 20px; border-radius:22px; }
   }
+  /* ---------- grouped service cards ---------- */
+  .svc-list{ list-style:none; margin:14px 0 0; padding:0; }
+  .svc-list li{ position:relative; padding-left:16px; margin-bottom:6px;
+    font-size:12.8px; line-height:1.5; color:var(--mist-dim); }
+  .svc-list li::before{ content:''; position:absolute; left:0; top:8px; width:6px; height:1.6px;
+    border-radius:1px; background:var(--cyan); opacity:.85; }
+  .card .svc-more{ display:inline-block; margin-top:14px; }
+
 
 
 
@@ -579,34 +587,35 @@
     <div class="wrap">
       <div class="sec-head center">
         <h2>Everything in one bot.</h2>
-        <p>Seven services, each delivered straight into the chat. No separate accounts,
+        <p>Five groups of services, each delivered straight into the chat. No separate accounts,
           no switching apps.</p>
       </div>
       <div class="svc-grid">
           <div class="card">
-            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 9v-1a3 3 0 0 1 3-3c2 0 3.5 2 6 4 2.5-2 4-4 6-4a3 3 0 0 1 3 3v1"/><line x1="12" y1="9" x2="12" y2="21"/></svg></div>
-            <p class="svc-name">Gift Cards</p>
-            <p class="svc-desc">Top brand gift cards, bought straight from your WrksNet balance.</p>
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="9.8" x2="21.5" y2="9.8"/><line x1="6" y1="14.6" x2="9.8" y2="14.6"/></svg></div>
+            <p class="svc-name">Cards &amp; Keys</p>
+            <p class="svc-desc">Gift cards, software license keys and USD virtual cards, delivered in seconds.</p>
+            <ul class="svc-list">
+              <li>Apple &amp; PlayStation gift cards</li>
+              <li>Microsoft 365 license keys</li>
+              <li>USD Visa virtual cards</li>
+            </ul>
+            <a class="svc-more" href="usd-virtual-cards.html">Learn more &rarr;</a>
           </div>
           <div class="card">
-            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
-            <p class="svc-name">Phone Number</p>
-            <p class="svc-desc">A second number for calls, texts, and verification — ready in seconds.</p>
-          </div>
-          <div class="card">
-            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2.5h6.5L19 6v14a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 7 20V4A1.5 1.5 0 0 1 8.5 2.5z"/><rect x="9.5" y="11" width="6" height="6" rx="1"/></svg></div>
-            <p class="svc-name">eSIMs</p>
-            <p class="svc-desc">Data Only or Data + SMS eSIMs — activate by QR code and get online anywhere, straight from the bot.</p>
+            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.4" width="12" height="19.2" rx="3"/><line x1="10.6" y1="18.5" x2="13.4" y2="18.5"/></svg></div>
+            <p class="svc-name">Numbers &amp; eSIMs</p>
+            <p class="svc-desc">Second phone numbers and travel data eSIMs, ready when you are.</p>
+            <ul class="svc-list">
+              <li>Second phone numbers</li>
+              <li>Data-only eSIMs</li>
+              <li>Data + SMS eSIMs</li>
+            </ul>
           </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><ellipse cx="12" cy="12" rx="4" ry="9.5"/><line x1="2.5" y1="12" x2="21.5" y2="12"/></svg></div>
             <p class="svc-name">Web Services</p>
             <p class="svc-desc">Tools that keep your internet work running smoothly, built for freelancers and developers.</p>
-          </div>
-          <div class="card">
-            <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M11 12l8-8"/><path d="M15 8l3 3"/><path d="M18 5l3 3"/></svg></div>
-            <p class="svc-name">License Keys</p>
-            <p class="svc-desc">Authentic software license keys, delivered instantly.</p>
           </div>
           <div class="card">
             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3h19v18l-3-2-3 2-3-2-3 2-3-2-3 2z"/><line x1="6.5" y1="8" x2="17.5" y2="8"/><line x1="6.5" y1="12" x2="17.5" y2="12"/><line x1="6.5" y1="16" x2="13" y2="16"/></svg></div>
@@ -618,7 +627,7 @@
             <p class="svc-name">Fax &amp; Mail</p>
             <p class="svc-desc">Send a fax to almost any country, or have letters and postcards printed and posted to the USA and Canada, all from the bot.</p>
           </div>
-      </div>
+        </div>
     </div>
   </section>
 
@@ -659,6 +668,7 @@
       <div class="footer-col">
         <p class="footer-head">Explore</p>
         <a href="services.html">Services</a>
+        <a href="usd-virtual-cards.html">USD Virtual Cards</a>
         <a href="updates.html">Stay Updated</a>
         <a href="approach.html">Our Approach</a>
         <a href="refer.html">Refer &amp; Earn</a>
