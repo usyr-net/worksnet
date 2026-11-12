@@ -574,28 +574,25 @@
   .stars-input label{ font-size:25px; color:#3a4164; cursor:pointer; transition:color .15s ease; }
   .stars-input input:checked ~ label, .stars-input label:hover, .stars-input label:hover ~ label{ color:#ffc93c; }
   @media (max-width:860px){ .testimonial-grid{ grid-template-columns:1fr; } }
-  /* ---------- official-site verification bar ---------- */
-  .verify-bar{ position:relative; z-index:70; width:100%;
-    background:linear-gradient(180deg,rgba(102,255,255,0.09),rgba(102,255,255,0.045));
-    border-bottom:1px solid rgba(102,255,255,0.18); }
-  .verify-row{ max-width:var(--maxw); margin:0 auto; padding:9px 24px;
-    display:flex; align-items:center; justify-content:center; gap:9px; flex-wrap:wrap;
-    font-size:13px; line-height:1.45; color:var(--mist); text-align:center; }
-  .verify-row svg{ width:16px; height:16px; flex:none; color:var(--cyan-bright); }
+  /* ---------- official-site verification bar (pinned) ---------- */
+  :root{ --vbar:34px; }
+  .verify-bar{ position:sticky; top:0; z-index:80; width:100%; height:var(--vbar);
+    background:linear-gradient(180deg,rgba(7,13,46,0.97),rgba(5,9,30,0.97));
+    -webkit-backdrop-filter:saturate(160%) blur(14px);
+    backdrop-filter:saturate(160%) blur(14px);
+    border-bottom:1px solid rgba(102,255,255,0.2); }
+  .verify-row{ height:100%; max-width:var(--maxw); margin:0 auto; padding:0 16px;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+    white-space:nowrap; font-size:clamp(9.4px,2.55vw,12.8px); color:var(--mist); }
+  .verify-row svg{ width:1.15em; height:1.15em; flex:none; color:var(--cyan-bright); }
   .verify-row b{ color:var(--ink); font-weight:650; }
   .verify-row a{ color:var(--cyan-bright); font-weight:650; text-decoration:underline;
-    text-underline-offset:3px; white-space:nowrap; }
+    text-underline-offset:3px; }
   .verify-row a:hover{ opacity:.8; }
-  .verify-row .v-tight{ display:none; }
-  @media (max-width:620px){
-    .verify-row{ padding:9px 16px; font-size:12px; gap:7px; flex-wrap:nowrap; }
-    .verify-row svg{ width:14px; height:14px; }
-    .verify-row .v-full{ display:none; }
-    .verify-row .v-tight{ display:inline; }
-  }
-  @media (max-width:340px){
-    .verify-row{ font-size:11px; gap:6px; padding:9px 12px; }
-  }
+  /* the header pins directly beneath the bar */
+  header{ top:var(--vbar) !important; }
+  section[id], div[id]{ scroll-margin-top:calc(var(--vbar) + 92px); }
+
   /* ---------- official channels ---------- */
   .official{ margin-top:34px; padding:clamp(24px,3vw,34px); border-radius:var(--r-md);
     border:1px solid rgba(102,255,255,0.18);
@@ -615,7 +612,7 @@
     .official li{ flex-direction:column; gap:3px; }
     .official span{ width:auto; }
   }
-  #official{ scroll-margin-top:118px; }
+  #official{ scroll-margin-top:calc(var(--vbar) + 108px); }
 
 
 
@@ -626,7 +623,7 @@
 <div class="verify-bar">
   <div class="verify-row">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.5 5.6v5.8c0 4.6 3.1 8.5 7.5 9.9 4.4-1.4 7.5-5.3 7.5-9.9V5.6L12 2.6Z"/><polyline points="8.8 11.8 11.1 14.1 15.2 9.6"/></svg>
-    <span class="v-full">Official site &mdash; always check you are on <b>wrksnet.com</b></span><span class="v-tight">Official site: <b>wrksnet.com</b></span>
+    <span>You&rsquo;re on the official WrksNet site &mdash; <b>wrksnet.com</b></span>
     <a href="contact.html#official">Verify</a>
   </div>
 </div>
