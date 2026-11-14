@@ -12,11 +12,21 @@
 <meta name="google-site-verification" content="phjoX-05HRzp2Mz59ewG2NMIjCmtCHpPmOtlS_jU1WI">
 <link rel="canonical" href="https://www.wrksnet.com/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="poppins-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="poppins-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="poppins-800.woff2" as="font" type="font/woff2" crossorigin>
+<style id="wn-fonts">
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(poppins-400.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(poppins-800.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(jetbrains-mono-400.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(jetbrains-mono-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+.turbo-progress-bar{height:2px;background:linear-gradient(90deg,#66ffff,#a865e6);}
+</style>
+<script src="turbo.js" defer></script>
 
-<style>
+<style data-turbo-track="dynamic">
   :root{
     --void:#04071b; --bg-top:#070d2e; --bg-bottom:#03061a;
     --line:#2b3360; --line-soft:#1e2550;
@@ -575,6 +585,16 @@
 
 
 
+
+  /* lighter glass on phones so low-end Android keeps up */
+  @media (max-width:700px){
+    .verify-bar{ -webkit-backdrop-filter:saturate(160%) blur(8px); backdrop-filter:saturate(160%) blur(8px); }
+    header{ -webkit-backdrop-filter:saturate(160%) blur(8px); backdrop-filter:saturate(160%) blur(8px); }
+    .nav-menu{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+    .phone-stage{ -webkit-backdrop-filter:blur(8px) saturate(135%); backdrop-filter:blur(8px) saturate(135%); }
+    .hero-card{ -webkit-backdrop-filter:blur(8px) saturate(140%); backdrop-filter:blur(8px) saturate(140%); }
+    .glass{ -webkit-backdrop-filter:blur(8px) saturate(135%); backdrop-filter:blur(8px) saturate(135%); }
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -623,14 +643,14 @@
   </div>
 </div>
 
-<div class="bg-layer">
+<div class="bg-layer" id="site-bg" data-turbo-permanent>
   <div class="grid"></div>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 </div>
 
-<header>
+<header id="site-header" data-turbo-permanent>
   <div class="header-row">
     <a class="brand" href="index.html">
       <img class="brand-mark" src="logo.png" alt="WrksNet logo">
@@ -667,7 +687,7 @@
         <div class="hero-col">
           <div class="hero-card">
             <h1>Digital products,<br><span class="grad">delivered in seconds.</span></h1>
-            <p class="lede">WrksNet provides everyday digital services on the web and through our Telegram bot. Fund your balance, choose a service,
+            <p class="lede">WrksNet provides everyday digital services on demand. Fund your balance, choose a service,
               and your order is delivered to you directly.</p>
             <div class="btn-row">
               <a class="btn btn-main" href="https://my.wrksnet.com/login">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -875,79 +895,109 @@
       <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram
         bot. Services are for personal and business use and subject to the terms of the platforms you use
         them with.</p>
-      <p class="footer-copy">&copy; <span id="year"></span> WRKSNET LLC</p>
+      <p class="footer-copy">&copy; <span id="year">2026</span> WRKSNET LLC</p>
     </div>
   </footer>
 </div>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-<script>
-(function(){
-  var h = document.querySelector('header');
-  if(!h) return;
-  function onScroll(){ h.classList.toggle('is-stuck', window.scrollY > 6); }
-  onScroll();
-  window.addEventListener('scroll', onScroll, {passive:true});
-})();
-</script>
-<script>
-(function(){
-  var btn = document.getElementById('navBtn'), menu = document.getElementById('navMenu');
-  if(!btn || !menu) return;
-  function setOpen(v){
-    menu.hidden = !v;
-    btn.setAttribute('aria-expanded', v ? 'true' : 'false');
-    btn.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
-  }
-  btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(menu.hidden); });
-  document.addEventListener('click', function(e){
-    if(!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) setOpen(false);
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && !menu.hidden){ setOpen(false); btn.focus(); }
-  });
-})();
-</script>
 
-<script type="speculationrules">
-{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.pdf"}}]},"eagerness":"moderate"}]}
-</script>
 <script>
-/* Prefetch the next page on hover / touch. Pure enhancement: without JS every
-   link still works as a plain link. Chrome uses the speculation rules above. */
+/* WrksNet runtime. Turbo re-runs body scripts on every page swap, so the year is
+   set each time and everything that adds listeners is guarded to run once per tab. */
 (function(){
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+  if (window.__wrksnet) return;
+  window.__wrksnet = true;
+  var root = document.documentElement;
+
+  /* sticky header shadow */
+  function stuck(){ var h = document.querySelector('header'); if (h) h.classList.toggle('is-stuck', window.scrollY > 6); }
+  stuck();
+  window.addEventListener('scroll', stuck, { passive:true });
+
+  /* menu: one delegated listener, works for whichever header is on screen */
+  function els(){ return { btn:document.getElementById('navBtn'), menu:document.getElementById('navMenu') }; }
+  function setOpen(v){
+    var e = els(); if (!e.btn || !e.menu) return;
+    e.menu.hidden = !v;
+    e.btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    e.btn.setAttribute('aria-label', v ? 'Close menu' : 'Open menu');
+  }
+  document.addEventListener('click', function(ev){
+    var e = els(); if (!e.btn || !e.menu) return;
+    if (e.btn.contains(ev.target)) { setOpen(e.menu.hidden); return; }
+    if (!e.menu.hidden && !e.menu.contains(ev.target)) setOpen(false);
+  });
+  document.addEventListener('keydown', function(ev){
+    var e = els();
+    if (ev.key === 'Escape' && e.menu && !e.menu.hidden) { setOpen(false); e.btn.focus(); }
+  });
+
+  /* Turbo: the header stays on screen, so close its menu when leaving, carry over
+     the next page's "current" link, and jump (not glide) to the top on each swap.
+     The link state is read before the swap and applied after it, so the snapshot
+     Turbo keeps for the back button still shows the page being left. */
+  var nextCurrent = null;
+  document.addEventListener('turbo:before-visit', function(){ setOpen(false); });
+  document.addEventListener('turbo:before-cache', function(){ setOpen(false); });
+  document.addEventListener('turbo:before-render', function(ev){
+    root.style.scrollBehavior = 'auto';
+    var next = ev.detail.newBody.querySelector('#site-header');
+    nextCurrent = next ? [].map.call(next.querySelectorAll('a'), function(a){ return a.getAttribute('aria-current'); }) : null;
+  });
+  document.addEventListener('turbo:render', function(){
+    var live = document.getElementById('site-header');
+    if (!live || !nextCurrent) return;
+    var a = live.querySelectorAll('a');
+    if (a.length === nextCurrent.length) for (var i = 0; i < a.length; i++) {
+      if (nextCurrent[i]) a[i].setAttribute('aria-current', nextCurrent[i]); else a[i].removeAttribute('aria-current');
+    }
+    nextCurrent = null;
+  });
+  document.addEventListener('turbo:load', function(){
+    stuck();
+    requestAnimationFrame(function(){ root.style.scrollBehavior = ''; });
+  });
+
+  /* warm pages into the browser cache so Turbo finds them already downloaded */
   var c = navigator.connection || {};
   if (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')) return;
   try { if (matchMedia('(prefers-reduced-data: reduce)').matches) return; } catch(e){}
-  if (HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
-  var seen = {}, n = 0, MAX = 6, link = document.createElement('link');
-  var canPrefetch = link.relList && link.relList.supports && link.relList.supports('prefetch');
-  function warm(a){
-    if (n >= MAX || !a || !a.href) return;
-    var u; try { u = new URL(a.href, location.href); } catch(e){ return; }
-    if (u.origin !== location.origin || u.pathname === location.pathname) return;
-    if (a.hasAttribute('download') || a.target === '_blank') return;
-    if (/\.(pdf|zip|png|jpe?g|svg|webp|ico|xml|txt)$/i.test(u.pathname)) return;
+  var seen = {};
+  function warm(href){
+    var u; try { u = new URL(href, location.href); } catch(e){ return; }
+    if (u.origin !== location.origin) return;
+    if (/\.(pdf|zip|png|jpe?g|gif|svg|webp|ico|xml|txt|woff2?)$/i.test(u.pathname)) return;
     if (seen[u.pathname]) return;
-    seen[u.pathname] = 1; n++;
-    if (canPrefetch){
-      var l = document.createElement('link');
-      l.rel = 'prefetch'; l.as = 'document'; l.href = u.href;
-      document.head.appendChild(l);
-    } else {
-      fetch(u.href, { credentials:'same-origin' }).catch(function(){});
-    }
+    seen[u.pathname] = 1;
+    fetch(u.pathname, { credentials:'same-origin' }).catch(function(){});
   }
-  function hit(e){
-    var t = e.target;
-    if (!t || !t.closest) return;
-    var a = t.closest('a[href]');
-    if (a) warm(a);
-  }
+  seen[location.pathname] = 1;
+  /* every browser: on hover, and the moment a finger lands on a link */
+  function hit(ev){ var t = ev.target, a = t && t.closest && t.closest('a[href]'); if (a && !a.hasAttribute('download') && a.target !== '_blank') warm(a.href); }
   document.addEventListener('pointerover', hit, { passive:true });
   document.addEventListener('touchstart', hit, { passive:true });
+  /* main pages, once the current one has finished loading: a speculation rule in
+     Chrome and Edge, a plain fetch everywhere else. Each page is fetched once. */
+  if (!document.getElementById('site-header')) return;
+  var MAIN = ['index.html','services.html','approach.html','refer.html','updates.html',
+              'contact.html','privacy.html','usd-virtual-cards.html'];
+  function eager(){
+    var todo = MAIN.filter(function(p){ return !seen[new URL(p, location.href).pathname]; });
+    if (!todo.length) return;
+    if (HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) {
+      todo.forEach(function(p){ seen[new URL(p, location.href).pathname] = 1; });
+      var s = document.createElement('script');
+      s.type = 'speculationrules';
+      s.textContent = JSON.stringify({ prefetch: [{ urls: todo, eagerness: 'immediate' }] });
+      document.head.appendChild(s);
+    } else {
+      todo.forEach(warm);
+    }
+  }
+  function idle(){ (window.requestIdleCallback || function(f){ setTimeout(f, 200); })(eager); }
+  if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once:true });
 })();
 </script>
 </body>
