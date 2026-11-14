@@ -68,6 +68,22 @@
   .brand-name .accent{ color:var(--cyan); }
   .header-right{ display:flex; align-items:center; gap:12px; }
 
+  /* ---------- log in (web app) ---------- */
+  .login-btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; white-space:nowrap;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.8px;
+    text-transform:uppercase; font-weight:600; color:var(--cyan-bright);
+    background:rgba(102,255,255,0.09); border:1px solid rgba(102,255,255,0.4);
+    padding:10px 17px; border-radius:999px;
+    transition:border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .login-btn svg{ width:14px; height:14px; flex:none; }
+  .login-btn:hover{ background:rgba(102,255,255,0.15); border-color:rgba(102,255,255,0.7);
+    transform:translateY(-1px); }
+  .login-btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+  @media (max-width:560px){ .login-btn{ padding:11px 14px; gap:6px; } }
+  @media (max-width:380px){ .login-btn{ padding:11px 12px; font-size:11px; } .login-btn svg{ display:none; } }
+
   /* ---------- nav ---------- */
   .nav{ position:relative; }
   .nav-btn{
@@ -621,6 +637,7 @@
       <span class="brand-name">WRKS<span class="accent">NET</span></span>
     </a>
     <div class="header-right">
+      <a class="login-btn" href="https://my.wrksnet.com/login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Log in</a>
         <nav class="nav">
           <button class="nav-btn" id="navBtn" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="Open menu">
             <span class="nav-ico" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -653,8 +670,8 @@
             <p class="lede">WrksNet provides everyday digital services through our Telegram bot. Fund your balance, choose a service, and your order is
               delivered to you directly.</p>
             <div class="btn-row">
-              <a class="btn btn-main" href="services.html">Explore our services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-              <a class="btn btn-soft" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">Open the bot</a>
+              <a class="btn btn-main" href="https://my.wrksnet.com/login">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              <a class="btn btn-soft" href="https://t.me/worksnet_bot" target="_blank" rel="noopener">Open in Telegram</a>
             </div>
           </div>
           <div class="qsp">

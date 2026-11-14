@@ -74,6 +74,21 @@
 
   /* ---------- header ---------- */
   header{ padding:28px 0 10px; }
+  /* ---------- log in (web app) ---------- */
+  .login-btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; white-space:nowrap;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.8px;
+    text-transform:uppercase; font-weight:600; color:var(--cyan-bright);
+    background:rgba(102,255,255,0.09); border:1px solid rgba(102,255,255,0.4);
+    padding:10px 17px; border-radius:999px;
+    transition:border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .login-btn svg{ width:14px; height:14px; flex:none; }
+  .login-btn:hover{ background:rgba(102,255,255,0.15); border-color:rgba(102,255,255,0.7);
+    transform:translateY(-1px); }
+  .login-btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+  @media (max-width:560px){ .login-btn{ padding:11px 14px; gap:6px; } }
+  @media (max-width:380px){ .login-btn{ padding:11px 12px; font-size:11px; } .login-btn svg{ display:none; } }
   .header-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
   .brand-mark{
@@ -404,7 +419,10 @@
         <img class="brand-mark" src="logo.png" alt="WrksNet logo">
         <span class="brand-name">WRKS<span class="accent">NET</span></span>
       </a>
-      <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="status-pill"><span class="status-dot"></span>ALL SYSTEMS OPERATIONAL</span>
+        <a class="login-btn" href="https://my.wrksnet.com/login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg> Log in</a>
+      </div>
     </div>
   </header>
 
