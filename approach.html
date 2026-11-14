@@ -818,5 +818,45 @@
 })();
 </script>
 
+
+<script type="speculationrules">
+{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.pdf"}}]},"eagerness":"moderate"}]}
+</script>
+<script>
+/* Prefetch the next page on hover / touch. Pure enhancement: without JS every
+   link still works as a plain link. Chrome uses the speculation rules above. */
+(function(){
+  var c = navigator.connection || {};
+  if (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')) return;
+  try { if (matchMedia('(prefers-reduced-data: reduce)').matches) return; } catch(e){}
+  if (HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+  var seen = {}, n = 0, MAX = 6, link = document.createElement('link');
+  var canPrefetch = link.relList && link.relList.supports && link.relList.supports('prefetch');
+  function warm(a){
+    if (n >= MAX || !a || !a.href) return;
+    var u; try { u = new URL(a.href, location.href); } catch(e){ return; }
+    if (u.origin !== location.origin || u.pathname === location.pathname) return;
+    if (a.hasAttribute('download') || a.target === '_blank') return;
+    if (/\.(pdf|zip|png|jpe?g|svg|webp|ico|xml|txt)$/i.test(u.pathname)) return;
+    if (seen[u.pathname]) return;
+    seen[u.pathname] = 1; n++;
+    if (canPrefetch){
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.as = 'document'; l.href = u.href;
+      document.head.appendChild(l);
+    } else {
+      fetch(u.href, { credentials:'same-origin' }).catch(function(){});
+    }
+  }
+  function hit(e){
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var a = t.closest('a[href]');
+    if (a) warm(a);
+  }
+  document.addEventListener('pointerover', hit, { passive:true });
+  document.addEventListener('touchstart', hit, { passive:true });
+})();
+</script>
 </body>
 </html>

@@ -547,6 +547,10 @@
     transition:border-color .18s ease, background .18s ease; }
   .where-link svg{ width:14px; height:14px; flex:none; }
   .where-link:hover{ border-color:rgba(102,255,255,0.72); background:rgba(102,255,255,0.14); }
+  .tg-btn{ background:#54A9EB; border-color:#54A9EB; color:#fff; font-size:14px;
+    padding:10px 20px 10px 16px; }
+  .tg-btn img{ width:19px; height:19px; flex:none; }
+  .tg-btn:hover{ background:#3f9ade; border-color:#3f9ade; }
   @media (max-width:560px){ .where-strip{ padding:18px 20px; width:100%; } }
 
   .refer-card{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
@@ -730,8 +734,8 @@
   <section class="sec" style="padding-top:0;" id="services">
     <div class="wrap">
       <div class="where-strip glass">
-        <p>Use <b>WRKSNET</b> in our Telegram bot or on the web, with one account and one balance.</p>
-        <a class="where-link" href="https://my.wrksnet.com/login">Log in on the web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <p><b>Already use our Telegram bot?</b> Your balance and order history come with you.</p>
+        <a class="where-link tg-btn" href="https://oauth.telegram.org/auth?bot_id=8970325351&amp;origin=https%3A%2F%2Fmy.wrksnet.com&amp;embed=1&amp;return_to=https%3A%2F%2Fmy.wrksnet.com%2Flogin"><img src="telegram.svg" alt="" width="19" height="19" loading="lazy" onerror="this.remove()"> Log in with Telegram</a>
       </div>
       <div class="svc-grid">
           <div class="card">
@@ -1009,6 +1013,46 @@
       reviewStatus.className = 'f-status status-error';
     }
   });
+</script>
+
+<script type="speculationrules">
+{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/*.pdf"}}]},"eagerness":"moderate"}]}
+</script>
+<script>
+/* Prefetch the next page on hover / touch. Pure enhancement: without JS every
+   link still works as a plain link. Chrome uses the speculation rules above. */
+(function(){
+  var c = navigator.connection || {};
+  if (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')) return;
+  try { if (matchMedia('(prefers-reduced-data: reduce)').matches) return; } catch(e){}
+  if (HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules')) return;
+  var seen = {}, n = 0, MAX = 6, link = document.createElement('link');
+  var canPrefetch = link.relList && link.relList.supports && link.relList.supports('prefetch');
+  function warm(a){
+    if (n >= MAX || !a || !a.href) return;
+    var u; try { u = new URL(a.href, location.href); } catch(e){ return; }
+    if (u.origin !== location.origin || u.pathname === location.pathname) return;
+    if (a.hasAttribute('download') || a.target === '_blank') return;
+    if (/\.(pdf|zip|png|jpe?g|svg|webp|ico|xml|txt)$/i.test(u.pathname)) return;
+    if (seen[u.pathname]) return;
+    seen[u.pathname] = 1; n++;
+    if (canPrefetch){
+      var l = document.createElement('link');
+      l.rel = 'prefetch'; l.as = 'document'; l.href = u.href;
+      document.head.appendChild(l);
+    } else {
+      fetch(u.href, { credentials:'same-origin' }).catch(function(){});
+    }
+  }
+  function hit(e){
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var a = t.closest('a[href]');
+    if (a) warm(a);
+  }
+  document.addEventListener('pointerover', hit, { passive:true });
+  document.addEventListener('touchstart', hit, { passive:true });
+})();
 </script>
 </body>
 </html>
