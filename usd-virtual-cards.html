@@ -620,17 +620,8 @@
   section[id], div[id]{ scroll-margin-top:calc(var(--vbar) + 92px); }
   /* ---------- usd virtual cards page ---------- */
   .vc-grid{ grid-template-columns:repeat(2,1fr); }
-  .vc-how{ margin:0 0 clamp(32px,4vw,44px); text-align:center; }
-  .vc-how .eyebrow{ margin-left:auto; margin-right:auto; }
-  .vc-how h2{ font-size:clamp(21px,2.6vw,28px); font-weight:750; letter-spacing:-0.6px; margin:0 0 20px; }
-  .vc-path{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin:0 0 18px; }
-  .vc-path span{ display:inline-flex; align-items:center; padding:9px 15px; border-radius:999px;
-    border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04);
-    font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.4px; color:var(--ink); }
-  .vc-path i{ font-style:normal; color:var(--cyan-bright); font-size:14px; }
-  .vc-note{ font-size:14px; color:var(--mist); margin:0; }
   /* where it works */
-  .vc-works{ margin:0 0 clamp(18px,2.2vw,24px); text-align:center; }
+  .vc-works{ margin:0 0 clamp(32px,4vw,44px); text-align:center; }
   .vc-works .eyebrow{ margin-left:auto; margin-right:auto; }
   .vc-works h2{ font-size:clamp(21px,2.6vw,28px); font-weight:750; letter-spacing:-0.6px; margin:0 0 22px; }
   .vc-brands{ list-style:none; margin:0 0 22px; padding:0;
@@ -662,7 +653,6 @@
     margin-left:auto; margin-right:auto; }
   @media (max-width:860px){ .vc-grid{ grid-template-columns:1fr; } }
   @media (max-width:560px){
-    .vc-path{ gap:7px; } .vc-path span{ padding:8px 12px; font-size:11.5px; }
     .vc-brands{ gap:9px; }
     .vc-brands li{ padding:9px 14px 9px 12px; font-size:13px; gap:7px; }
     .vc-brands li::before{ width:6px; height:6px; }
@@ -697,7 +687,7 @@
     "width": 192,
     "height": 192
   },
-  "description": "WrksNet provides everyday digital services through a Telegram bot: gift cards, phone numbers, eSIMs, web services, license keys, bill pay and fax & mail.",
+  "description": "WrksNet provides everyday digital services through a Telegram bot: gift cards, phone numbers, eSIMs, web services, bill pay and fax & mail.",
   "email": "contact@wrksnet.com",
   "sameAs": [
     "https://x.com/wrksnet",
@@ -782,7 +772,7 @@
       <div class="upd-grid vc-grid">
         <div class="card">
           <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="9.8" x2="21.5" y2="9.8"/><line x1="6" y1="14.6" x2="9.8" y2="14.6"/></svg></div>
-          <p class="svc-name">Load from $10 to $250</p>
+          <p class="svc-name">Load $10 and above</p>
           <p class="svc-desc">Choose how much goes on the card when you create it, and keep it topped up as you go.</p>
         </div>
         <div class="card">
@@ -821,13 +811,6 @@
         </ul>
         <p class="vc-anywhere">&hellip;and anywhere else online that accepts <b>Visa</b>.</p>
         <p class="vc-fine">Merchant names are shown as examples of where a USD card is commonly used. WrksNet is not affiliated with, or endorsed by, any of them.</p>
-      </div>
-
-      <div class="glass glass-pad vc-how">
-        <p class="eyebrow"><i></i>How it works</p>
-        <h2>Three taps inside the bot.</h2>
-        <p class="vc-path"><span>Our Services</span><i>&#10140;</i><span>Cards &amp; Keys</span><i>&#10140;</i><span>Virtual Cards</span><i>&#10140;</i><span>Create a Card</span></p>
-        <p class="vc-note">Your card is created inside the chat and ready to use straight away.</p>
       </div>
 
       <div class="upd-cta">
@@ -880,9 +863,8 @@
       </div>
     </div>
     <div class="footer-base">
-      <p class="fine-print">WrksNet provides paid digital services delivered via our Telegram
-        bot. Services are for personal and business use and subject to the terms of the platforms you use
-        them with.</p>
+      <p class="fine-print">WrksNet provides paid digital services for personal and business use.
+        Services are subject to the terms of the platforms you use them with.</p>
       <p class="footer-copy">&copy; <span id="year">2026</span> WRKSNET LLC</p>
     </div>
   </footer>
